@@ -1,29 +1,41 @@
 package com.example.olio_harkkatyo;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.SeekBar;
-import android.widget.SeekBar.OnSeekBarChangeListener;
-import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+    View v;
+    Context context;
+    Button buttonRead;
+    Button buttonWrite;
+    String fileName;
+    String inputText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        context = MainActivity.this;
 
+        /*****************************************************************************************/
+        // For testing DataManager, will get rid of the buttons + other extra stuff later on
+        buttonRead = (Button) findViewById(R.id.buttonRead);
+        buttonWrite = (Button) findViewById(R.id.buttonWrite);
+        fileName = "testfile.txt";
+        inputText = "DataManager\nTiedoston luku ja kirjoitus\n:)";
 
+        DataManager dm = new DataManager();
+
+        buttonWrite.setOnClickListener(v -> dm.writeFile(v, context, fileName, inputText));
+        buttonRead.setOnClickListener(v -> dm.readFile(v, context, fileName));
+        /*****************************************************************************************/
     }
-
 
     public void co2Activity (View v){
         Intent intent = new Intent(MainActivity.this, co2_calculator.class);
