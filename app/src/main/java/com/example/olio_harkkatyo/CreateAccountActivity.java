@@ -45,6 +45,8 @@ public class CreateAccountActivity extends AppCompatActivity {
         if(username.isEmpty() || password.length() < 8 ){
             Toast.makeText(this,"Please fill in all the fields correctly!", Toast.LENGTH_SHORT).show();
             return false;
+        } else {
+            return true;
         }
     }
 }

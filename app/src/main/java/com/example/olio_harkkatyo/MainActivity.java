@@ -67,8 +67,8 @@ public class MainActivity extends AppCompatActivity {
                         //Code for new activity
                     }
             }
-        });
-    }
+        }
+    });
 
     }
 
