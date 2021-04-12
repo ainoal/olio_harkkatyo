@@ -21,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
     private EditText Username;
     private EditText Password;
     private Button Login;
+    boolean confirmed = false;
+
 
     public MainActivity() {
     }
@@ -58,17 +60,26 @@ public class MainActivity extends AppCompatActivity {
                 if(inputUsername.isEmpty() || inputPassword.isEmpty()) {
                     Toast.makeText(MainActivity.this, "Please fill in all the required fields.", Toast.LENGTH_SHORT).show();
                 } else {
+                    confirmed = confirm(inputUsername,inputPassword);
+                    if(!confirmed){
+                        Toast.makeText(MainActivity.this, "Invalid credentials!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(MainActivity.this, "Login succesful!", Toast.LENGTH_SHORT).show();
+                        //Code for new activity
+                    }
             }
         });
     }
-
-    }
-    private boolean confirm(String username, String password){
 
     }
 
     public void co2Activity (View v){
         Intent intent = new Intent(MainActivity.this, co2_calculator.class);
         startActivity(intent);
+    }
+    private boolean confirm(String username, String password){
+        if(username.equals(Username) && password.equals(Password)){
+            return true;
+        }
     }
 }
