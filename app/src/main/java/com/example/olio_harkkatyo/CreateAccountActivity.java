@@ -15,7 +15,8 @@ public class CreateAccountActivity extends AppCompatActivity {
     private EditText createName;
     private EditText createPasswrd;
     private Button create;
-    Credentials credentials;
+
+    public static Credentials credentials;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +37,6 @@ public class CreateAccountActivity extends AppCompatActivity {
                     credentials = new Credentials(createUsername, createPassword);
                     startActivity( new Intent(CreateAccountActivity.this, MainActivity.class));
                     Toast.makeText(CreateAccountActivity.this,"New account created successfully!", Toast.LENGTH_SHORT).show();
-
                 }
             }
         });
@@ -45,7 +45,6 @@ public class CreateAccountActivity extends AppCompatActivity {
         if(username.isEmpty() || password.length() < 8 ){
             Toast.makeText(this,"Please fill in all the fields correctly!", Toast.LENGTH_SHORT).show();
             return false;
-
         }
     }
 }

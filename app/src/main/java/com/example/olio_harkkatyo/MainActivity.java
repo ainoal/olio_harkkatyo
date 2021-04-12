@@ -22,8 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText Password;
     private Button Login;
     boolean confirmed = false;
-
-
+    
     public MainActivity() {
     }
 
@@ -78,8 +77,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
     private boolean confirm(String username, String password){
-        if(username.equals(Username) && password.equals(Password)){
+        if(username.equals(CreateAccountActivity.credentials.getUsername()) && password.equals(CreateAccountActivity.credentials.getPassword())){
             return true;
         }
+        return false;
     }
 }
