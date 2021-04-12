@@ -2,11 +2,14 @@ package com.example.olio_harkkatyo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentProviderClient;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     View v;
@@ -15,6 +18,13 @@ public class MainActivity extends AppCompatActivity {
     Button buttonWrite;
     String fileName;
     String inputText;
+    private EditText Username;
+    private EditText Password;
+    private Button Login;
+
+    public MainActivity() {
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +45,26 @@ public class MainActivity extends AppCompatActivity {
         buttonWrite.setOnClickListener(v -> dm.writeFile(v, context, fileName, inputText));
         buttonRead.setOnClickListener(v -> dm.readFile(v, context, fileName));
         /*****************************************************************************************/
+        Username = findViewById(R.id.etUsername);
+        Password = findViewById(R.id.etPassword);
+        Login = findViewById(R.id.btnLogin);
+
+        Login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String inputUsername = Username.getText().toString();
+                String inputPassword = Password.getText().toString();
+                if(inputUsername.isEmpty() || inputPassword.isEmpty()) {
+                    Toast.makeText(MainActivity.this, "Please fill in all the required fields.", Toast.LENGTH_SHORT).show();
+                } else {
+            }
+        });
+    }
+
+    }
+    private boolean confirm(String username, String password){
+
     }
 
     public void co2Activity (View v){
