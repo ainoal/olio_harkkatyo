@@ -12,12 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    View v;
     Context context;
-    Button buttonRead;
-    Button buttonWrite;
-    String fileName;
-    String inputText;
     private EditText Username;
     private EditText Password;
     private Button Login;
@@ -32,20 +27,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        context = MainActivity.this;
-
-        /*****************************************************************************************/
-        // For testing DataManager, will get rid of the buttons + other extra stuff later on
-        buttonRead = (Button) findViewById(R.id.buttonRead);
-        buttonWrite = (Button) findViewById(R.id.buttonWrite);
-        fileName = "testfile.txt";
-        inputText = "DataManager\nTiedoston luku ja kirjoitus\n:)";
-
-        DataManager dm = new DataManager();
-
-        buttonWrite.setOnClickListener(v -> dm.writeFile(v, context, fileName, inputText));
-        buttonRead.setOnClickListener(v -> dm.readFile(v, context, fileName));
-        /*****************************************************************************************/
         Username = findViewById(R.id.etUsername);
         Password = findViewById(R.id.etPassword);
         Login = findViewById(R.id.btnLogin);

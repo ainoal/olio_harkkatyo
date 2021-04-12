@@ -12,7 +12,7 @@ import java.io.OutputStreamWriter;
 
 public class DataManager {
 
-    public void writeFile(View v, Context context, String fileName, String text) {
+    public void writeFile(Context context, String fileName, String text) {
         try {
             OutputStreamWriter osw = new OutputStreamWriter(context.openFileOutput(fileName, Context.MODE_PRIVATE));
             osw.write(text);
@@ -22,12 +22,13 @@ public class DataManager {
         }
     }
 
-    public void readFile(View v, Context context, String fileName) {
+    public String readFile(Context context, String fileName) {
+        String s = "";
+        String fileContent = "";
+
         try {
             InputStream is = context.openFileInput(fileName);
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
-            String s = "";
-            String fileContent = "";
 
             while ((s = br.readLine()) != null) {
                 fileContent = fileContent.concat(s);
@@ -41,5 +42,7 @@ public class DataManager {
         } finally {
             System.out.println("READ");
         }
+
+        return fileContent;
     }
 }
