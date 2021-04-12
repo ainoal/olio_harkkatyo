@@ -10,8 +10,7 @@
         android:id="@+id/beefView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Beef"
+        android:text="Beef and lamb"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,27 +18,23 @@
 
     <SeekBar
         android:id="@+id/beefBar"
-        android:layout_width="228dp"
-        android:layout_height="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_width="269dp"
+        android:layout_height="23dp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="71dp" />
 
     <SeekBar
         android:id="@+id/pigBar"
-        android:layout_width="219dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.479"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/beefView" />
+        android:layout_width="274dp"
+        android:layout_height="26dp"
+        app:layout_constraintTop_toBottomOf="@+id/beefView"
+        tools:layout_editor_absoluteX="66dp" />
 
     <TextView
         android:id="@+id/pigView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pig"
+        android:text="Pig and poultry"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pigBar" />
@@ -48,18 +43,17 @@
         android:id="@+id/fishView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Fish"
+        android:text="Fish and shellfish"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fishBar" />
 
     <SeekBar
         android:id="@+id/fishBar"
-        android:layout_width="209dp"
-        android:layout_height="28dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pigView" />
+        android:layout_width="282dp"
+        android:layout_height="26dp"
+        app:layout_constraintTop_toBottomOf="@+id/pigView"
+        tools:layout_editor_absoluteX="65dp" />
 
     <Button
         android:id="@+id/button5"
@@ -70,4 +64,110 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/cheeseView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cheese"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cheeseBar" />
+
+    <TextView
+        android:id="@+id/milkView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Milk"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/milkBar" />
+
+    <TextView
+        android:id="@+id/riceView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/riceBar" />
+
+    <TextView
+        android:id="@+id/saladView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Winter salad"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/saladBar" />
+
+    <TextView
+        android:id="@+id/eggView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Eggs"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eggBar" />
+
+    <SeekBar
+        android:id="@+id/cheeseBar"
+        android:layout_width="266dp"
+        android:layout_height="23dp"
+        app:layout_constraintTop_toBottomOf="@+id/fishView"
+        tools:layout_editor_absoluteX="73dp" />
+
+    <SeekBar
+        android:id="@+id/milkBar"
+        android:layout_width="255dp"
+        android:layout_height="21dp"
+        app:layout_constraintTop_toBottomOf="@+id/cheeseView"
+        tools:layout_editor_absoluteX="78dp" />
+
+    <SeekBar
+        android:id="@+id/riceBar"
+        android:layout_width="254dp"
+        android:layout_height="21dp"
+        app:layout_constraintTop_toBottomOf="@+id/milkView"
+        tools:layout_editor_absoluteX="79dp" />
+
+    <SeekBar
+        android:id="@+id/saladBar"
+        android:layout_width="255dp"
+        android:layout_height="24dp"
+        app:layout_constraintTop_toBottomOf="@+id/riceView"
+        tools:layout_editor_absoluteX="78dp" />
+
+    <SeekBar
+        android:id="@+id/eggBar"
+        android:layout_width="250dp"
+        android:layout_height="26dp"
+        app:layout_constraintTop_toBottomOf="@+id/saladView"
+        tools:layout_editor_absoluteX="81dp" />
+
+    <SeekBar
+        android:id="@+id/restaurantBar"
+        android:layout_width="255dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="8dp"
+        android:max="800"
+        app:layout_constraintTop_toBottomOf="@+id/eggView"
+        tools:layout_editor_absoluteX="81dp" />
+
+    <TextView
+        android:id="@+id/restaurantView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Restaurant spending"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/restaurantBar" />
+
+    <Spinner
+        android:id="@+id/spinnerDiet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/restaurantView" />
 </androidx.constraintlayout.widget.ConstraintLayout>
