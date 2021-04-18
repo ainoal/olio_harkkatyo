@@ -22,6 +22,16 @@ public class DataManager {
         }
     }
 
+    public void appendFile(Context context, String fileName, String text) {
+        try {
+            OutputStreamWriter osw = new OutputStreamWriter(context.openFileOutput(fileName, Context.MODE_APPEND));
+            osw.write(text);
+            osw.close();
+        } catch (IOException e) {
+            Log.e("IOException", "IOException while writing to a file.");
+        }
+    }
+
     public String readFile(Context context, String fileName) {
         String s = "";
         String fileContent = "";
