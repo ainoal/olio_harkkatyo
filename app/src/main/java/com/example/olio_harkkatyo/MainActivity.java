@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    Context context;
+    Context context = MainActivity.this;
     private EditText Username;
     private EditText Password;
     private Button Login;
@@ -31,7 +31,10 @@ public class MainActivity extends AppCompatActivity {
         Password = findViewById(R.id.etPassword);
         Login = findViewById(R.id.btnLogin);
 
-        Login.setOnClickListener(new View.OnClickListener() {
+        DataManager dm = DataManager.getInstance();
+        dm.init(context);
+
+        /*Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -49,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                     }
             }
         }
-    });
+    });*/
 
     }
 
@@ -57,10 +60,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, co2_calculator.class);
         startActivity(intent);
     }
-    private boolean confirm(String username, String password){
+    /*private boolean confirm(String username, String password){
         if(username.equals(CreateAccountActivity.credentials.getUsername()) && password.equals(CreateAccountActivity.credentials.getPassword())){
             return true;
         }
         return false;
-    }
+    }*/
 }

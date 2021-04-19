@@ -1,4 +1,4 @@
-package com.example.olio_harkkatyo;
+/*package com.example.olio_harkkatyo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -49,4 +49,4 @@ public class CreateAccountActivity extends AppCompatActivity {
             return true;
         }
     }
-}
+}*/

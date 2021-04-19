@@ -4,26 +4,22 @@ import android.content.Context;
 import android.view.View;
 
 public class PhysicalActivity {
-    View v;
-    Context context = v.getContext(); // ?? joku fiksu tapa kontekstille
     String fileName = "testfile.txt";
     String goalFile = "goalfile.txt";
 
-    public void changeGoal(float newGoal) { // Kirjoitetaanko tiedostoon vai tallennetaanko muuttujaan?
+    public void changeGoal(float newGoal, DataManager dm) {
         String inputText = Float.toString(newGoal);
-        DataManager dm = new DataManager();
 
-        dm.writeFile(context, goalFile, inputText);
+        dm.writeFile(goalFile, inputText);
     }
 
-    public void SaveDaily() {
+    public void SaveDaily(DataManager dm) {
         String inputText = "DataManager\nTiedoston luku ja kirjoitus\n:)"; // Testi
-        DataManager dm = new DataManager();
 
-        dm.appendFile(context, fileName, inputText);
+        dm.writeFile(fileName, inputText);
     }
 
-    public Integer ActivityToGoal() {
+    public Integer ActivityToGoal(DataManager dm) {
         Integer dailyAverage;
         Integer difference = 0;
         Integer lineCount = 0;
@@ -31,13 +27,11 @@ public class PhysicalActivity {
         float historicalActivity =  0;
         float goal;
 
-        DataManager dm = new DataManager();
-
-        String file = dm.readFile(context, fileName);
-        String file2 = dm.readFile(context, goalFile);
+        String file = dm.readFile(fileName);
+        String file2 = dm.readFile(goalFile);
 
         /*
-        while (käydään läpi rivit) {    // DataManager palauttaisi ArrayListin? Vai Stringin niin kuin nyt?
+        while (käydään läpi rivit) {
             historicalActivity += Float.parseFloat(line.trim());
         }
         dailyAverage = historicalActivity / lineCount;
