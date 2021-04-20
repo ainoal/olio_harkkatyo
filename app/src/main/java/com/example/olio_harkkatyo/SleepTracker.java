@@ -1,43 +1,77 @@
 package com.example.olio_harkkatyo;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class SleepTracker {
+    String evaluation = "";
 
-    public Float sleepTime;
     public ArrayList<Float> sleepHistory = new ArrayList<>();
+    public float twoWeekAverage;
 
+    public SleepTracker(){
+
+
+
+    }
 
     public void setHistory(Float sleepTime){ //adds latest value to a file
+        System.out.println("Slept: "+sleepTime);
+        DataManager dm = DataManager.getInstance();
+        dm.writeFile("sleep_history.txt", sleepTime.toString());
+        //TODO aseta slider aktiviteettiin ja syötä luku tänne
 
-        //TODO use data manager to add future slider value to file
+        getHistory();
+        avgSleepTime();
+        System.out.println("Average sleep time of last 14 days: "+twoWeekAverage);
+        compareSleepTimes();
+
+
     }
 
-    public ArrayList getHistory(){              //gets n previous values
-        float previousSleepTime = 0;
+    public void getHistory(){              //gets n previous values
+        DataManager dm = DataManager.getInstance();
+        String history_string = dm.readFile("sleep_history.txt");
 
-        //TODO use data manager to fetch values from file, append to sleepHistory
+        Scanner scanner = new Scanner(history_string);
 
-
-        return sleepHistory;
+        while (scanner.hasNextLine()){
+            String line = scanner.nextLine();
+            sleepHistory.add(Float.parseFloat(line));
+            if (sleepHistory.size() > 14){
+                sleepHistory.remove(0);
+            }
+        }
     }
 
-    public float avgSleepTime(){
-        float monthlyAverage = 0;
-
-        //TODO get up to 30 latest values from sleepHistory and calculate average
-
-        return monthlyAverage;
+    public void avgSleepTime(){
+        float total = 0;
+        for (int i = 0; i < sleepHistory.size(); i++){
+            total = total+sleepHistory.get(i);
+        }
+        twoWeekAverage = total / sleepHistory.size();
+        //TODO ??14?? latest values from sleepHistory and calculate average
+;
     }
 
-    public String compareSleepTimes(){
-        String evaluation = "";
+    public void compareSleepTimes(){
+        //TODO what is reasonable deviation?
+        int under_avg = 0;
+        int over_avg = 0;
+        for (int i = 0; i < sleepHistory.size(); i++){
+            if (sleepHistory.get(i) > twoWeekAverage+1){
+                over_avg++;
+            } if (sleepHistory.get(i) < twoWeekAverage-1){
+                under_avg++;
+            }
+        }
+        //TODO set UI and textbox for messages
+        if ((over_avg > 3) || (under_avg > 3) || ((over_avg+under_avg) > 3)){
+            evaluation = "Sleep irregular";
+            System.out.println(evaluation);
 
-        //TODO compare times from last ??week?? and inform frequent irregularities
-
-
-        return evaluation;
+        } else {
+            evaluation = "Sleep under control!";
+            System.out.println(evaluation);}
     }
-
-
 }

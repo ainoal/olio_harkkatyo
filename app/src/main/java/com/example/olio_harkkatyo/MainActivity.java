@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText Password;
     private Button Login;
     boolean confirmed = false;
+    SleepTracker slt = new SleepTracker(); //luonti testausta varten, siirretään varmaan toiseen aktiviteettiin
     
     public MainActivity() {
     }
@@ -30,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
         Username = findViewById(R.id.etUsername);
         Password = findViewById(R.id.etPassword);
         Login = findViewById(R.id.btnLogin);
+
+
 
         DataManager dm = DataManager.getInstance();
         dm.init(context);
@@ -60,6 +63,11 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, co2_calculator.class);
         startActivity(intent);
     }
+
+    public void sleepActivity (View v){
+        slt.setHistory(7.5f);
+    }
+
     /*private boolean confirm(String username, String password){
         if(username.equals(CreateAccountActivity.credentials.getUsername()) && password.equals(CreateAccountActivity.credentials.getPassword())){
             return true;

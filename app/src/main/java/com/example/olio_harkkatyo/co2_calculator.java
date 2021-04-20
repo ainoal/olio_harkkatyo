@@ -42,6 +42,7 @@ public class co2_calculator extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_co2_calculator);
 
+
         diet = findViewById(R.id.spinnerDiet);
         ArrayList<String> dietList = new ArrayList<>();
         String diet_0 = "omnivore";
@@ -158,6 +159,11 @@ public class co2_calculator extends AppCompatActivity {
     public void readJSON(View v) {
         String json = getJSON();
         System.out.println(json);
+        DataManager dm = DataManager.getInstance();
+        dm.writeFile("co2_history.txt", json);
+
+
+
     }
 
     public String  getJSON(){
@@ -195,7 +201,7 @@ public class co2_calculator extends AppCompatActivity {
             StringBuilder sb = new StringBuilder();
             String line = null;
             while((line = br.readLine()) != null){
-                sb.append(line).append("\n");
+                sb.append(line);
             }
             response = sb.toString();
             in.close();
