@@ -50,7 +50,7 @@ public class DataManager {
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
             while ((s = br.readLine()) != null) {
-                fileContent = fileContent.concat(s);
+                fileContent = fileContent.concat(s+"\n");
             }
 
             is.close();
