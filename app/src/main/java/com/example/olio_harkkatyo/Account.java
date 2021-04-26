@@ -1,10 +1,10 @@
 package com.example.olio_harkkatyo;
 
-public class Credentials {
+public class Account {
     private String Username;
     private String Password;
 
-    Credentials(String username, String password){
+    Account(String username, String password) {
         this.Username = username;
         this.Password = password;
     }
@@ -13,12 +13,12 @@ public class Credentials {
         return Username;
     }
 
-    public String getPassword() {
-        return Password;
-    }
-
     public void setUsername(String username) {
         Username = username;
+    }
+
+    public String getPassword() {
+        return Password;
     }
 
     public void setPassword(String password) {

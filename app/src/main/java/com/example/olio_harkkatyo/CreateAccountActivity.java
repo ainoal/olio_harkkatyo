@@ -1,4 +1,4 @@
-/*package com.example.olio_harkkatyo;
+package com.example.olio_harkkatyo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,7 +16,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     private EditText createPasswrd;
     private Button create;
 
-    public static Credentials credentials;
+    public static Account account;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +34,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                 String createPassword = createPasswrd.getText().toString();
 
                 if(confirm(createUsername, createPassword)){
-                    credentials = new Credentials(createUsername, createPassword);
+                    account = new Account(createUsername, createPassword);
                     startActivity( new Intent(CreateAccountActivity.this, MainActivity.class));
                     Toast.makeText(CreateAccountActivity.this,"New account created successfully!", Toast.LENGTH_SHORT).show();
                 }
@@ -49,4 +49,4 @@ public class CreateAccountActivity extends AppCompatActivity {
             return true;
         }
     }
-}*/
+}

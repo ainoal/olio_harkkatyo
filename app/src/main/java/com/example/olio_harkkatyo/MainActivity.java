@@ -13,12 +13,13 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     Context context = MainActivity.this;
-    private EditText Username;
-    private EditText Password;
-    private Button Login;
+    private EditText username;
+    private EditText password;
+    private Button login;
+    private Button signUp;
     boolean confirmed = false;
     SleepTracker slt = new SleepTracker(); //luonti testausta varten, siirretään varmaan toiseen aktiviteettiin
-    
+
     public MainActivity() {
     }
 
@@ -28,21 +29,29 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Username = findViewById(R.id.etUsername);
-        Password = findViewById(R.id.etPassword);
-        Login = findViewById(R.id.btnLogin);
+        username = findViewById(R.id.etUsername);
+        password = findViewById(R.id.etPassword);
+        login = findViewById(R.id.btnLogin);
+        signUp = findViewById(R.id.btnSignUp);
+
+        signUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, CreateAccountActivity.class));
+            }
+        });
 
 
 
         DataManager dm = DataManager.getInstance();
         dm.init(context);
 
-        /*Login.setOnClickListener(new View.OnClickListener() {
+        login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                String inputUsername = Username.getText().toString();
-                String inputPassword = Password.getText().toString();
+                String inputUsername = username.getText().toString();
+                String inputPassword = password.getText().toString();
                 if(inputUsername.isEmpty() || inputPassword.isEmpty()) {
                     Toast.makeText(MainActivity.this, "Please fill in all the required fields.", Toast.LENGTH_SHORT).show();
                 } else {
@@ -55,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                     }
             }
         }
-    });*/
+    });
 
     }
 
@@ -68,10 +77,15 @@ public class MainActivity extends AppCompatActivity {
         slt.setHistory(7.5f);
     }
 
-    /*private boolean confirm(String username, String password){
-        if(username.equals(CreateAccountActivity.credentials.getUsername()) && password.equals(CreateAccountActivity.credentials.getPassword())){
-            return true;
+    private boolean confirm(String username, String password){
+
+        if(CreateAccountActivity.account != null){
+            if(username.equals(CreateAccountActivity.account.getUsername()) && password.equals(CreateAccountActivity.account.getPassword())){
+                return true;
+            }
         }
+
+
         return false;
-    }*/
+    }
 }
