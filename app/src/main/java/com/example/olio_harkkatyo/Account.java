@@ -1,27 +1,27 @@
 package com.example.olio_harkkatyo;
 
 public class Account {
-    private String Username;
-    private String Password;
+    private String username;
+    private String password;
 
     Account(String username, String password) {
-        this.Username = username;
-        this.Password = password;
+        this.username = username;
+        this.password = password;
     }
 
     public String getUsername() {
-        return Username;
+        return username;
     }
 
     public void setUsername(String username) {
-        Username = username;
+        username = username;
     }
 
     public String getPassword() {
-        return Password;
+        return password;
     }
 
     public void setPassword(String password) {
-        Password = password;
+        password = password;
     }
 }
