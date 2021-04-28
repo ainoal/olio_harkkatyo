@@ -22,10 +22,10 @@
 
     <EditText
         android:id="@+id/etUserWeight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="272dp"
+        android:layout_height="57dp"
         android:ems="10"
-        android:hint="Enter your weight (kg):"
+        android:hint='Enter your weight ("56.0 kg"):'
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
