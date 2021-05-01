@@ -44,8 +44,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etUserWeight"
-        app:layout_constraintVertical_bias="0.634" />
+        app:layout_constraintTop_toBottomOf="@+id/btnBday"
+        app:layout_constraintVertical_bias="0.325" />
 
     <TextView
         android:id="@+id/tvBday"
@@ -53,26 +53,28 @@
         android:layout_height="wrap_content"
         android:text="Select your birthday below:"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintBottom_toTopOf="@+id/btnApplyInfo"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etUserWeight"
-        app:layout_constraintVertical_bias="0.241" />
+        app:layout_constraintVertical_bias="0.096" />
 
     <Button
         android:id="@+id/btnBday"
         style="?android:spinnerStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:OnClick="openBtnBday"
         android:text="JAN 01 2021       "
-        android:textColor="@android:color/black"
+        android:textColor="@color/purple_500"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnApplyInfo"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvBday"
-        app:layout_constraintVertical_bias="0.216"
-        android:OnClick="openBtnBday"/>
+        app:layout_constraintVertical_bias="0.111" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

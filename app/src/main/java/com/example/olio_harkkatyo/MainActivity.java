@@ -20,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
     boolean confirmed = false;
     SleepTracker slt = new SleepTracker(); //luonti testausta varten, siirretään varmaan toiseen aktiviteettiin
 
+    /*private Button profileTester;*/ //Testiä varten
+
     public MainActivity() {
     }
 
@@ -33,6 +35,14 @@ public class MainActivity extends AppCompatActivity {
         password = findViewById(R.id.etPassword);
         login = findViewById(R.id.btnLogin);
         signUp = findViewById(R.id.btnSignUp);
+        /*profileTester = findViewById(R.id.btnProfileTester);
+
+        profileTester.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, UserProfile.class));
+            }
+        });*/
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
