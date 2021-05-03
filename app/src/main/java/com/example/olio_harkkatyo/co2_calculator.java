@@ -2,6 +2,7 @@ package com.example.olio_harkkatyo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
@@ -160,7 +161,7 @@ public class co2_calculator extends AppCompatActivity {
         String json = getJSON();
         System.out.println(json);
         DataManager dm = DataManager.getInstance();
-        dm.writeFile("co2_history.txt", json);
+        dm.writeFile("co2_history.json", json);
 
 
 
@@ -201,7 +202,7 @@ public class co2_calculator extends AppCompatActivity {
             StringBuilder sb = new StringBuilder();
             String line = null;
             while((line = br.readLine()) != null){
-                sb.append(line);
+                sb.append(line+"\n");
             }
             response = sb.toString();
             in.close();
@@ -212,6 +213,11 @@ public class co2_calculator extends AppCompatActivity {
             e.printStackTrace();
         }
         return response;
+        }
+
+        public void loadDrawingTool(View v){
+        Intent intent = new Intent(co2_calculator.this, draw_tool.class);
+            startActivity(intent);
         }
 
 
