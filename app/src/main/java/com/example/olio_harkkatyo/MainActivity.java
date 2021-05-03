@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Invalid credentials!", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(MainActivity.this, "Login succesful!", Toast.LENGTH_SHORT).show();
-                        //Code for new activity
+                        setContentView(R.layout.activity_mainview);
                     }
             }
         }

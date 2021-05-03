@@ -3,4 +3,9 @@
     <string name="read">Read</string>
     <string name="write">Write</string>
     <string name="physical_activity">Physical Activity</string>
+    <string name="activity">Activity</string>
+    <string name="sleep">Sleep</string>
+    <string name="weight">Weight</string>
+    <string name="food_info">Food info</string>
+    <string name="co2">CO2</string>
 </resources>
