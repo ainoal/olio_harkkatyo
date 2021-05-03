@@ -50,7 +50,7 @@ public class UserProfile extends AppCompatActivity {
 
         });
 
-        //datePicker();
+        datePicker();
         bday = findViewById(R.id.btnBday);
         bday.setText(getTodaysDate());
 
