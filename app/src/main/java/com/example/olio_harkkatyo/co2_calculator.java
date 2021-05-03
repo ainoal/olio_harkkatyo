@@ -12,6 +12,10 @@ import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -159,10 +163,13 @@ public class co2_calculator extends AppCompatActivity {
 
     public void readJSON(View v) {
         String json = getJSON();
-        System.out.println(json);
-        DataManager dm = DataManager.getInstance();
-        dm.writeFile("co2_history.json", json);
 
+        //JSONObject jsonobject = new JSONObject(json);
+        //System.out.println(jsonobject);
+        DataManager dm = DataManager.getInstance();
+        if( json != null) {
+            dm.writeFile("co2_history.txt", json);
+        }
 
 
     }
@@ -202,8 +209,9 @@ public class co2_calculator extends AppCompatActivity {
             StringBuilder sb = new StringBuilder();
             String line = null;
             while((line = br.readLine()) != null){
-                sb.append(line+"\n");
+                sb.append(line);
             }
+
             response = sb.toString();
             in.close();
 
@@ -217,7 +225,9 @@ public class co2_calculator extends AppCompatActivity {
 
         public void loadDrawingTool(View v){
         Intent intent = new Intent(co2_calculator.this, draw_tool.class);
-            startActivity(intent);
+        intent.putExtra("filename", "co2_history.txt");
+        intent.putExtra("application", 1);
+        startActivity(intent);
         }
 
 
