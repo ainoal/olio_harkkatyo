@@ -41,7 +41,7 @@ public class UserProfile extends AppCompatActivity {
 
                 String name = userName.getText().toString();
                 float weight = Float.valueOf(userWeight.getText().toString());
-
+                //Tänne tarvitaan vielä birthday
                 user = new User(name, weight);
                 //startActivity( new Intent(UserProfile.this, MainActivity.class)); ??
                 Toast.makeText(UserProfile.this,"User information applied successfully!", Toast.LENGTH_SHORT).show();

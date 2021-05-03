@@ -3,6 +3,7 @@ package com.example.olio_harkkatyo;
 public class User {
     private String name;
     private float weight;
+    //Tänne tarvitaan vielä birthday
 
     User(String name, float weight) {
         this.name = name;
