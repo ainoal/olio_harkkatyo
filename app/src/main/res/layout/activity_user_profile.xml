@@ -65,7 +65,6 @@
         style="?android:spinnerStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:OnClick="openBtnBday"
         android:text="JAN 01 2021       "
         android:textColor="@color/purple_500"
         android:textSize="20sp"
