@@ -160,7 +160,7 @@ public class co2_calculator extends AppCompatActivity {
         String json = getJSON();
         System.out.println(json);
         DataManager dm = DataManager.getInstance();
-        dm.writeFile("co2_history.txt", json);
+        dm.writeFile("co2_history.json", json);
 
 
 
@@ -201,7 +201,7 @@ public class co2_calculator extends AppCompatActivity {
             StringBuilder sb = new StringBuilder();
             String line = null;
             while((line = br.readLine()) != null){
-                sb.append(line);
+                sb.append(line+"\n");
             }
             response = sb.toString();
             in.close();
