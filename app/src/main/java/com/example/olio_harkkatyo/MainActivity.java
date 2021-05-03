@@ -9,7 +9,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.SeekBar;
 import android.widget.Toast;
+
+import org.w3c.dom.ls.LSOutput;
 
 public class MainActivity extends AppCompatActivity {
     Context context = MainActivity.this;
@@ -69,12 +72,12 @@ public class MainActivity extends AppCompatActivity {
                     if(!confirmed){
                         Toast.makeText(MainActivity.this, "Invalid credentials!", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(MainActivity.this, "Login succesful!", Toast.LENGTH_SHORT).show();
-                        setContentView(R.layout.activity_mainview);
+                        Toast.makeText(MainActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
+                        mainView(); // go to the main app view
                     }
+                }
             }
-        }
-    });
+        });
 
     }
 
@@ -90,11 +93,101 @@ public class MainActivity extends AppCompatActivity {
     private boolean confirm(String username, String password){
 
         if(CreateAccountActivity.account != null){
-            if(username.equals(CreateAccountActivity.account.getUsername()) && password.equals(CreateAccountActivity.account.getPassword())){
-                return true;
-            }
+            return username.equals(CreateAccountActivity.account.getUsername()) && password.equals(CreateAccountActivity.account.getPassword());
         }
 
         return false;
+    }
+
+    public void mainView() {
+        SeekBar seekbarSleep;
+        SeekBar seekbarActivity;
+        SeekBar seekbarWeight;
+        Button buttonWeight;
+        Button buttonActivity;
+        Button buttonCO2;
+
+        setContentView(R.layout.activity_mainview);
+
+        seekbarSleep = findViewById(R.id.seekBarSleep);
+        seekbarActivity = findViewById(R.id.seekBarActivity);
+        seekbarWeight = findViewById(R.id.seekBarWeight);
+        buttonWeight = findViewById(R.id.buttonWeight);
+        buttonActivity = findViewById(R.id.buttonActivity);
+        buttonCO2 = findViewById(R.id.buttonCO2);
+
+        seekbarSleep.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                System.out.println("SeekbarSleep: progress changed");
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        seekbarActivity.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                System.out.println("SeekbarActivity: progress changed");
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        seekbarWeight.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                System.out.println("SeekbarWeight: progress changed");
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        buttonWeight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("ButtonSleep: OnClickListener successful");
+                // -> Weight drawer?
+            }
+        });
+
+        buttonActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("ButtonActivity: OnClickListener successful");
+                // TODO physical activity view where the user can display their previous physical activity
+            }
+        });
+
+        buttonCO2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                co2Activity(v);
+            }
+        });
     }
 }

@@ -14,7 +14,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.120000005" />
+        app:layout_constraintVertical_bias="0.060000002" />
 
     <SeekBar
         android:id="@+id/seekBarSleep"
@@ -24,7 +24,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewSleep"
-        app:layout_constraintVertical_bias="0.06999999" />
+        app:layout_constraintVertical_bias="0.26" />
 
     <TextView
         android:id="@+id/textViewActivity"
@@ -100,4 +100,14 @@
         app:layout_constraintStart_toEndOf="@+id/buttonActivity"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/sleepInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/place_sleep_info_here"
+        app:layout_constraintBottom_toTopOf="@+id/seekBarSleep"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewSleep" />
 </androidx.constraintlayout.widget.ConstraintLayout>

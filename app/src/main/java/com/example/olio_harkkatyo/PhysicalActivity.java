@@ -1,8 +1,5 @@
 package com.example.olio_harkkatyo;
 
-import android.content.Context;
-import android.view.View;
-
 import java.util.Scanner;
 
 public class PhysicalActivity {
