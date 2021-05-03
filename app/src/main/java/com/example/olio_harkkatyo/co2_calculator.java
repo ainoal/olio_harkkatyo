@@ -2,6 +2,7 @@ package com.example.olio_harkkatyo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
@@ -212,6 +213,11 @@ public class co2_calculator extends AppCompatActivity {
             e.printStackTrace();
         }
         return response;
+        }
+
+        public void loadDrawingTool(View v){
+        Intent intent = new Intent(co2_calculator.this, draw_tool.class);
+            startActivity(intent);
         }
 
 
