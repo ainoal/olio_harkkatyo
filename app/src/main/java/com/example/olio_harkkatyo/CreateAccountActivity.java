@@ -42,11 +42,44 @@ public class CreateAccountActivity extends AppCompatActivity {
         });
     }
     private boolean confirm(String username, String password){
-        if(username.isEmpty() || password.length() < 8 ){
+        boolean foundDigit = false;
+        boolean foundLCLetter = false;
+        boolean foundUCLetter = false;
+
+
+        if(username.isEmpty() || password.isEmpty() ){
+            Toast.makeText(this,"Please fill in all the fields!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(password.length() < 12 ) {
+            Toast.makeText(this, "Password must be at least 12 characters long!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if(password.length() >= 12 ) {
+            for (int i = 0; i < password.length(); i++){
+                char c = password.charAt(i);
+                if (Character.isDigit(c)){
+                    foundDigit = true;
+                }
+                else if (Character.isLetter(c)) {
+                    if (Character.isLowerCase(c)) {
+                        foundLCLetter = true;
+                    } else if (Character.isUpperCase(c)) {
+                        foundUCLetter = true;
+                    }
+                }
+                if (foundDigit && foundLCLetter && foundUCLetter){
+                    break;
+                }
+            }
+        }
+        if (foundDigit && foundLCLetter && foundUCLetter){
+            return true;
+        }
+        else {
             Toast.makeText(this,"Please fill in all the fields correctly!", Toast.LENGTH_SHORT).show();
             return false;
-        } else {
-            return true;
         }
     }
 }
