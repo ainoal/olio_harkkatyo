@@ -100,26 +100,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void mainView() {
-        SeekBar seekbarSleep;
-        SeekBar seekbarActivity;
-        SeekBar seekbarWeight;
-        Button buttonWeight;
-        Button buttonActivity;
-        Button buttonCO2;
+        final float[] sleep = new float[1];
+        final float[] activity = new float[1];
+        final float[] weight = new float[1];
 
         setContentView(R.layout.activity_mainview);
 
-        seekbarSleep = findViewById(R.id.seekBarSleep);
-        seekbarActivity = findViewById(R.id.seekBarActivity);
-        seekbarWeight = findViewById(R.id.seekBarWeight);
-        buttonWeight = findViewById(R.id.buttonWeight);
-        buttonActivity = findViewById(R.id.buttonActivity);
-        buttonCO2 = findViewById(R.id.buttonCO2);
+        SeekBar seekbarSleep = findViewById(R.id.seekBarSleep);
+        SeekBar seekbarActivity = findViewById(R.id.seekBarActivity);
+        SeekBar seekbarWeight = findViewById(R.id.seekBarWeight);
+        Button buttonWeight = findViewById(R.id.buttonWeight);
+        Button buttonActivity = findViewById(R.id.buttonActivity);
+        Button buttonCO2 = findViewById(R.id.buttonCO2);
 
         seekbarSleep.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                System.out.println("SeekbarSleep: progress changed");
+                /* Sleep time choices between 2h and 12h */
+                // TODO choose an appropriate range for sleep times
+                sleep[0] = progress / 10 + 2;
+                System.out.println("SeekbarSleep: " + sleep[0]);
             }
 
             @Override
@@ -136,34 +136,36 @@ public class MainActivity extends AppCompatActivity {
         seekbarActivity.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                System.out.println("SeekbarActivity: progress changed");
+                /* Physical activity choices between 0h and 10h */
+                // TODO choose an appropriate range for activity
+                activity[0] = progress / 10;
+                System.out.println("SeekbarActivity: " + activity[0]);
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
             }
         });
 
         seekbarWeight.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                System.out.println("SeekbarWeight: progress changed");
+                /* Weight choices between 30kg and 130kg */
+                // TODO choose appropriate weight range
+                weight[0] = progress + 30;
+                System.out.println("SeekbarWeight: " + weight[0]);
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
             }
         });
 
@@ -179,7 +181,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 System.out.println("ButtonActivity: OnClickListener successful");
-                // TODO physical activity view where the user can display their previous physical activity
             }
         });
 
