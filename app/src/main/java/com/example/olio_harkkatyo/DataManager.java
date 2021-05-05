@@ -6,13 +6,20 @@ import android.util.Log;
 import android.view.View;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
 
 public class DataManager {
     private Context appContext;
+    private ArrayList<User> users = new ArrayList<>();
     private static DataManager dm= new DataManager();
 
     public void init(Context context) {
@@ -61,4 +68,39 @@ public class DataManager {
 
         return fileContent;
     }
+
+    public void saveUser(String fileName, Object user) { //tänne siis lista usereista, jotka kirjoitetaan tiedostoon?
+        appContext = getInstance().getContext();
+        try {
+            ObjectOutputStream oos = new ObjectOutputStream(appContext.openFileOutput(fileName, Context.MODE_PRIVATE));
+            oos.writeObject(user);
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public Object loadUsers(String fileName) { //tänne palautukseen ArrayList, jossa kaikki userit?
+        Object user = null;
+        appContext = getInstance().getContext();
+        try {
+                        System.out.println(appContext.openFileInput(fileName));
+            ObjectInputStream ois = new ObjectInputStream(appContext.openFileInput(fileName));
+
+            user = ois.readObject();
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+          }
+        return user;
+    }
+
+    //TODO pitää varmaan tehdä erillinen luku ja kirjoitus käyttäjä+salasana tiedostolle.
+
+
 }

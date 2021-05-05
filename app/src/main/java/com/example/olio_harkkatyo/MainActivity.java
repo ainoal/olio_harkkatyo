@@ -60,6 +60,16 @@ public class MainActivity extends AppCompatActivity {
         DataManager dm = DataManager.getInstance();
         dm.init(context);
 
+        //// testi käyttäjän tallennus ja luku
+        User juser = new User("asd",1,1,2,3,123);
+        dm.saveUser("user.ser", juser);
+        User useri = (User) dm.loadUsers("user.ser");
+        System.out.println("TESTI RIVI\n" +
+                "################################\n" +
+                "painou: "+useri.getIdealWeight()+
+                "\n######################################");
+        ////TODO tallennetaanko userit tiedostoon, josta haetaan aina kaikki tallennetut userit, jos tietoja muutetaan niin kirjoitetaan koko tiedosto uusiks?
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -185,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
                 // TODO sleep, activity and weight on User -> write on file
                 pa.saveDaily(activity[0]); // test
                 slt.setHistory(sleep[0]);
-            }
+           }
         });
 
         buttonWeight.setOnClickListener(new View.OnClickListener() {
