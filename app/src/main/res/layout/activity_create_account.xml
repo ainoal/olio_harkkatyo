@@ -49,7 +49,7 @@
         android:id="@+id/tvPassword"
         android:layout_width="286dp"
         android:layout_height="57dp"
-        android:text="Password must be at least 12 characters long and contain at least 1 digit, 1 upper and 1 lower case!"
+        android:text="Password must be at least 12 characters long and contain at least 1 digit, 1 special character, 1 upper and 1 lower case!"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"

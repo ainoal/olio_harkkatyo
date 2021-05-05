@@ -18,9 +18,11 @@ public class UserProfile extends AppCompatActivity {
 
     private EditText userName;
     private EditText userWeight;
+    private EditText userIdealWeight;
     private Button applyInfo;
     private DatePickerDialog datePickerDialog;
     private Button bday;
+
 
 
     public static User user;
@@ -34,6 +36,7 @@ public class UserProfile extends AppCompatActivity {
 
         userName = findViewById(R.id.etUserName);
         userWeight = findViewById(R.id.etUserWeight);
+        userIdealWeight = findViewById(R.id.etUserIdealWeight);
         applyInfo = findViewById(R.id.btnApplyInfo);
         applyInfo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,9 +44,10 @@ public class UserProfile extends AppCompatActivity {
 
                 String name = userName.getText().toString();
                 float weight = Float.valueOf(userWeight.getText().toString());
+                float idealWeight = Float.valueOf(userIdealWeight.getText().toString());
                 //Tänne tarvitaan vielä birthday
-                user = new User(name, weight);
-                //startActivity( new Intent(UserProfile.this, MainActivity.class)); ??
+                user = new User(name, weight, idealWeight);
+                startActivity( new Intent(UserProfile.this, MainActivity.class));
                 Toast.makeText(UserProfile.this,"User information applied successfully!", Toast.LENGTH_SHORT).show();
 
             }
