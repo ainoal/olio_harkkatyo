@@ -43,13 +43,11 @@ public class CreateAccountActivity extends AppCompatActivity {
     }
     private boolean confirm(String username, String password){
 
-        String pattern = "^[a-zA-Z0-9]*$";
-        /*^ = Start of the String
-        a-z = any character between a and z
+        String pattern = "[a-zA-Z0-9]*";
+        /* a-z = any character between a and z
         A-Z = any character between A and Z
         0-9 = any digit between 0 and 9
-        *  = 0 or more instances and
-        $ = end of String */
+        *  = 0 or more instances */
 
         boolean foundDigit = false;
         boolean foundLCLetter = false;
