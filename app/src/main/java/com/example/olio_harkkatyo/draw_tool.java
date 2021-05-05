@@ -15,15 +15,13 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.security.KeyStore;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class draw_tool extends AppCompatActivity {
 
     private LineGraphSeries<DataPoint> data_series1;
     private LineGraphSeries<DataPoint> data_series2;
+    private LineGraphSeries<DataPoint> data_series3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +35,7 @@ public class draw_tool extends AppCompatActivity {
 
         data_series1 = new LineGraphSeries<>();
         data_series2 = new LineGraphSeries<>();
+        data_series3 = new LineGraphSeries<>();
 
             try {
                 drawCO2Graph(gv, fileName, app);
@@ -64,34 +63,76 @@ public class draw_tool extends AppCompatActivity {
         double x=0;
         double y_1;
         double y_2;
+        double y_3;
         String data = readHistory(fileName);
         Scanner sc = new Scanner(data);
         GridLabelRenderer glr = gv.getGridLabelRenderer();
+        gv.getViewport().setXAxisBoundsManual(true);
+        gv.getViewport().setMinX(1);
 
 
         switch(app) {
             case 1:
-                gv.setTitle("Total and meat emission");
+                gv.setTitle("Total (BLK), meat(RED), plant(PNK) emission");
                 glr.setVerticalAxisTitle("Emission estimate in kg CO2 eq. / year");
                 glr.setHorizontalAxisTitle("Calculated data points");
                 while (sc.hasNextLine()) {
-                    x = x + 1;
+
                     String line = sc.nextLine();
                     JSONObject jsonobject = new JSONObject(line);
                     y_1 = jsonobject.getDouble("Total");
                     data_series1.appendData(new DataPoint(x, y_1), true, 365);
                     y_2 = jsonobject.getDouble("Meat");
                     data_series2.appendData(new DataPoint(x, y_2), true, 365);
+                    y_3 = jsonobject.getDouble("Plant");
+                    data_series3.appendData(new DataPoint(x, y_3), true, 365);
+                    x = x + 1;
                 }
-                data_series1.setColor(Color.RED);
-                data_series2.setColor(Color.MAGENTA);
+                gv.getViewport().setMaxX(x);
+                gv.setBackgroundColor(Color.argb(80, 0, 221, 0));
+                data_series1.setColor(Color.BLACK);
+                data_series2.setColor(Color.RED);
+                data_series3.setColor(Color.argb(255, 225, 110, 195));
                 gv.addSeries(data_series1);
                 gv.addSeries(data_series2);
+                gv.addSeries(data_series3);
                 break;
             case 2:
                 //TODO piirtäjälle switch-case ohjaus mitä halutaan piirtää. luotava koodi painon, nukkumiesn jne. piirtämiseen kun activity on tehty.
                 System.out.println("toimii");
+                gv.getViewport().setMaxX(x+1);
                 break;
+            case 3:
+                gv.setTitle("Your daily activity");
+                glr.setVerticalAxisTitle("Activity in hours");
+                glr.setHorizontalAxisTitle("Days");
+                System.out.println("Mentiin piirtää\n");
+                while (sc.hasNextLine()) {
+                    String line = sc.nextLine();
+                    y_1 = Double.parseDouble(line);
+                    data_series1.appendData(new DataPoint(x, y_1), true, 365);
+                    x = x + 1;
+                }
+                gv.getViewport().setMaxX(x+1);
+                gv.setBackgroundColor(Color.argb(225, 225, 225, 60));
+                gv.addSeries(data_series1);
+                break;
+
+            case 4:
+                gv.setTitle("Your nightly sleep");
+                glr.setVerticalAxisTitle("Sleep in hours");
+                glr.setHorizontalAxisTitle("Nights");
+                while (sc.hasNextLine()) {
+
+                    String line = sc.nextLine();
+                    y_1 = Double.parseDouble(line);
+                    data_series1.appendData(new DataPoint(x, y_1), true, 365);
+                    x = x + 1;
+                }
+                gv.getViewport().setMaxX(x+1);
+                gv.addSeries(data_series1);
+                break;
+
             default:
                 break;
         }

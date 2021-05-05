@@ -67,7 +67,8 @@ public class MainActivity extends AppCompatActivity {
                 String inputUsername = username.getText().toString();
                 String inputPassword = password.getText().toString();
                 if(inputUsername.isEmpty() || inputPassword.isEmpty()) {
-                    Toast.makeText(MainActivity.this, "Please fill in all the required fields.", Toast.LENGTH_SHORT).show();
+                    mainView();                                             //TODO testaamisen avuksi tyhjä login, poista!!!
+                    //Toast.makeText(MainActivity.this, "Please fill in all the required fields.", Toast.LENGTH_SHORT).show();
                 } else {
                     confirmed = confirm(inputUsername,inputPassword);
                     if(!confirmed){
@@ -199,6 +200,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 System.out.println("ButtonActivity: OnClickListener successful");
                 pa.ActivityToGoal(); // for testing purposes
+                activityDrawingTool();
             }
         });
 
@@ -210,7 +212,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void sleepDrawingTool(){ //TODO set button to draw
+    public void sleepDrawingTool(View v){ //TODO set button to draw
         String saveFile = slt.getSaveFile();
         int ID = slt.getAppID();
         Intent intent = new Intent(MainActivity.this, draw_tool.class);
@@ -222,6 +224,7 @@ public class MainActivity extends AppCompatActivity {
     public void activityDrawingTool() { //TODO set button to draw
         String saveFile = phs.getSaveFile();
         int ID = phs.getAppID();
+        System.out.println("ID: "+ID+"Save file: "+saveFile);
         Intent intent = new Intent(MainActivity.this, draw_tool.class);
         intent.putExtra("filename", saveFile);
         intent.putExtra("application", ID);
