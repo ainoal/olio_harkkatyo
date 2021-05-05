@@ -112,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
         Button buttonWeight = findViewById(R.id.buttonWeight);
         Button buttonActivity = findViewById(R.id.buttonActivity);
         Button buttonCO2 = findViewById(R.id.buttonCO2);
+        Button buttonSave = findViewById(R.id.buttonSave);
 
         seekbarSleep.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -152,9 +153,15 @@ public class MainActivity extends AppCompatActivity {
         seekbarWeight.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                /* Weight choices between 30kg and 130kg */
-                // TODO weight range = user weight +- 20kg
-                weight[0] = progress / 5;
+                float currentWeight;
+
+                /* User can choose their weight in range currentWeight +- 20kg.
+                This way the seek bar is customized for each individual user, and thus it
+                is easier to use. */
+                // TODO set current weight according to User weight
+                currentWeight = (float) 50.0;
+                weight[0] = (float) (progress / 2.5) - 10 + currentWeight;
+
                 System.out.println("SeekbarWeight: " + weight[0]);
             }
 
@@ -164,6 +171,14 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        });
+
+        buttonSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("ButtonSave: OnClickListener successful");
+                // TODO sleep, activity and weight on User -> write on file
             }
         });
 
