@@ -114,6 +114,8 @@ public class MainActivity extends AppCompatActivity {
         Button buttonCO2 = findViewById(R.id.buttonCO2);
         Button buttonSave = findViewById(R.id.buttonSave);
 
+        PhysicalActivity pa = new PhysicalActivity();
+
         seekbarSleep.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -179,6 +181,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 System.out.println("ButtonSave: OnClickListener successful");
                 // TODO sleep, activity and weight on User -> write on file
+                pa.saveDaily(activity[0]); // test
             }
         });
 
@@ -194,6 +197,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 System.out.println("ButtonActivity: OnClickListener successful");
+                pa.ActivityToGoal(); // for testing purposes
             }
         });
 
