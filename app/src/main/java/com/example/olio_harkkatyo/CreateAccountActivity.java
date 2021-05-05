@@ -42,9 +42,19 @@ public class CreateAccountActivity extends AppCompatActivity {
         });
     }
     private boolean confirm(String username, String password){
+
+        String pattern = "^[a-zA-Z0-9]*$";
+        /*^ = Start of the String
+        a-z = any character between a and z
+        A-Z = any character between A and Z
+        0-9 = any digit between 0 and 9
+        *  = 0 or more instances and
+        $ = end of String */
+
         boolean foundDigit = false;
         boolean foundLCLetter = false;
         boolean foundUCLetter = false;
+
 
 
         if(username.isEmpty() || password.isEmpty() ){
@@ -57,20 +67,24 @@ public class CreateAccountActivity extends AppCompatActivity {
         }
 
         if(password.length() >= 12 ) {
-            for (int i = 0; i < password.length(); i++){
-                char c = password.charAt(i);
-                if (Character.isDigit(c)){
-                    foundDigit = true;
-                }
-                else if (Character.isLetter(c)) {
-                    if (Character.isLowerCase(c)) {
-                        foundLCLetter = true;
-                    } else if (Character.isUpperCase(c)) {
-                        foundUCLetter = true;
+            if (password.matches(pattern)) {
+                Toast.makeText(this, "Password must contain at least 1 special character!", Toast.LENGTH_SHORT).show();
+                return false;
+            } else {
+                for (int i = 0; i < password.length(); i++) {
+                    char c = password.charAt(i);
+                    if (Character.isDigit(c)) {
+                        foundDigit = true;
+                    } else if (Character.isLetter(c)) {
+                        if (Character.isLowerCase(c)) {
+                            foundLCLetter = true;
+                        } else if (Character.isUpperCase(c)) {
+                            foundUCLetter = true;
+                        }
                     }
-                }
-                if (foundDigit && foundLCLetter && foundUCLetter){
-                    break;
+                    if (foundDigit && foundLCLetter && foundUCLetter) {
+                        break;
+                    }
                 }
             }
         }
@@ -78,7 +92,7 @@ public class CreateAccountActivity extends AppCompatActivity {
             return true;
         }
         else {
-            Toast.makeText(this,"Please fill in all the fields correctly!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Password must contain at least 1 digit, 1 upper and 1 lower case!", Toast.LENGTH_SHORT).show();
             return false;
         }
     }
