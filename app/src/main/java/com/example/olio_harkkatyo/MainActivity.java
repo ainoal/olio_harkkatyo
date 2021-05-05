@@ -116,9 +116,8 @@ public class MainActivity extends AppCompatActivity {
         seekbarSleep.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                /* Sleep time choices between 2h and 12h */
-                // TODO choose an appropriate range for sleep times
-                sleep[0] = progress / 10 + 2;
+                /* Sleep time choices between 0h and 16h */
+                sleep[0] = (float) (progress / 6.25);
                 System.out.println("SeekbarSleep: " + sleep[0]);
             }
 
@@ -137,8 +136,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 /* Physical activity choices between 0h and 10h */
-                // TODO choose an appropriate range for activity
-                activity[0] = progress / 10;
+                activity[0] = (float) (progress / 10.0);
                 System.out.println("SeekbarActivity: " + activity[0]);
             }
 
@@ -155,8 +153,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 /* Weight choices between 30kg and 130kg */
-                // TODO choose appropriate weight range
-                weight[0] = progress + 30;
+                // TODO weight range = user weight +- 20kg
+                weight[0] = progress / 5;
                 System.out.println("SeekbarWeight: " + weight[0]);
             }
 
