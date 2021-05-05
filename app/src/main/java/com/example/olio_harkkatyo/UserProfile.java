@@ -12,6 +12,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class UserProfile extends AppCompatActivity {
@@ -38,25 +39,26 @@ public class UserProfile extends AppCompatActivity {
         userWeight = findViewById(R.id.etUserWeight);
         userIdealWeight = findViewById(R.id.etUserIdealWeight);
         applyInfo = findViewById(R.id.btnApplyInfo);
+
+        ArrayList<Integer> birthday = datePicker();
+        bday = findViewById(R.id.btnBday);
+        bday.setText(getTodaysDate());
+
         applyInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String name = userName.getText().toString();
                 float weight = Float.valueOf(userWeight.getText().toString());
                 float idealWeight = Float.valueOf(userIdealWeight.getText().toString());
-                //Tänne tarvitaan vielä birthday
-                user = new User(name, weight, idealWeight);
+                int birthMonth = birthday.get(0);
+                int birthDay = birthday.get(1);
+                int birthYear = birthday.get(2);
+                user = new User(name, weight, idealWeight, birthMonth, birthDay, birthYear);
                 startActivity( new Intent(UserProfile.this, MainActivity.class));
                 Toast.makeText(UserProfile.this,"User information applied successfully!", Toast.LENGTH_SHORT).show();
-
             }
 
         });
-
-        datePicker();
-        bday = findViewById(R.id.btnBday);
-        bday.setText(getTodaysDate());
 
     }
     private String getTodaysDate(){
@@ -67,13 +69,22 @@ public class UserProfile extends AppCompatActivity {
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         return makeDateString(year, month, day);
     }
-    private void datePicker(){
+
+    private ArrayList<Integer> datePicker(){
+        ArrayList<Integer> birthday = new ArrayList<>();
         DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month = month + 1; //Jan = 0
                 String date = makeDateString(year, month, day);
                 bday.setText(date);
+
+                Integer bmonth = month;
+                Integer bday = day;
+                Integer byear = year;
+                birthday.add(bmonth);
+                birthday.add(bday);
+                birthday.add(byear);
             }
         };
 
@@ -83,6 +94,7 @@ public class UserProfile extends AppCompatActivity {
        int day = calendar.get(Calendar.DAY_OF_MONTH);
        int style = AlertDialog.THEME_HOLO_LIGHT;
        datePickerDialog = new DatePickerDialog(this, style, dateSetListener, year, month, day);
+       return birthday;
     }
 
     private String makeDateString(int year, int month, int day){
