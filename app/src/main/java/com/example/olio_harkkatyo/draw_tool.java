@@ -130,6 +130,7 @@ public class draw_tool extends AppCompatActivity {
                     x = x + 1;
                 }
                 gv.getViewport().setMaxX(x+1);
+                gv.setBackgroundColor(Color.argb(60, 50, 0, 255));
                 gv.addSeries(data_series1);
                 break;
 
