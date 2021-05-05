@@ -3,24 +3,22 @@ package com.example.olio_harkkatyo;
 import java.util.Scanner;
 
 public class PhysicalActivity {
-    String fileName = "testfile.txt";
-    String goalFile = "goalfile.txt";
+    String fileName = "testfile0.txt";
 
     public void changeGoal(float newGoal) {
         String inputText = Float.toString(newGoal);
 
-        DataManager dm = DataManager.getInstance();
-        dm.writeFile(goalFile, inputText);
+        // TODO User goal --> inputText
     }
 
-    public void SaveDaily(float dailyActivity) {
+    public void saveDaily(float dailyActivity) {
         String inputText = Float.toString(dailyActivity);
 
         DataManager dm = DataManager.getInstance();
         dm.writeFile(fileName, inputText);
     }
 
-    public float ActivityToGoal() {       // float goal parametrinä?
+    public float ActivityToGoal() {
         float dailyAverage;
         float goal;
         float difference = 0;
@@ -32,7 +30,6 @@ public class PhysicalActivity {
         DataManager dm = DataManager.getInstance();
 
         String file = dm.readFile(fileName);
-        String file2 = dm.readFile(goalFile);
 
         Scanner avgScanner = new Scanner(file);
 
@@ -44,7 +41,7 @@ public class PhysicalActivity {
 
         if (lineCount != 0) {   // If there's sleep activity data in the file
             dailyAverage = historicalActivity / lineCount;
-            goal = Float.parseFloat(file2.trim());
+            goal = (float) 5.0; // TODO Get goal from user info
             difference = goal - dailyAverage;
         } else {
             return 1000;  // return an impossible number as a sign that the user hasn't input any data
@@ -56,4 +53,5 @@ public class PhysicalActivity {
 
         return difference;
     }
+
 }

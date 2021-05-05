@@ -31,7 +31,7 @@ public class draw_tool extends AppCompatActivity {
         setContentView(R.layout.activity_draw_tool);
         GraphView gv = (GraphView) findViewById(R.id.graph);
         String fileName = getIntent().getStringExtra("filename");
-        int app = getIntent().getIntExtra("application",0);
+        int app = getIntent().getIntExtra("application",0); //TODO values: 1=co2, 2=sleep, 3=...
 
         System.out.println("numero: "+app +" ja tiedostonimi: "+fileName);
 

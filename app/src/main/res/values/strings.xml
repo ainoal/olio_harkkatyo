@@ -9,4 +9,5 @@
     <string name="food_info">Food info</string>
     <string name="co2">CO2</string>
     <string name="place_sleep_info_here">*Place sleep info here*</string>
+    <string name="save">Save</string>
 </resources>

@@ -6,15 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -24,7 +20,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -40,6 +35,7 @@ public class co2_calculator extends AppCompatActivity {
     SeekBar egg;
     SeekBar restaurant;
     Spinner diet;
+    String saveFile = "co2_history.txt";
 
 
     @Override
@@ -168,7 +164,7 @@ public class co2_calculator extends AppCompatActivity {
         //System.out.println(jsonobject);
         DataManager dm = DataManager.getInstance();
         if( json != null) {
-            dm.writeFile("co2_history.txt", json);
+            dm.writeFile(saveFile, json);
         }
 
 
@@ -225,7 +221,7 @@ public class co2_calculator extends AppCompatActivity {
 
         public void loadDrawingTool(View v){
         Intent intent = new Intent(co2_calculator.this, draw_tool.class);
-        intent.putExtra("filename", "co2_history.txt");
+        intent.putExtra("filename", saveFile);
         intent.putExtra("application", 1);
         startActivity(intent);
         }
