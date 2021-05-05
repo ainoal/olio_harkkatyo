@@ -208,4 +208,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    public void sleepDrawingTool(){ //TODO set for button to draw
+        String saveFile = "sleep_history.txt";
+        Intent intent = new Intent(MainActivity.this, draw_tool.class);
+        intent.putExtra("filename", saveFile);
+        intent.putExtra("application", 2);
+        startActivity(intent);
+    }
 }

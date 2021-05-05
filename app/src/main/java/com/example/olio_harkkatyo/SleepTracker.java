@@ -1,10 +1,14 @@
 package com.example.olio_harkkatyo;
 
+import android.content.Intent;
+import android.view.View;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class SleepTracker {
     String evaluation = "";
+    String saveFile = "sleep_history.txt";
 
     public ArrayList<Float> sleepHistory = new ArrayList<>();
     public float twoWeekAverage;
@@ -18,7 +22,7 @@ public class SleepTracker {
     public void setHistory(Float sleepTime){ //adds latest value to a file
         System.out.println("Slept: "+sleepTime);
         DataManager dm = DataManager.getInstance();
-        dm.writeFile("sleep_history.txt", sleepTime.toString());
+        dm.writeFile(saveFile, sleepTime.toString());
         //TODO aseta slider aktiviteettiin ja syötä luku tänne
 
         getHistory();
@@ -51,7 +55,7 @@ public class SleepTracker {
         }
         twoWeekAverage = total / sleepHistory.size();
         //TODO ??14?? latest values from sleepHistory and calculate average
-;
+
     }
 
     public void compareSleepTimes(){
