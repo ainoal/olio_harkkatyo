@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private Button login;
     private Button signUp;
     boolean confirmed = false;
+    PhysicalActivity phs = new PhysicalActivity();
     SleepTracker slt = new SleepTracker(); //luonti testausta varten, siirretään varmaan toiseen aktiviteettiin
 
     private Button profileTester; //Testiä varten
@@ -208,11 +209,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    public void sleepDrawingTool(){ //TODO set for button to draw
-        String saveFile = "sleep_history.txt";
+
+    public void sleepDrawingTool(){ //TODO set button to draw
+        String saveFile = slt.getSaveFile();
+        int ID = slt.getAppID();
         Intent intent = new Intent(MainActivity.this, draw_tool.class);
         intent.putExtra("filename", saveFile);
-        intent.putExtra("application", 2);
+        intent.putExtra("application", ID);
         startActivity(intent);
     }
+
+    public void activityDrawingTool() { //TODO set button to draw
+        String saveFile = phs.getSaveFile();
+        int ID = phs.getAppID();
+        Intent intent = new Intent(MainActivity.this, draw_tool.class);
+        intent.putExtra("filename", saveFile);
+        intent.putExtra("application", ID);
+        startActivity(intent);
+    }
+
 }

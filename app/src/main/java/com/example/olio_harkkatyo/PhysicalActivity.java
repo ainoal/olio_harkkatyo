@@ -4,6 +4,9 @@ import java.util.Scanner;
 
 public class PhysicalActivity {
     String fileName = "testfile0.txt";
+    int appID = 3;
+
+    public PhysicalActivity(){}
 
     public void changeGoal(float newGoal) {
         String inputText = Float.toString(newGoal);
@@ -52,6 +55,14 @@ public class PhysicalActivity {
         System.out.println(inputText);
 
         return difference;
+    }
+
+    public String getSaveFile(){
+        return fileName;
+    }
+
+    public int getAppID(){
+        return appID;
     }
 
 }

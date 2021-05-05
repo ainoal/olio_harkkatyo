@@ -9,6 +9,7 @@ import java.util.Scanner;
 public class SleepTracker {
     String evaluation = "";
     String saveFile = "sleep_history.txt";
+    int appID = 2;
 
     public ArrayList<Float> sleepHistory = new ArrayList<>();
     public float twoWeekAverage;
@@ -77,5 +78,13 @@ public class SleepTracker {
         } else {
             evaluation = "Sleep under control!";
             System.out.println(evaluation);}
+    }
+
+    public String getSaveFile(){
+        return saveFile;
+    }
+
+    public int getAppID(){
+        return appID;
     }
 }
