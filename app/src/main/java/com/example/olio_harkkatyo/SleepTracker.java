@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class SleepTracker {
     String evaluation = "";
     String saveFile = "sleep_history.txt";
-    int appID = 2;
+    int appID = 4;
 
     public ArrayList<Float> sleepHistory = new ArrayList<>();
     public float twoWeekAverage;
