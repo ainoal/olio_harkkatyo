@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -27,8 +28,8 @@ public class UserProfile extends AppCompatActivity {
 
 
 
-    public static User user;
-
+    //public static User user;
+    User u = User.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +45,7 @@ public class UserProfile extends AppCompatActivity {
         ArrayList<Integer> birthday = datePicker();
         bday = findViewById(R.id.btnBday);
         bday.setText(getTodaysDate());
+
 
         applyInfo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,9 +68,11 @@ public class UserProfile extends AppCompatActivity {
                     float fWeight = Float.parseFloat(weight);
                     float fIdealWeight = Float.parseFloat(idealWeight);
 
-                    user = new User(name, fWeight, fIdealWeight, birthMonth, birthDay, birthYear);
+                    u.setName(name); u.setWeight(fWeight); u.setIdealWeight(fIdealWeight);
+                    u.setBirthMonth(birthMonth); u.setBirthDay(birthDay); u.setBirthYear(birthYear);
                     startActivity(new Intent(UserProfile.this, MainActivity.class));
                     Toast.makeText(UserProfile.this, "User information applied successfully!", Toast.LENGTH_SHORT).show();
+
                 }
             }
         });

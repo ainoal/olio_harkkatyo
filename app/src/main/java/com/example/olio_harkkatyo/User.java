@@ -1,14 +1,25 @@
 package com.example.olio_harkkatyo;
 
+import android.content.Context;
+
 import java.io.Serializable;
 
 public class User implements Serializable {
+    private Context appContext;
     private String name;
     private float weight;
     private float idealWeight;
     private int birthMonth;
     private int birthDay;
     private int birthYear;
+
+    public void init(Context context) {
+        if(appContext == null) {
+            this.appContext = context;
+        }
+    }
+
+    private static User U = new User(null, 0,0,0,0,0);
 
     User(String name, float fWeight, float fIdealWeight, int birthMonth, int birthDay, int birthYear) {
         this.name = name;
@@ -19,6 +30,8 @@ public class User implements Serializable {
         this.birthYear = birthYear;
 
     }
+
+    public static synchronized User getInstance() { return U; }
 
     public String getName() {
         return name;

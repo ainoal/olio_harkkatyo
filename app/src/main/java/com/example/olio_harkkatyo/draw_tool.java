@@ -22,6 +22,7 @@ public class draw_tool extends AppCompatActivity {
     private LineGraphSeries<DataPoint> data_series1;
     private LineGraphSeries<DataPoint> data_series2;
     private LineGraphSeries<DataPoint> data_series3;
+    User user = User.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +77,7 @@ public class draw_tool extends AppCompatActivity {
                 gv.setTitle("Total (BLK), meat(RED), plant(PNK) emission");
                 glr.setVerticalAxisTitle("Emission estimate in kg CO2 eq. / year");
                 glr.setHorizontalAxisTitle("Calculated data points");
+
                 while (sc.hasNextLine()) {
 
                     String line = sc.nextLine();
