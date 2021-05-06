@@ -70,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
                 "\n######################################");
         ////TODO tallennetaanko userit tiedostoon, josta haetaan aina kaikki tallennetut userit, jos tietoja muutetaan niin kirjoitetaan koko tiedosto uusiks?
 
+        //WeightManagement.IdealWeight idealWeight = new WeightManagement.IdealWeight(juser.getWeight(),juser.getIdealWeight());
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
                 String inputUsername = username.getText().toString();
                 String inputPassword = password.getText().toString();
                 if(inputUsername.isEmpty() || inputPassword.isEmpty()) {
-                    mainView();                                             //TODO testaamisen avuksi tyhjä login, poista!!!
+                    mainView(juser);                                             //TODO testaamisen avuksi tyhjä login, poista!!!
                     //Toast.makeText(MainActivity.this, "Please fill in all the required fields.", Toast.LENGTH_SHORT).show();
                 } else {
                     confirmed = confirm(inputUsername,inputPassword);
@@ -85,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Invalid credentials!", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(MainActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
-                        mainView(); // go to the main app view
+                        mainView(juser); // go to the main app view
                     }
                 }
             }
@@ -111,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
-    public void mainView() {
+    public void mainView(User user) {
         final float[] sleep = new float[1];
         final float[] activity = new float[1];
         final float[] weight = new float[1];
@@ -172,9 +174,8 @@ public class MainActivity extends AppCompatActivity {
                 /* User can choose their weight in range currentWeight +- 20kg.
                 This way the seek bar is customized for each individual user, and thus it
                 is easier to use. */
-                // TODO set current weight according to User weight
-                currentWeight = (float) 50.0;
-                weight[0] = (float) (progress / 2.5) - 10 + currentWeight;
+                currentWeight = user.getWeight();
+                weight[0] = (float) (progress / 2.5) - 20 + currentWeight;
 
                 System.out.println("SeekbarWeight: " + weight[0]);
             }
@@ -193,6 +194,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 System.out.println("ButtonSave: OnClickListener successful");
                 // TODO sleep, activity and weight on User -> write on file
+                user.setWeight(weight[0]);
                 pa.saveDaily(activity[0]); // test
                 slt.setHistory(sleep[0]);
            }
