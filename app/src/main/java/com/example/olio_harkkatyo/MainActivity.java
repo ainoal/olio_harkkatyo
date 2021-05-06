@@ -103,10 +103,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void sleepActivity (View v){
-        slt.setHistory(7.5f);
-    }
-
     private boolean confirm(String username, String password){
 
         if(CreateAccountActivity.account != null){
