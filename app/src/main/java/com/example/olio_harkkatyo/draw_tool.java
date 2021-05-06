@@ -99,8 +99,18 @@ public class draw_tool extends AppCompatActivity {
                 break;
             case 2:
                 //TODO piirtäjälle switch-case ohjaus mitä halutaan piirtää. luotava koodi painon, nukkumiesn jne. piirtämiseen kun activity on tehty.
-                System.out.println("toimii");
+
+                gv.setTitle("Weight change over time");
+                glr.setVerticalAxisTitle("Weight in kg");
+                glr.setHorizontalAxisTitle("Days");
+                while (sc.hasNextLine()) {
+                    String line = sc.nextLine();
+                    y_1 = Double.parseDouble(line);
+                    data_series1.appendData(new DataPoint(x, y_1), true, 365);
+                    x = x + 1;
+                }
                 gv.getViewport().setMaxX(x+1);
+                gv.addSeries(data_series1);
                 break;
             case 3:
                 gv.setTitle("Your daily activity");

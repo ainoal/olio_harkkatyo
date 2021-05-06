@@ -2,6 +2,8 @@ package com.example.olio_harkkatyo;
 
 public class WeightManagement {
     float weight;
+    int appID = 2;
+    String saveFile = "weight_history.txt";
 
     public static class IdealWeight extends WeightManagement {
         float idealWeight;
@@ -40,5 +42,13 @@ public class WeightManagement {
         public void createHistory() {
 
         }
+    }
+
+    public String getSaveFile(){
+        return saveFile;
+    }
+
+    public int getAppID(){
+        return appID;
     }
 }
