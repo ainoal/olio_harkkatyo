@@ -22,7 +22,6 @@ public class draw_tool extends AppCompatActivity {
     private LineGraphSeries<DataPoint> data_series1;
     private LineGraphSeries<DataPoint> data_series2;
     private LineGraphSeries<DataPoint> data_series3;
-    User user = User.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

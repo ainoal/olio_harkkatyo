@@ -47,11 +47,6 @@ public class MainActivity extends AppCompatActivity {
         DataManager dm = DataManager.getInstance();
         dm.init(context);
 
-        User u = User.getInstance();
-        u.init(context);
-
-        System.out.println("Dataa syntymävuosi #########: " +u.getBirthYear());
-
         profileTester.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,14 +67,14 @@ public class MainActivity extends AppCompatActivity {
 
 
         //testi käyttäjän tallennus ja luku
-       /* User juser = new User("asd",1,1,2,3,123);
+        User juser = new User("asd",1,1,2,3,123);
         dm.saveUser("user.ser", juser);
         User useri = (User) dm.loadUsers("user.ser");
         System.out.println("TESTI RIVI\n" +
                 "################################\n" +
                 "painou: "+useri.getIdealWeight()+
                 "\n######################################");
-                */
+
 
         ////TODO tallennetaanko userit tiedostoon, josta haetaan aina kaikki tallennetut userit, jos tietoja muutetaan niin kirjoitetaan koko tiedosto uusiks?
 
@@ -92,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                 String inputUsername = username.getText().toString();
                 String inputPassword = password.getText().toString();
                 if(inputUsername.isEmpty() || inputPassword.isEmpty()) {
-                    mainView(u);                                             //TODO testaamisen avuksi tyhjä login, poista!!!
+                    mainView(juser);                                             //TODO testaamisen avuksi tyhjä login, poista!!!
                     //Toast.makeText(MainActivity.this, "Please fill in all the required fields.", Toast.LENGTH_SHORT).show();
                 } else {
                     confirmed = confirm(inputUsername,inputPassword);
@@ -100,7 +95,8 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Invalid credentials!", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(MainActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
-                        mainView(u); // go to the main app view
+                        //User u = (User) getIntent().getSerializableExtra("user");
+                        mainView(juser); // go to the main app view
                     }
                 }
             }
