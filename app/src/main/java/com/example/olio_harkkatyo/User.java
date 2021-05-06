@@ -10,12 +10,10 @@ public class User implements Serializable {
     private int birthDay;
     private int birthYear;
 
-    //Tänne tarvitaan vielä birthday
-
-    User(String name, float weight, float idealWeight, int birthMonth, int birthDay, int birthYear) {
+    User(String name, float fWeight, float fIdealWeight, int birthMonth, int birthDay, int birthYear) {
         this.name = name;
-        this.weight = weight;
-        this.idealWeight = idealWeight;
+        this.weight = fWeight;
+        this.idealWeight = fIdealWeight;
         this.birthMonth = birthMonth;
         this.birthDay = birthDay;
         this.birthYear = birthYear;

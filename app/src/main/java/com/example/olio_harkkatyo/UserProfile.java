@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -48,37 +49,26 @@ public class UserProfile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String name = userName.getText().toString();
-                float weight = Float.parseFloat(userWeight.getText().toString());
-                float idealWeight = Float.parseFloat(userIdealWeight.getText().toString());
+                String name = userName.getText().toString().trim();
+                String weight = userWeight.getText().toString().trim();
+                String idealWeight = userIdealWeight.getText().toString().trim();
                 int birthMonth = birthday.get(0);
                 int birthDay = birthday.get(1);
                 int birthYear = birthday.get(2);
 
-                if(confirm(name, weight, idealWeight, birthMonth, birthDay, birthYear)){
-                    user = new User(name, weight, idealWeight, birthMonth, birthDay, birthYear);
+                if(TextUtils.isEmpty(name) || TextUtils.isEmpty(weight) || TextUtils.isEmpty(idealWeight)){
+                    Toast.makeText(UserProfile.this, "Please fill in all the fields!", Toast.LENGTH_SHORT).show();
+                } else {
+                    float fWeight = Float.parseFloat(weight);
+                    float fIdealWeight = Float.parseFloat(idealWeight);
+
+                    user = new User(name, fWeight, fIdealWeight, birthMonth, birthDay, birthYear);
                     startActivity(new Intent(UserProfile.this, MainActivity.class));
                     Toast.makeText(UserProfile.this, "User information applied successfully!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-    }
-    private boolean confirm(String name, float weight, float idealWeight, int birthMonth, int birthDay, int birthYear){
-        if (name.isEmpty()) {
-            Toast.makeText(this, "Please fill in all the fields!", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        if (weight == 0.0f || idealWeight == 0.0f) {
-            Toast.makeText(this, "Please fill in all the fields!", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        if (birthMonth == 0 || birthDay == 0 || birthYear == 0) {
-            Toast.makeText(this, "Please fill in all the fields!", Toast.LENGTH_SHORT).show();
-            return false;
-        } else {
-            return  true;
-        }
     }
 
     private String getTodaysDate(){
