@@ -2,12 +2,19 @@ package com.example.olio_harkkatyo;
 
 public class WeightManagement {
     float weight;
+    int appID = 2;
+    String saveFile = "weight_history.txt";
 
-    public class IdealWeight extends WeightManagement {
+    public static class IdealWeight extends WeightManagement {
         float idealWeight;
 
+        IdealWeight(float weight, float idealWeight) {
+            this.weight = weight;
+            this.idealWeight = idealWeight;
+        }
+
         public void setIdealWeight(float inputIdeal) {
-            idealWeight = inputIdeal;
+            this.idealWeight = inputIdeal;
         }
 
         public float comparison() {
@@ -17,10 +24,14 @@ public class WeightManagement {
 
     }
 
-    public class WeightChange extends WeightManagement {
+    public static class WeightChange extends WeightManagement {
+
+        WeightChange(float weight) {
+            this.weight = weight;
+        }
 
         public void setWeight(float inputWeight) {
-            weight = inputWeight;
+            this.weight = inputWeight;
         }
 
         public float getChange() { // Change between which exact points in time?
@@ -31,5 +42,13 @@ public class WeightManagement {
         public void createHistory() {
 
         }
+    }
+
+    public String getSaveFile(){
+        return saveFile;
+    }
+
+    public int getAppID(){
+        return appID;
     }
 }

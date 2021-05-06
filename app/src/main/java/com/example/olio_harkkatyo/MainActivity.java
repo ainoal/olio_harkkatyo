@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import org.w3c.dom.ls.LSOutput;
 
+import java.io.FileNotFoundException;
+
 public class MainActivity extends AppCompatActivity {
     Context context = MainActivity.this;
     private EditText username;
@@ -23,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     boolean confirmed = false;
     PhysicalActivity phs = new PhysicalActivity();
     SleepTracker slt = new SleepTracker(); //luonti testausta varten, siirretään varmaan toiseen aktiviteettiin
+    WeightManagement wgt = new WeightManagement();
 
     private Button profileTester; //Testiä varten
 
@@ -70,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
                 "\n######################################");
         ////TODO tallennetaanko userit tiedostoon, josta haetaan aina kaikki tallennetut userit, jos tietoja muutetaan niin kirjoitetaan koko tiedosto uusiks?
 
+        //WeightManagement.IdealWeight idealWeight = new WeightManagement.IdealWeight(juser.getWeight(),juser.getIdealWeight());
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                 String inputUsername = username.getText().toString();
                 String inputPassword = password.getText().toString();
                 if(inputUsername.isEmpty() || inputPassword.isEmpty()) {
-                    mainView();                                             //TODO testaamisen avuksi tyhjä login, poista!!!
+                    mainView(juser);                                             //TODO testaamisen avuksi tyhjä login, poista!!!
                     //Toast.makeText(MainActivity.this, "Please fill in all the required fields.", Toast.LENGTH_SHORT).show();
                 } else {
                     confirmed = confirm(inputUsername,inputPassword);
@@ -85,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Invalid credentials!", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(MainActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
-                        mainView(); // go to the main app view
+                        mainView(juser); // go to the main app view
                     }
                 }
             }
@@ -111,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
-    public void mainView() {
+    public void mainView(User user) {
         final float[] sleep = new float[1];
         final float[] activity = new float[1];
         final float[] weight = new float[1];
@@ -133,6 +138,8 @@ public class MainActivity extends AppCompatActivity {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 /* Sleep time choices between 0h and 16h */
                 sleep[0] = (float) (progress / 6.25);
+                /* Round to the nearest half an hour*/
+                sleep[0] = (float) (Math.round(sleep[0] * 2) / 2.0);
                 System.out.println("SeekbarSleep: " + sleep[0]);
             }
 
@@ -152,6 +159,8 @@ public class MainActivity extends AppCompatActivity {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 /* Physical activity choices between 0h and 10h */
                 activity[0] = (float) (progress / 10.0);
+                /* Round to the nearest half an hour */
+                activity[0] = (float) (Math.round(activity[0] * 2) / 2.0);
                 System.out.println("SeekbarActivity: " + activity[0]);
             }
 
@@ -172,9 +181,9 @@ public class MainActivity extends AppCompatActivity {
                 /* User can choose their weight in range currentWeight +- 20kg.
                 This way the seek bar is customized for each individual user, and thus it
                 is easier to use. */
-                // TODO set current weight according to User weight
-                currentWeight = (float) 50.0;
-                weight[0] = (float) (progress / 2.5) - 10 + currentWeight;
+                currentWeight = user.getWeight();
+                weight[0] = (float) (progress / 2.5) - 20 + currentWeight;
+                weight[0] = (float) (Math.round(weight[0] * 10) / 10.0);
 
                 System.out.println("SeekbarWeight: " + weight[0]);
             }
@@ -193,6 +202,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 System.out.println("ButtonSave: OnClickListener successful");
                 // TODO sleep, activity and weight on User -> write on file
+                user.setWeight(weight[0]);
                 pa.saveDaily(activity[0]); // test
                 slt.setHistory(sleep[0]);
            }
@@ -233,9 +243,19 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void activityDrawingTool() { //TODO set to a button to draw
+    public void activityDrawingTool() { //TODO set to a button to draw activity
         String saveFile = phs.getSaveFile();
         int ID = phs.getAppID();
+        System.out.println("ID: "+ID+"Save file: "+saveFile);
+        Intent intent = new Intent(MainActivity.this, draw_tool.class);
+        intent.putExtra("filename", saveFile);
+        intent.putExtra("application", ID);
+        startActivity(intent);
+    }
+
+    public void weightDrawingTool() { //TODO set to a button to draw weight
+        String saveFile = wgt.getSaveFile();
+        int ID = wgt.getAppID();
         System.out.println("ID: "+ID+"Save file: "+saveFile);
         Intent intent = new Intent(MainActivity.this, draw_tool.class);
         intent.putExtra("filename", saveFile);

@@ -24,7 +24,7 @@ public class SleepTracker {
         System.out.println("Slept: "+sleepTime);
         DataManager dm = DataManager.getInstance();
         dm.writeFile(saveFile, sleepTime.toString());
-        //TODO aseta slider aktiviteettiin ja syötä luku tänne
+
 
         getHistory();
         avgSleepTime();
