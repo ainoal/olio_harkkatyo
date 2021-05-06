@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     boolean confirmed = false;
     PhysicalActivity phs = new PhysicalActivity();
     SleepTracker slt = new SleepTracker(); //luonti testausta varten, siirretään varmaan toiseen aktiviteettiin
+    WeightManagement wgt = new WeightManagement();
 
     private Button profileTester; //Testiä varten
 
@@ -242,9 +243,19 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void activityDrawingTool() { //TODO set to a button to draw
+    public void activityDrawingTool() { //TODO set to a button to draw activity
         String saveFile = phs.getSaveFile();
         int ID = phs.getAppID();
+        System.out.println("ID: "+ID+"Save file: "+saveFile);
+        Intent intent = new Intent(MainActivity.this, draw_tool.class);
+        intent.putExtra("filename", saveFile);
+        intent.putExtra("application", ID);
+        startActivity(intent);
+    }
+
+    public void weightDrawingTool() { //TODO set to a button to draw weight
+        String saveFile = wgt.getSaveFile();
+        int ID = wgt.getAppID();
         System.out.println("ID: "+ID+"Save file: "+saveFile);
         Intent intent = new Intent(MainActivity.this, draw_tool.class);
         intent.putExtra("filename", saveFile);
