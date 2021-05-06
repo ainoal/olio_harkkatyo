@@ -47,20 +47,40 @@ public class UserProfile extends AppCompatActivity {
         applyInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String name = userName.getText().toString();
-                float weight = Float.valueOf(userWeight.getText().toString());
-                float idealWeight = Float.valueOf(userIdealWeight.getText().toString());
+                float weight = Float.parseFloat(userWeight.getText().toString());
+                float idealWeight = Float.parseFloat(userIdealWeight.getText().toString());
                 int birthMonth = birthday.get(0);
                 int birthDay = birthday.get(1);
                 int birthYear = birthday.get(2);
-                user = new User(name, weight, idealWeight, birthMonth, birthDay, birthYear);
-                startActivity( new Intent(UserProfile.this, MainActivity.class));
-                Toast.makeText(UserProfile.this,"User information applied successfully!", Toast.LENGTH_SHORT).show();
-            }
 
+                if(confirm(name, weight, idealWeight, birthMonth, birthDay, birthYear)){
+                    user = new User(name, weight, idealWeight, birthMonth, birthDay, birthYear);
+                    startActivity(new Intent(UserProfile.this, MainActivity.class));
+                    Toast.makeText(UserProfile.this, "User information applied successfully!", Toast.LENGTH_SHORT).show();
+                }
+            }
         });
 
     }
+    private boolean confirm(String name, float weight, float idealWeight, int birthMonth, int birthDay, int birthYear){
+        if (name.isEmpty()) {
+            Toast.makeText(this, "Please fill in all the fields!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (weight == 0.0f || idealWeight == 0.0f) {
+            Toast.makeText(this, "Please fill in all the fields!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (birthMonth == 0 || birthDay == 0 || birthYear == 0) {
+            Toast.makeText(this, "Please fill in all the fields!", Toast.LENGTH_SHORT).show();
+            return false;
+        } else {
+            return  true;
+        }
+    }
+
     private String getTodaysDate(){
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
