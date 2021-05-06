@@ -29,7 +29,7 @@ public class draw_tool extends AppCompatActivity {
         setContentView(R.layout.activity_draw_tool);
         GraphView gv = (GraphView) findViewById(R.id.graph);
         String fileName = getIntent().getStringExtra("filename");
-        int app = getIntent().getIntExtra("application",0); //TODO values: 1=co2, 2=sleep, 3=...
+        int app = getIntent().getIntExtra("application",0); //values: 1=co2, 2=weight, 3=...
 
         System.out.println("numero: "+app +" ja tiedostonimi: "+fileName);
 
@@ -98,8 +98,6 @@ public class draw_tool extends AppCompatActivity {
                 gv.addSeries(data_series3);
                 break;
             case 2:
-                //TODO piirtäjälle switch-case ohjaus mitä halutaan piirtää. luotava koodi painon, nukkumiesn jne. piirtämiseen kun activity on tehty.
-
                 gv.setTitle("Weight change over time");
                 glr.setVerticalAxisTitle("Weight in kg");
                 glr.setHorizontalAxisTitle("Days");
