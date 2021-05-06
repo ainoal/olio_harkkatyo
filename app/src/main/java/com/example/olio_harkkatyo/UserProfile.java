@@ -52,10 +52,14 @@ public class UserProfile extends AppCompatActivity {
                 String name = userName.getText().toString().trim();
                 String weight = userWeight.getText().toString().trim();
                 String idealWeight = userIdealWeight.getText().toString().trim();
-                int birthMonth = birthday.get(0);
-                int birthDay = birthday.get(1);
-                int birthYear = birthday.get(2);
-
+                int birthMonth = 1;
+                int birthDay = 1;
+                int birthYear = 1990;
+                    try {
+                        birthMonth = birthday.get(0);
+                        birthDay = birthday.get(1);
+                        birthYear = birthday.get(2);
+                    } catch (IndexOutOfBoundsException e) {}
                 if(TextUtils.isEmpty(name) || TextUtils.isEmpty(weight) || TextUtils.isEmpty(idealWeight)){
                     Toast.makeText(UserProfile.this, "Please fill in all the fields!", Toast.LENGTH_SHORT).show();
                 } else {
