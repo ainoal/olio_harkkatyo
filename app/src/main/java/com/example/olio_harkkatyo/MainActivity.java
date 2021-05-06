@@ -2,7 +2,6 @@ package com.example.olio_harkkatyo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.ContentProviderClient;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,10 +11,6 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.ls.LSOutput;
-
-import java.io.FileNotFoundException;
 
 public class MainActivity extends AppCompatActivity {
     Context context = MainActivity.this;
@@ -131,9 +126,10 @@ public class MainActivity extends AppCompatActivity {
         SeekBar seekbarSleep = findViewById(R.id.seekBarSleep);
         SeekBar seekbarActivity = findViewById(R.id.seekBarActivity);
         SeekBar seekbarWeight = findViewById(R.id.seekBarWeight);
-        Button buttonWeight = findViewById(R.id.buttonWeight);
+        Button buttonSleep = findViewById(R.id.buttonSleep);
         Button buttonActivity = findViewById(R.id.buttonActivity);
-        Button buttonCO2 = findViewById(R.id.buttonCO2);
+        Button buttonWeight = findViewById(R.id.buttonWeight);
+        Button buttonCO2 = findViewById(R.id.buttonWeight);
         Button buttonSave = findViewById(R.id.buttonSave);
         TextView sleepInfoView = findViewById(R.id.sleepInfo);
         TextView activityInfoView = findViewById(R.id.activityInfo);
@@ -234,11 +230,11 @@ public class MainActivity extends AppCompatActivity {
            }
         });
 
-        buttonWeight.setOnClickListener(new View.OnClickListener() {
+        buttonSleep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 System.out.println("ButtonSleep: OnClickListener successful");
-                // -> Weight drawer?
+                sleepDrawingTool();
             }
         });
 
@@ -247,8 +243,16 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 System.out.println("ButtonActivity: OnClickListener successful");
                 pa.ActivityToGoal(); // for testing purposes
-                //activityDrawingTool(); //draw test
-                sleepDrawingTool();      //draw test
+                activityDrawingTool(); //draw test
+                //sleepDrawingTool();      //draw test
+            }
+        });
+
+        buttonWeight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("ButtonWeight: OnClickListener successful");
+                weightDrawingTool();
             }
         });
 
