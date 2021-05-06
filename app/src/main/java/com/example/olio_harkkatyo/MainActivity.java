@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.w3c.dom.ls.LSOutput;
@@ -121,6 +122,9 @@ public class MainActivity extends AppCompatActivity {
         final float[] sleep = new float[1];
         final float[] activity = new float[1];
         final float[] weight = new float[1];
+        String sleepInfo = "Your average sleep time: ";  // TODO add user sleep time to this string
+        String activityInfo = "Your average daily activity: ";
+        String weightInfo = "Weight info: ";
 
         setContentView(R.layout.activity_mainview);
 
@@ -131,6 +135,13 @@ public class MainActivity extends AppCompatActivity {
         Button buttonActivity = findViewById(R.id.buttonActivity);
         Button buttonCO2 = findViewById(R.id.buttonCO2);
         Button buttonSave = findViewById(R.id.buttonSave);
+        TextView sleepInfoView = findViewById(R.id.sleepInfo);
+        TextView activityInfoView = findViewById(R.id.activityInfo);
+        TextView weightInfoView = findViewById(R.id.weightInfo);
+
+        sleepInfoView.setText(sleepInfo);
+        activityInfoView.setText(activityInfo);
+        weightInfoView.setText(weightInfo);
 
         PhysicalActivity pa = new PhysicalActivity();
 
@@ -139,8 +150,11 @@ public class MainActivity extends AppCompatActivity {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 /* Sleep time choices between 0h and 16h */
                 sleep[0] = (float) (progress / 6.25);
-                /* Round to the nearest half an hour*/
+                /* Round to the nearest half an hour */
                 sleep[0] = (float) (Math.round(sleep[0] * 2) / 2.0);
+
+                String si = sleepInfo.concat("\nYour sleep time today: " + sleep[0]);
+                sleepInfoView.setText(si);
                 System.out.println("SeekbarSleep: " + sleep[0]);
             }
 
@@ -162,6 +176,9 @@ public class MainActivity extends AppCompatActivity {
                 activity[0] = (float) (progress / 10.0);
                 /* Round to the nearest half an hour */
                 activity[0] = (float) (Math.round(activity[0] * 2) / 2.0);
+
+                String ai = activityInfo.concat("\nYour activity today: " + activity[0]);
+                activityInfoView.setText(ai);
                 System.out.println("SeekbarActivity: " + activity[0]);
             }
 
@@ -186,6 +203,8 @@ public class MainActivity extends AppCompatActivity {
                 weight[0] = (float) (progress / 2.5) - 20 + currentWeight;
                 weight[0] = (float) (Math.round(weight[0] * 10) / 10.0);
 
+                String wi = weightInfo.concat("\nYour weight: " + weight[0]);
+                weightInfoView.setText(wi);
                 System.out.println("SeekbarWeight: " + weight[0]);
             }
 
