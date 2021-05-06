@@ -200,8 +200,12 @@ public class MainActivity extends AppCompatActivity {
                 This way the seek bar is customized for each individual user, and thus it
                 is easier to use. */
                 currentWeight = user.getWeight();
-                weight[0] = (float) (progress / 2.5) - 20 + currentWeight;
-                weight[0] = (float) (Math.round(weight[0] * 10) / 10.0);
+                if (currentWeight <= 20) { // To avoid possibility of negative weight
+                    weight[0] = (float) (progress / 2.5);
+                } else {
+                    weight[0] = (float) (progress / 2.5) - 20 + currentWeight;
+                    weight[0] = (float) (Math.round(weight[0] * 10) / 10.0);
+                }
 
                 String wi = weightInfo.concat("\nYour weight: " + weight[0]);
                 weightInfoView.setText(wi);
