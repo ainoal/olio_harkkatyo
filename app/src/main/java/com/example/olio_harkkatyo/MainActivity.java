@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import org.w3c.dom.ls.LSOutput;
 
+import java.io.FileNotFoundException;
+
 public class MainActivity extends AppCompatActivity {
     Context context = MainActivity.this;
     private EditText username;
@@ -135,6 +137,8 @@ public class MainActivity extends AppCompatActivity {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 /* Sleep time choices between 0h and 16h */
                 sleep[0] = (float) (progress / 6.25);
+                /* Round to the nearest half an hour*/
+                sleep[0] = (float) (Math.round(sleep[0] * 2) / 2.0);
                 System.out.println("SeekbarSleep: " + sleep[0]);
             }
 
@@ -154,6 +158,8 @@ public class MainActivity extends AppCompatActivity {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 /* Physical activity choices between 0h and 10h */
                 activity[0] = (float) (progress / 10.0);
+                /* Round to the nearest half an hour */
+                activity[0] = (float) (Math.round(activity[0] * 2) / 2.0);
                 System.out.println("SeekbarActivity: " + activity[0]);
             }
 
@@ -176,6 +182,7 @@ public class MainActivity extends AppCompatActivity {
                 is easier to use. */
                 currentWeight = user.getWeight();
                 weight[0] = (float) (progress / 2.5) - 20 + currentWeight;
+                weight[0] = (float) (Math.round(weight[0] * 10) / 10.0);
 
                 System.out.println("SeekbarWeight: " + weight[0]);
             }
