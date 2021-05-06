@@ -80,7 +80,6 @@ public class DataManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public Object loadUsers(String fileName) { //tänne palautukseen ArrayList, jossa kaikki userit?

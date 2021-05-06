@@ -55,7 +55,6 @@ public class draw_tool extends AppCompatActivity {
         String FileData = dm.readFile(fileName);
         System.out.println("Data luettu: " +fileName+"\n");
 
-
         return FileData;
     }
 

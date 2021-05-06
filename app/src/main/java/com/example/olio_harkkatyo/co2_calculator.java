@@ -98,7 +98,6 @@ public class co2_calculator extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {    //
                 switch (seekBar.getId()) {
-
                     case R.id.beefBar:
                         beef_text.setText("Beef and lamb: "+String.valueOf(df.format((float)progress/125))+"kg/week"); //average 0.4kg/week
                         break;

@@ -25,8 +25,6 @@ public class UserProfile extends AppCompatActivity {
     private DatePickerDialog datePickerDialog;
     private Button bday;
 
-
-
     public static User user;
 
     @Override

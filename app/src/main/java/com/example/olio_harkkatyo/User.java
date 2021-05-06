@@ -17,7 +17,6 @@ public class User implements Serializable {
         this.birthMonth = birthMonth;
         this.birthDay = birthDay;
         this.birthYear = birthYear;
-
     }
 
     public String getName() {

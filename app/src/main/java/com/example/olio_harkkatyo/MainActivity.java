@@ -95,7 +95,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     public void co2Activity (View v){
