@@ -35,7 +35,7 @@ public class CreateAccountActivity extends AppCompatActivity {
 
                 if(confirm(createUsername, createPassword)){
                     account = new Account(createUsername, createPassword);
-                    startActivity( new Intent(CreateAccountActivity.this, MainActivity.class));
+                    startActivity( new Intent(CreateAccountActivity.this, UserProfile.class));
                     Toast.makeText(CreateAccountActivity.this,"New account created successfully!", Toast.LENGTH_SHORT).show();
                 }
             }
