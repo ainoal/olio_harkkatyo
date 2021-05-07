@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -17,15 +18,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class UserProfile extends AppCompatActivity {
-
+    Context context = UserProfile.this;;
     private EditText userName;
     private EditText userWeight;
     private EditText userIdealWeight;
     private Button applyInfo;
     private DatePickerDialog datePickerDialog;
     private Button bday;
-
-
 
     public static User user;
 
@@ -45,6 +44,9 @@ public class UserProfile extends AppCompatActivity {
         bday = findViewById(R.id.btnBday);
         bday.setText(getTodaysDate());
 
+        DataManager dm = DataManager.getInstance();
+        dm.init(context);
+
         applyInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,18 +54,27 @@ public class UserProfile extends AppCompatActivity {
                 String name = userName.getText().toString().trim();
                 String weight = userWeight.getText().toString().trim();
                 String idealWeight = userIdealWeight.getText().toString().trim();
-                int birthMonth = birthday.get(0);
-                int birthDay = birthday.get(1);
-                int birthYear = birthday.get(2);
-
+                int birthMonth = 1;
+                int birthDay = 1;
+                int birthYear = 1990;
+                    try {
+                        birthMonth = birthday.get(0);
+                        birthDay = birthday.get(1);
+                        birthYear = birthday.get(2);
+                    } catch (IndexOutOfBoundsException e) {}
                 if(TextUtils.isEmpty(name) || TextUtils.isEmpty(weight) || TextUtils.isEmpty(idealWeight)){
                     Toast.makeText(UserProfile.this, "Please fill in all the fields!", Toast.LENGTH_SHORT).show();
                 } else {
                     float fWeight = Float.parseFloat(weight);
                     float fIdealWeight = Float.parseFloat(idealWeight);
 
+                    String userName = getIntent().getStringExtra("username");
                     user = new User(name, fWeight, fIdealWeight, birthMonth, birthDay, birthYear);
-                    startActivity(new Intent(UserProfile.this, MainActivity.class));
+                    dm.saveUser(userName,user);
+
+                    Intent intent = new Intent(UserProfile.this, MainActivity.class);
+                    //intent.putExtra("user", user);
+                    startActivity(intent);
                     Toast.makeText(UserProfile.this, "User information applied successfully!", Toast.LENGTH_SHORT).show();
                 }
             }

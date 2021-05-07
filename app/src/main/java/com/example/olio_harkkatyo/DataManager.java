@@ -21,6 +21,7 @@ public class DataManager {
     private Context appContext;
     private ArrayList<User> users = new ArrayList<>();
     private static DataManager dm= new DataManager();
+    private String userData = "accounts.txt";
 
     public void init(Context context) {
         if(appContext == null) {
@@ -72,7 +73,7 @@ public class DataManager {
     public void saveUser(String fileName, Object user) { //tänne siis lista usereista, jotka kirjoitetaan tiedostoon?
         appContext = getInstance().getContext();
         try {
-            ObjectOutputStream oos = new ObjectOutputStream(appContext.openFileOutput(fileName, Context.MODE_PRIVATE));
+            ObjectOutputStream oos = new ObjectOutputStream(appContext.openFileOutput(fileName+".ser", Context.MODE_PRIVATE));
             oos.writeObject(user);
 
         } catch (FileNotFoundException e) {
@@ -80,14 +81,12 @@ public class DataManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public Object loadUsers(String fileName) { //tänne palautukseen ArrayList, jossa kaikki userit?
         Object user = null;
         appContext = getInstance().getContext();
         try {
-                        System.out.println(appContext.openFileInput(fileName));
             ObjectInputStream ois = new ObjectInputStream(appContext.openFileInput(fileName));
 
             user = ois.readObject();
@@ -102,5 +101,18 @@ public class DataManager {
 
     //TODO pitää varmaan tehdä erillinen luku ja kirjoitus käyttäjä+salasana tiedostolle.
 
+    public void saveAccount(Account account){
+        String psw = account.getPassword();
+        String usr = account.getUsername();
+        appContext = getInstance().getContext();
+
+        try {
+            OutputStreamWriter osw = new OutputStreamWriter(appContext.openFileOutput(userData, Context.MODE_APPEND));
+            osw.write(usr+":"+psw + "\n");
+            osw.close();
+        } catch (IOException e) {
+            Log.e("IOException", "IOException while writing to a file.");
+        }
+    }
 
 }

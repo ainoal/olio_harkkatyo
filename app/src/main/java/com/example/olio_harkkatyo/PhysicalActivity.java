@@ -1,10 +1,13 @@
 package com.example.olio_harkkatyo;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class PhysicalActivity {
     String fileName = "testfile0.txt";
     int appID = 3;
+
+    public ArrayList<Float> activityHistory = new ArrayList<>();
 
     public PhysicalActivity(){}
 

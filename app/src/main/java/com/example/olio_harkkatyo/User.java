@@ -1,5 +1,7 @@
 package com.example.olio_harkkatyo;
 
+import android.content.Context;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -18,7 +20,6 @@ public class User implements Serializable {
         this.birthMonth = birthMonth;
         this.birthDay = birthDay;
         this.birthYear = birthYear;
-
     }
 
     public String getName() {

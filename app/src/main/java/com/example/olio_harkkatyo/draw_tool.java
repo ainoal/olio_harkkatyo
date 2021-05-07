@@ -55,7 +55,6 @@ public class draw_tool extends AppCompatActivity {
         String FileData = dm.readFile(fileName);
         System.out.println("Data luettu: " +fileName+"\n");
 
-
         return FileData;
     }
 
@@ -76,6 +75,7 @@ public class draw_tool extends AppCompatActivity {
                 gv.setTitle("Total (BLK), meat(RED), plant(PNK) emission");
                 glr.setVerticalAxisTitle("Emission estimate in kg CO2 eq. / year");
                 glr.setHorizontalAxisTitle("Calculated data points");
+
                 while (sc.hasNextLine()) {
 
                     String line = sc.nextLine();
