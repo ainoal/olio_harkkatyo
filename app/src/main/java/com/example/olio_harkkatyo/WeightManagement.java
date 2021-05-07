@@ -25,13 +25,20 @@ public class WeightManagement {
         return difference;
     }
 
-    public float getChange() { // Change during last 14 days
+    public float getChange(User user) { // Change during last 14 days
         float change = 0;
+        weightHistory = user.weightList;
 
-        /*float first = weightHistory.get(0);
-        float last = weightHistory.get(weightHistory.size() - 1);
+        if (weightHistory.size() > 1) {
+            float first = weightHistory.get(0);
+            float last = weightHistory.get(weightHistory.size() - 1);
+            change = last - first;
+        } else if (weightHistory.size() == 1) {
+            // Nothing to compare here since the user has input only 1 weight
+        } else {
+            // Empty ArrayList user.WeightList<>
+        }
 
-        change = last - first;*/
         return change;
     }
 

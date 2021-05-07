@@ -218,7 +218,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 weightInfoView.setText(wi);
 
-                //System.out.println(wm.getChange());
+                System.out.println(wm.getChange(user));
                 System.out.println("SeekbarWeight: " + weight[0]);
             }
 
