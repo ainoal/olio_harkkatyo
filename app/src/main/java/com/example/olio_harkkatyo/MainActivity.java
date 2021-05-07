@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
         Button buttonSleep = findViewById(R.id.buttonSleep);
         Button buttonActivity = findViewById(R.id.buttonActivity);
         Button buttonWeight = findViewById(R.id.buttonWeight);
-        Button buttonCO2 = findViewById(R.id.buttonWeight);
+        Button buttonCO2 = findViewById(R.id.buttonCO2);
         Button buttonSave = findViewById(R.id.buttonSave);
         TextView sleepInfoView = findViewById(R.id.sleepInfo);
         TextView activityInfoView = findViewById(R.id.activityInfo);
