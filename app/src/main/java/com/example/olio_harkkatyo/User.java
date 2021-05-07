@@ -21,15 +21,14 @@ public class User implements Serializable {
 
 
 
-    User(String name, float fWeight, float fIdealWeight, int birthMonth, int birthDay, int birthYear) {
+    User(String username, String name, float fWeight, float fIdealWeight, int birthMonth, int birthDay, int birthYear) {
+        this.username = username;
         this.name = name;
         this.weight = fWeight;
         this.idealWeight = fIdealWeight;
         this.birthMonth = birthMonth;
         this.birthDay = birthDay;
         this.birthYear = birthYear;
-        this.username = CreateAccountActivity.account.getUsername();
-
     }
 
 

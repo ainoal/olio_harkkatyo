@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //testi käyttäjän tallennus ja luku
-        User juser = new User("asd",1,1,2,3,123);
+        User juser = new User("uasd","asd",1,1,2,3,123);
         System.out.println("Ideal weight pitäs olla 1: "+juser.getIdealWeight()+" oikee paino 1: "+juser.getWeight());
         dm.saveUser("user.ser", juser);
         User useri = (User) dm.loadUsers("user.ser");
