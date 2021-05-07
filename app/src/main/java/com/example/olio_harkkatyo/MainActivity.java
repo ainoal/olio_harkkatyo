@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
         //testi käyttäjän tallennus ja luku
         User juser = new User("asd",1,1,2,3,123);
+        System.out.println("Ideal weight pitäs olla 1: "+juser.getIdealWeight()+" oikee paino 1: "+juser.getWeight());
         dm.saveUser("user.ser", juser);
         User useri = (User) dm.loadUsers("user.ser");
         System.out.println("TESTI RIVI\n" +
@@ -91,8 +92,8 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Invalid credentials!", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(MainActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
-                        //User u = (User) getIntent().getSerializableExtra("user");
-                        mainView(juser); // go to the main app view
+                        User u = (User) getIntent().getSerializableExtra("user");
+                        mainView(u); // go to the main app view
                     }
                 }
             }

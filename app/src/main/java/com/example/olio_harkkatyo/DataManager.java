@@ -87,7 +87,7 @@ public class DataManager {
         Object user = null;
         appContext = getInstance().getContext();
         try {
-            ObjectInputStream ois = new ObjectInputStream(appContext.openFileInput(fileName));
+            ObjectInputStream ois = new ObjectInputStream(appContext.openFileInput(fileName+".ser"));
 
             user = ois.readObject();
 
