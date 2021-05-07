@@ -162,14 +162,10 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
+            public void onStartTrackingTouch(SeekBar seekBar) { }
 
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
+            public void onStopTrackingTouch(SeekBar seekBar) { }
         });
 
         seekbarActivity.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -186,12 +182,10 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
+            public void onStartTrackingTouch(SeekBar seekBar) { }
 
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-            }
+            public void onStopTrackingTouch(SeekBar seekBar) { }
         });
 
         seekbarWeight.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -213,7 +207,15 @@ public class MainActivity extends AppCompatActivity {
 
                 String wi = weightInfo.concat("\nYour weight: " + weight[0]);
                 wi = wi.concat("\nYour ideal weight: " + user.getIdealWeight());
-                wi = wi.concat("\n" + wm.comparison(user));
+
+                /* Set info box message about how far user is from their ideal weight */
+                if (wm.comparison(user) < 0) {
+                    wi = wi.concat("\nYou are " + Math.abs(wm.comparison(user)) + "kg under your ideal weight.");
+                } else if (wm.comparison(user) == 0) {
+                    wi = wi.concat("\nYou are in your ideal weight! :)");
+                } else {
+                    wi = wi.concat("\nYou are " + wm.comparison(user) + "kg over your ideal weight.");
+                }
                 weightInfoView.setText(wi);
 
                 //System.out.println(change.getChange());
@@ -221,12 +223,10 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
+            public void onStartTrackingTouch(SeekBar seekBar) { }
 
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-            }
+            public void onStopTrackingTouch(SeekBar seekBar) { }
         });
 
         buttonSave.setOnClickListener(new View.OnClickListener() {
