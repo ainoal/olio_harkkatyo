@@ -15,6 +15,7 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class draw_tool extends AppCompatActivity {
@@ -75,6 +76,9 @@ public class draw_tool extends AppCompatActivity {
                 gv.setTitle("Total (BLK), meat(RED), plant(PNK) emission");
                 glr.setVerticalAxisTitle("Emission estimate in kg CO2 eq. / year");
                 glr.setHorizontalAxisTitle("Calculated data points");
+                ArrayList<String> co2List = new ArrayList<>();
+                //co2List =
+
 
                 while (sc.hasNextLine()) {
 
