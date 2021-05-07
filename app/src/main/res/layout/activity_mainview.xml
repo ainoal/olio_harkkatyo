@@ -3,23 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#D9ED92">
 
     <TextView
         android:id="@+id/textViewSleep"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/sleep"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.060000002" />
+        app:layout_constraintVertical_bias="0.059" />
 
     <SeekBar
         android:id="@+id/seekBarSleep"
         android:layout_width="274dp"
         android:layout_height="26dp"
+        android:thumbTint="#34A0A4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -32,54 +36,62 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/activity"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/seekBarSleep"
-        app:layout_constraintVertical_bias="0.083" />
+        app:layout_constraintVertical_bias="0.082" />
 
     <SeekBar
         android:id="@+id/seekBarActivity"
         android:layout_width="274dp"
         android:layout_height="26dp"
+        android:thumbTint="#34A0A4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewActivity"
-        app:layout_constraintVertical_bias="0.13999999" />
+        app:layout_constraintVertical_bias="0.17" />
 
     <TextView
         android:id="@+id/textViewWeight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/weight"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/seekBarActivity"
-        app:layout_constraintVertical_bias="0.154" />
+        app:layout_constraintVertical_bias="0.157" />
 
     <SeekBar
         android:id="@+id/seekBarWeight"
         android:layout_width="274dp"
         android:layout_height="26dp"
+        android:thumbTint="#34A0A4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewWeight"
-        app:layout_constraintVertical_bias="0.332" />
+        app:layout_constraintVertical_bias="0.253" />
 
     <Button
         android:id="@+id/buttonSleep"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/sleep"
+        android:layout_marginLeft="4dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="3dp"
+        app:backgroundTint="#1E6091"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/buttonActivity"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/buttonActivity"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
@@ -89,10 +101,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/activity"
+        android:layout_marginLeft="3dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="3dp"
+        app:backgroundTint="#76C893"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.322"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/buttonSleep"
+        app:layout_constraintRight_toLeftOf="@+id/buttonWeight"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
@@ -101,10 +116,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/weight"
+        android:layout_marginLeft="3dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="3dp"
+        app:backgroundTint="#1E6091"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/buttonActivity"
+        app:layout_constraintRight_toLeftOf="@+id/buttonCO2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/buttonCO2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/co2"
+        android:layout_marginLeft="3dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="4dp"
+        app:backgroundTint="#76C893"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.057"
-        app:layout_constraintStart_toEndOf="@+id/buttonActivity"
+        app:layout_constraintLeft_toRightOf="@+id/buttonWeight"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
@@ -124,6 +157,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/save"
+        app:backgroundTint="#34A0A4"
         app:layout_constraintBottom_toTopOf="@+id/buttonActivity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -148,15 +182,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewWeight" />
-
-    <Button
-        android:id="@+id/buttonCO2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/co2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/buttonWeight"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>
