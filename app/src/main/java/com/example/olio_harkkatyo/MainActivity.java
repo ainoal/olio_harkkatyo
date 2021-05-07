@@ -144,12 +144,15 @@ public class MainActivity extends AppCompatActivity {
         seekbarSleep.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                String msg = slt.compareSleepTimes();
+
                 /* Sleep time choices between 0h and 16h */
                 sleep[0] = (float) (progress / 6.25);
                 /* Round to the nearest half an hour */
                 sleep[0] = (float) (Math.round(sleep[0] * 2) / 2.0);
 
                 String si = sleepInfo.concat("\nYour sleep time today: " + sleep[0]);
+                si = si.concat("\n" + msg);
                 sleepInfoView.setText(si);
                 System.out.println("SeekbarSleep: " + sleep[0]);
             }
@@ -192,6 +195,7 @@ public class MainActivity extends AppCompatActivity {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 float currentWeight;
                 WeightManagement.IdealWeight ideal = new WeightManagement.IdealWeight();
+                WeightManagement.WeightChange change = new WeightManagement.WeightChange();
 
                 /* User can choose their weight in range currentWeight +- 20kg.
                 This way the seek bar is customized for each individual user, and thus it
@@ -206,8 +210,10 @@ public class MainActivity extends AppCompatActivity {
 
                 String wi = weightInfo.concat("\nYour weight: " + weight[0]);
                 wi = wi.concat("\nYour ideal weight: " + user.getIdealWeight());
-                ideal.comparison(user);
+                wi = wi.concat("\n" + ideal.comparison(user));
                 weightInfoView.setText(wi);
+
+                //System.out.println(change.getChange());
                 System.out.println("SeekbarWeight: " + weight[0]);
             }
 
