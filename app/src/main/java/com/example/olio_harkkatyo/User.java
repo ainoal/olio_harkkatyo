@@ -12,6 +12,12 @@ public class User implements Serializable {
     private int birthMonth;
     private int birthDay;
     private int birthYear;
+    private ArrayList<Float> sleepList = new ArrayList<>();
+    private ArrayList<Float> activityList = new ArrayList<>();
+    private ArrayList<Float> weightList = new ArrayList<>();
+    private ArrayList<String> co2List = new ArrayList<>();
+
+
 
     User(String name, float fWeight, float fIdealWeight, int birthMonth, int birthDay, int birthYear) {
         this.name = name;
@@ -20,7 +26,14 @@ public class User implements Serializable {
         this.birthMonth = birthMonth;
         this.birthDay = birthDay;
         this.birthYear = birthYear;
+
+
+
+
+
     }
+
+
 
     public String getName() {
         return name;
