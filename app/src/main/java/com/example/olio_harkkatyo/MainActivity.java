@@ -195,8 +195,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 float currentWeight;
-                WeightManagement.IdealWeight ideal = new WeightManagement.IdealWeight();
-                WeightManagement.WeightChange change = new WeightManagement.WeightChange();
+                WeightManagement wm= new WeightManagement();
 
                 /* User can choose their weight in range currentWeight +- 20kg.
                 This way the seek bar is customized for each individual user, and thus it
@@ -211,7 +210,7 @@ public class MainActivity extends AppCompatActivity {
 
                 String wi = weightInfo.concat("\nYour weight: " + weight[0]);
                 wi = wi.concat("\nYour ideal weight: " + user.getIdealWeight());
-                wi = wi.concat("\n" + ideal.comparison(user));
+                wi = wi.concat("\n" + wm.comparison(user));
                 weightInfoView.setText(wi);
 
                 //System.out.println(change.getChange());
@@ -231,7 +230,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 System.out.println("ButtonSave: OnClickListener successful");
-                // TODO sleep, activity and weight on User -> write on file
                 System.out.println(user.getWeight()+" old weight \n");
                 user.setWeight(weight[0]);
                 System.out.println(user.getWeight()+ " updated weight \n");
