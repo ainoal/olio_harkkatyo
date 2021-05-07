@@ -18,7 +18,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.263" />
+        app:layout_constraintVertical_bias="0.151" />
 
     <EditText
         android:id="@+id/etCreatePasswrd"
@@ -32,7 +32,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etCreateName"
-        app:layout_constraintVertical_bias="0.095" />
+        app:layout_constraintVertical_bias="0.05" />
 
     <Button
         android:id="@+id/btnCreate"
@@ -43,17 +43,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvPassword"
-        app:layout_constraintVertical_bias="0.242" />
+        app:layout_constraintVertical_bias="0.058" />
 
     <TextView
         android:id="@+id/tvPassword"
-        android:layout_width="286dp"
-        android:layout_height="57dp"
+        android:layout_width="227dp"
+        android:layout_height="65dp"
         android:text="Password must be at least 12 characters long and contain at least 1 digit, 1 special character, 1 upper and 1 lower case!"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etCreatePasswrd"
-        app:layout_constraintVertical_bias="0.063" />
+        app:layout_constraintVertical_bias="0.058" />
 </androidx.constraintlayout.widget.ConstraintLayout>
