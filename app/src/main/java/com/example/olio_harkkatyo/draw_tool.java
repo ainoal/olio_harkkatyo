@@ -23,6 +23,7 @@ public class draw_tool extends AppCompatActivity {
     private LineGraphSeries<DataPoint> data_series1;
     private LineGraphSeries<DataPoint> data_series2;
     private LineGraphSeries<DataPoint> data_series3;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +78,10 @@ public class draw_tool extends AppCompatActivity {
                 glr.setVerticalAxisTitle("Emission estimate in kg CO2 eq. / year");
                 glr.setHorizontalAxisTitle("Calculated data points");
                 ArrayList<String> co2List = new ArrayList<>();
-                //co2List =
+
+                co2List = user.getCO2List();
+                System.out.println("Arvo1: "+co2List.get(0));
+                System.out.println("Arvo2: "+co2List.get(1));
 
 
                 while (sc.hasNextLine()) {

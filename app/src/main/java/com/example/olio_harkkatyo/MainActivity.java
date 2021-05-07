@@ -104,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void co2Activity (View v){
         Intent intent = new Intent(MainActivity.this, co2_calculator.class);
+
         startActivity(intent);
     }
 
@@ -278,7 +279,7 @@ public class MainActivity extends AppCompatActivity {
         String saveFile = slt.getSaveFile();
         int ID = slt.getAppID();
         Intent intent = new Intent(MainActivity.this, draw_tool.class);
-        intent.putExtra("filename", saveFile);
+        //intent.putExtra("username", User.);
         intent.putExtra("application", ID);
         startActivity(intent);
     }

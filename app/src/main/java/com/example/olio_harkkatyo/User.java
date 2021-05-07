@@ -53,6 +53,11 @@ public class User implements Serializable {
         return co2List;
     }
 
+    public void setCO2List(String line) {
+        manipulateStringList(co2List, line);
+
+    }
+
     public void setWeight(float weight) {
         manipulateFloatList(weightList, weight);
         this.weight = weight;
@@ -100,6 +105,20 @@ public class User implements Serializable {
         }
         for(int i=0; i<list.size(); i++){
             System.out.println("Listan arvot: "+list.get(i)+"\n");
+        }
+
+
+    }
+
+    public void manipulateStringList(ArrayList list, String line){
+        if (list.size()>365){
+            list.remove(0);
+        }
+
+        list.add(line);
+
+        for(int i=0; i<list.size(); i++){
+            System.out.println("Listan rivit: "+list.get(i)+"\n");
         }
 
 
