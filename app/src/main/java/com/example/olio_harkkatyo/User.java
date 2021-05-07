@@ -49,8 +49,12 @@ public class User implements Serializable {
         return weight;
     }
 
+    public ArrayList getCO2List() {
+        return co2List;
+    }
+
     public void setWeight(float weight) {
-        weightList.add(weight);
+        manipulateFloatList(weightList, weight);
         this.weight = weight;
     }
 
@@ -84,5 +88,20 @@ public class User implements Serializable {
 
     public void setBirthYear(int birthYear) {
         this.birthYear = birthYear;
+    }
+
+    public void manipulateFloatList(ArrayList list, float value){
+        if (list.size()>365){
+            list.remove(0);
+        }
+        while(list.size()<365) {
+            list.add(value+1);
+            list.add(value-4);
+        }
+        for(int i=0; i<list.size(); i++){
+            System.out.println("Listan arvot: "+list.get(i)+"\n");
+        }
+
+
     }
 }
