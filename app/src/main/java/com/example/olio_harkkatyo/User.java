@@ -32,10 +32,11 @@ public class User implements Serializable {
     }
 
 
-
     public String getName() {
         return name;
     }
+
+    public String getUsername(){return username; }
 
     public void setName(String name) {
         this.name = name;
@@ -45,13 +46,25 @@ public class User implements Serializable {
         return weight;
     }
 
-    public ArrayList getCO2List() {
-        return co2List;
-    }
-
     public void setCO2List(String line) {
         manipulateStringList(co2List, line);
 
+        for(int i=0;co2List.size()>i;i++){
+            System.out.println("CO2 listan arvot, "+i+":"+ co2List.get(i));
+        }
+
+    }
+
+    public void setSleepList(float line) {
+        manipulateFloatList(sleepList, line);
+    }
+
+    public void setWeightList(float line) {
+        manipulateFloatList(weightList, line);
+    }
+
+    public void setActivityList(float line) {
+        manipulateFloatList(activityList, line);
     }
 
     public void setWeight(float weight) {
@@ -95,10 +108,11 @@ public class User implements Serializable {
         if (list.size()>365){
             list.remove(0);
         }
-        while(list.size()<365) {
+       /* while(list.size()<365) {
             list.add(value+1);
             list.add(value-4);
-        }
+        }*/
+        list.add(value);
         for(int i=0; i<list.size(); i++){
             System.out.println("Listan arvot: "+list.get(i)+"\n");
         }
@@ -110,7 +124,6 @@ public class User implements Serializable {
         if (list.size()>365){
             list.remove(0);
         }
-
         list.add(line);
 
         for(int i=0; i<list.size(); i++){
@@ -119,4 +132,21 @@ public class User implements Serializable {
 
 
     }
+
+    public ArrayList getCO2List() {
+        return co2List;
+    }
+
+    public ArrayList getWeightList() {
+        return weightList;
+    }
+
+    public ArrayList getActivityList() {
+        return activityList;
+    }
+
+    public ArrayList getSleepList() {
+        return sleepList;
+    }
+
 }

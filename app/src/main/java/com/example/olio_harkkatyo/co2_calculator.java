@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import java.io.BufferedInputStream;
@@ -37,12 +38,16 @@ public class co2_calculator extends AppCompatActivity {
     Spinner diet;
     String saveFile = "co2_history.txt";
     User user;
+    int ID = 1;
+    String userName;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_co2_calculator);
+        userName = getIntent().getStringExtra("username");
+        System.out.println("Käyttäjänimi on: "+ userName);
 
 
         diet = findViewById(R.id.spinnerDiet);
@@ -163,9 +168,11 @@ public class co2_calculator extends AppCompatActivity {
         //JSONObject jsonobject = new JSONObject(json);
         //System.out.println(jsonobject);
         DataManager dm = DataManager.getInstance();
+        user = (User) dm.loadUsers(userName);
         if( json != null) {
             //dm.writeFile(saveFile, json);
             user.setCO2List(json);
+            dm.saveUser(userName, user);
         }
 
 
@@ -220,11 +227,17 @@ public class co2_calculator extends AppCompatActivity {
         return response;
         }
 
-        public void loadDrawingTool(View v){
-        Intent intent = new Intent(co2_calculator.this, draw_tool.class);
-        intent.putExtra("filename", saveFile);
-        intent.putExtra("application", 1);
-        startActivity(intent);
+        public void loadDrawingTool(View v) {
+        DataManager dm = DataManager.getInstance();
+            user = (User) dm.loadUsers(userName);
+            if (user.getCO2List().size() > 1) {
+                Intent intent = new Intent(co2_calculator.this, draw_tool.class);
+                intent.putExtra("username", userName);
+                intent.putExtra("application", ID);
+                startActivity(intent);
+            } else {
+                Toast.makeText(co2_calculator.this, "Need at least two entries to draw!", Toast.LENGTH_SHORT).show();
+            }
         }
 
 

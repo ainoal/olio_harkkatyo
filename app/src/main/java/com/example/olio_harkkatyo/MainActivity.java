@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     PhysicalActivity phs = new PhysicalActivity();
     SleepTracker slt = new SleepTracker(); //luonti testausta varten, siirretään varmaan toiseen aktiviteettiin
     WeightManagement wgt = new WeightManagement();
+    User u;
 
     private Button profileTester; //Testiä varten
 
@@ -67,12 +68,14 @@ public class MainActivity extends AppCompatActivity {
         //testi käyttäjän tallennus ja luku
         User juser = new User("uasd","asd",1,1,2,3,123);
         System.out.println("Ideal weight pitäs olla 1: "+juser.getIdealWeight()+" oikee paino 1: "+juser.getWeight());
-        dm.saveUser("user.ser", juser);
-        User useri = (User) dm.loadUsers("user.ser");
+
+        dm.saveUser(juser.getUsername(), juser);
+        User useri = (User) dm.loadUsers(juser.getUsername());
         System.out.println("TESTI RIVI\n" +
                 "################################\n" +
                 "painou: "+useri.getIdealWeight()+
                 "\n######################################");
+        u = useri;
 
 
         ////TODO tallennetaanko userit tiedostoon, josta haetaan aina kaikki tallennetut userit, jos tietoja muutetaan niin kirjoitetaan koko tiedosto uusiks?
@@ -86,7 +89,8 @@ public class MainActivity extends AppCompatActivity {
                 String inputUsername = username.getText().toString();
                 String inputPassword = password.getText().toString();
                 if(inputUsername.isEmpty() || inputPassword.isEmpty()) {
-                    mainView(juser);                                             //TODO testaamisen avuksi tyhjä login, poista!!!
+                    //u = (User) dm.loadUsers("uasd");
+                    mainView(u);                                             //TODO testaamisen avuksi tyhjä login, poista!!!
                     //Toast.makeText(MainActivity.this, "Please fill in all the required fields.", Toast.LENGTH_SHORT).show();
                 } else {
                     confirmed = confirm(inputUsername,inputPassword);
@@ -94,7 +98,9 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Invalid credentials!", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(MainActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
-                        User u = (User) getIntent().getSerializableExtra("user");
+
+                        u = (User) dm.loadUsers(inputUsername);
+                        //User u = (User) getIntent().getSerializableExtra("user");
                         mainView(u); // go to the main app view
                     }
                 }
@@ -103,10 +109,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void co2Activity (View v){
-        Intent intent = new Intent(MainActivity.this, co2_calculator.class);
+            Intent intent = new Intent(MainActivity.this, co2_calculator.class);
+            //System.out.println("Käyttäjänimi on: "+ u.getUsername());
 
-        startActivity(intent);
-    }
+            //intent.putExtra("username", "uasd"); //TODO TESTIÄ VARTEN, POISTA
+            intent.putExtra("username", u.getUsername());
+            startActivity(intent);
+     }
 
     private boolean confirm(String username, String password){
 
@@ -232,12 +241,20 @@ public class MainActivity extends AppCompatActivity {
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("ButtonSave: OnClickListener successful");
-                System.out.println(user.getWeight()+" old weight \n");
+                DataManager dm = DataManager.getInstance();
+                System.out.println("ButtonSave: OnClickListener successful\nUsername is: "+u.getUsername());   //TODO poistoon kommentoidut
+                /*System.out.println(user.getWeight()+" old weight \n");
                 user.setWeight(weight[0]);
                 System.out.println(user.getWeight()+ " updated weight \n");
                 pa.saveDaily(activity[0]); // test
-                slt.setHistory(sleep[0]);
+                slt.setHistory(sleep[0]);*/
+                //user = (User) dm.loadUsers(u.getUsername());
+                u.setWeightList(weight[0]);
+                u.setSleepList(sleep[0]);
+                u.setActivityList(activity[0]);
+                dm.saveUser(u.getUsername(),u);
+
+
            }
         });
 
@@ -276,32 +293,41 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void sleepDrawingTool(){ //TODO set to a button to draw, currently starting at line 200 activity click
-        String saveFile = slt.getSaveFile();
-        int ID = slt.getAppID();
-        Intent intent = new Intent(MainActivity.this, draw_tool.class);
-        //intent.putExtra("username", User.);
-        intent.putExtra("application", ID);
-        startActivity(intent);
+        if(u.getSleepList().size() > 1) {
+            int ID = slt.getAppID();
+            Intent intent = new Intent(MainActivity.this, draw_tool.class);
+            intent.putExtra("username", u.getUsername());
+            intent.putExtra("application", ID);
+            startActivity(intent);
+        } else {
+            Toast.makeText(MainActivity.this, "Need at least two entries to draw!", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void activityDrawingTool() { //TODO set to a button to draw activity
-        String saveFile = phs.getSaveFile();
-        int ID = phs.getAppID();
-        System.out.println("ID: "+ID+"Save file: "+saveFile);
-        Intent intent = new Intent(MainActivity.this, draw_tool.class);
-        intent.putExtra("filename", saveFile);
-        intent.putExtra("application", ID);
-        startActivity(intent);
+        if(u.getSleepList().size() > 1) {
+            int ID = phs.getAppID();
+            System.out.println("ID: " + ID + "Save file: " + u.getUsername());
+            Intent intent = new Intent(MainActivity.this, draw_tool.class);
+            intent.putExtra("username", u.getUsername());
+            intent.putExtra("application", ID);
+            startActivity(intent);
+        }else {
+            Toast.makeText(MainActivity.this, "Need at least two entries to draw!", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void weightDrawingTool() { //TODO set to a button to draw weight
-        String saveFile = wgt.getSaveFile();
-        int ID = wgt.getAppID();
-        System.out.println("ID: "+ID+"Save file: "+saveFile);
-        Intent intent = new Intent(MainActivity.this, draw_tool.class);
-        intent.putExtra("filename", saveFile);
-        intent.putExtra("application", ID);
-        startActivity(intent);
+        if(u.getSleepList().size() > 1) {
+            int ID = wgt.getAppID();
+            System.out.println("ID: " + ID + "Save file: " + u.getUsername());
+            Intent intent = new Intent(MainActivity.this, draw_tool.class);
+            intent.putExtra("username", u.getUsername());
+            intent.putExtra("application", ID);
+            startActivity(intent);
+        } else {
+            Toast.makeText(MainActivity.this, "Need at least two entries to draw!", Toast.LENGTH_SHORT).show();
+        }
     }
 
 }
