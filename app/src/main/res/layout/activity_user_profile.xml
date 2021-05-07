@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#B5E48C"
     android:visibility="visible"
     tools:context=".UserProfile">
 
@@ -19,12 +20,12 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.17" />
+        app:layout_constraintVertical_bias="0.072" />
 
     <EditText
         android:id="@+id/etUserWeight"
-        android:layout_width="343dp"
-        android:layout_height="46dp"
+        android:layout_width="342dp"
+        android:layout_height="42dp"
         android:ems="10"
         android:hint='Enter your current weight in kg ("56.0"):'
         android:inputType="textPersonName"
@@ -32,19 +33,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etUserName"
-        app:layout_constraintVertical_bias="0.11" />
+        app:layout_constraintVertical_bias="0.037" />
 
     <Button
         android:id="@+id/btnApplyInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Apply"
+        app:backgroundTint="#52B69A"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnBday"
-        app:layout_constraintVertical_bias="0.325" />
+        app:layout_constraintVertical_bias="0.095" />
 
     <TextView
         android:id="@+id/tvBday"
@@ -56,7 +58,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etUserIdealWeight"
-        app:layout_constraintVertical_bias="0.159" />
+        app:layout_constraintVertical_bias="0.037" />
 
     <Button
         android:id="@+id/btnBday"
@@ -65,15 +67,15 @@
         android:layout_height="wrap_content"
         android:onClick="openDatePicker"
         android:text="JAN 01 2021"
-        android:textColor="@color/purple_500"
+        android:textColor="#00695C"
         android:textSize="25sp"
-        app:backgroundTint="@color/purple_500"
+        app:backgroundTint="#00695C"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvBday"
-        app:layout_constraintVertical_bias="0.059" />
+        app:layout_constraintVertical_bias="0.037" />
 
     <EditText
         android:id="@+id/etUserIdealWeight"
@@ -87,7 +89,7 @@
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etUserWeight"
-        app:layout_constraintVertical_bias="0.122" />
+        app:layout_constraintVertical_bias="0.037" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
