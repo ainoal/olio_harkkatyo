@@ -59,7 +59,7 @@ public class SleepTracker {
 
     }
 
-    public void compareSleepTimes(){
+    public String compareSleepTimes(){
         //TODO what is reasonable deviation?
         int under_avg = 0;
         int over_avg = 0;
@@ -78,6 +78,8 @@ public class SleepTracker {
         } else {
             evaluation = "Sleep under control!";
             System.out.println(evaluation);}
+
+        return evaluation;
     }
 
     public String getSaveFile(){

@@ -22,9 +22,10 @@
         android:layout_height="26dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewSleep"
-        app:layout_constraintVertical_bias="0.26" />
+        app:layout_constraintVertical_bias="0.133" />
 
     <TextView
         android:id="@+id/textViewActivity"
@@ -33,9 +34,10 @@
         android:text="@string/activity"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.484"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/seekBarSleep"
-        app:layout_constraintVertical_bias="0.24000001" />
+        app:layout_constraintVertical_bias="0.083" />
 
     <SeekBar
         android:id="@+id/seekBarActivity"
@@ -54,9 +56,10 @@
         android:text="@string/weight"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/seekBarActivity"
-        app:layout_constraintVertical_bias="0.26999998" />
+        app:layout_constraintVertical_bias="0.154" />
 
     <SeekBar
         android:id="@+id/seekBarWeight"
@@ -64,17 +67,19 @@
         android:layout_height="26dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewWeight"
-        app:layout_constraintVertical_bias="0.19" />
+        app:layout_constraintVertical_bias="0.332" />
 
     <Button
-        android:id="@+id/buttonWeight"
+        android:id="@+id/buttonSleep"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/weight"
+        android:text="@string/sleep"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/buttonActivity"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
@@ -86,17 +91,19 @@
         android:text="@string/activity"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.322"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
-        android:id="@+id/buttonCO2"
+        android:id="@+id/buttonWeight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/co2"
+        android:text="@string/weight"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.057"
         app:layout_constraintStart_toEndOf="@+id/buttonActivity"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
@@ -105,11 +112,12 @@
         android:id="@+id/sleepInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/place_sleep_info_here"
+        android:text="@string/sleep_info"
         app:layout_constraintBottom_toTopOf="@+id/seekBarSleep"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewSleep" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewSleep"
+        app:layout_constraintVertical_bias="0.364" />
 
     <Button
         android:id="@+id/buttonSave"
@@ -120,4 +128,35 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/seekBarWeight" />
+
+    <TextView
+        android:id="@+id/activityInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/activity_info_here"
+        app:layout_constraintBottom_toTopOf="@+id/seekBarActivity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewActivity" />
+
+    <TextView
+        android:id="@+id/weightInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/weight_info_here"
+        app:layout_constraintBottom_toTopOf="@+id/seekBarWeight"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewWeight" />
+
+    <Button
+        android:id="@+id/buttonCO2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/co2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/buttonWeight"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

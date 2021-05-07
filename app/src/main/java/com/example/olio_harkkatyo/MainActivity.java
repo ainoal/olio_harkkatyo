@@ -2,7 +2,6 @@ package com.example.olio_harkkatyo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.ContentProviderClient;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,11 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.ls.LSOutput;
-
-import java.io.FileNotFoundException;
 
 public class MainActivity extends AppCompatActivity {
     Context context = MainActivity.this;
@@ -121,26 +117,43 @@ public class MainActivity extends AppCompatActivity {
         final float[] sleep = new float[1];
         final float[] activity = new float[1];
         final float[] weight = new float[1];
+        String sleepInfo = "Your average sleep time: ";  // TODO add user sleep time to this string
+        String activityInfo = "Your average daily activity: ";
+        String weightInfo = "Weight info: ";
 
         setContentView(R.layout.activity_mainview);
 
         SeekBar seekbarSleep = findViewById(R.id.seekBarSleep);
         SeekBar seekbarActivity = findViewById(R.id.seekBarActivity);
         SeekBar seekbarWeight = findViewById(R.id.seekBarWeight);
-        Button buttonWeight = findViewById(R.id.buttonWeight);
+        Button buttonSleep = findViewById(R.id.buttonSleep);
         Button buttonActivity = findViewById(R.id.buttonActivity);
-        Button buttonCO2 = findViewById(R.id.buttonCO2);
+        Button buttonWeight = findViewById(R.id.buttonWeight);
+        Button buttonCO2 = findViewById(R.id.buttonWeight);
         Button buttonSave = findViewById(R.id.buttonSave);
+        TextView sleepInfoView = findViewById(R.id.sleepInfo);
+        TextView activityInfoView = findViewById(R.id.activityInfo);
+        TextView weightInfoView = findViewById(R.id.weightInfo);
+
+        sleepInfoView.setText(sleepInfo);
+        activityInfoView.setText(activityInfo);
+        weightInfoView.setText(weightInfo);
 
         PhysicalActivity pa = new PhysicalActivity();
 
         seekbarSleep.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                String msg = slt.compareSleepTimes();
+
                 /* Sleep time choices between 0h and 16h */
                 sleep[0] = (float) (progress / 6.25);
-                /* Round to the nearest half an hour*/
+                /* Round to the nearest half an hour */
                 sleep[0] = (float) (Math.round(sleep[0] * 2) / 2.0);
+
+                String si = sleepInfo.concat("\nYour sleep time today: " + sleep[0]);
+                si = si.concat("\n" + msg);
+                sleepInfoView.setText(si);
                 System.out.println("SeekbarSleep: " + sleep[0]);
             }
 
@@ -162,6 +175,9 @@ public class MainActivity extends AppCompatActivity {
                 activity[0] = (float) (progress / 10.0);
                 /* Round to the nearest half an hour */
                 activity[0] = (float) (Math.round(activity[0] * 2) / 2.0);
+
+                String ai = activityInfo.concat("\nYour activity today: " + activity[0]);
+                activityInfoView.setText(ai);
                 System.out.println("SeekbarActivity: " + activity[0]);
             }
 
@@ -178,14 +194,26 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 float currentWeight;
+                WeightManagement.IdealWeight ideal = new WeightManagement.IdealWeight();
+                WeightManagement.WeightChange change = new WeightManagement.WeightChange();
 
                 /* User can choose their weight in range currentWeight +- 20kg.
                 This way the seek bar is customized for each individual user, and thus it
                 is easier to use. */
                 currentWeight = user.getWeight();
-                weight[0] = (float) (progress / 2.5) - 20 + currentWeight;
-                weight[0] = (float) (Math.round(weight[0] * 10) / 10.0);
+                if (currentWeight <= 20) { // To avoid possibility of negative weight
+                    weight[0] = (float) (progress / 2.5);
+                } else {
+                    weight[0] = (float) (progress / 2.5) - 20 + currentWeight;
+                    weight[0] = (float) (Math.round(weight[0] * 10) / 10.0);
+                }
 
+                String wi = weightInfo.concat("\nYour weight: " + weight[0]);
+                wi = wi.concat("\nYour ideal weight: " + user.getIdealWeight());
+                wi = wi.concat("\n" + ideal.comparison(user));
+                weightInfoView.setText(wi);
+
+                //System.out.println(change.getChange());
                 System.out.println("SeekbarWeight: " + weight[0]);
             }
 
@@ -211,11 +239,11 @@ public class MainActivity extends AppCompatActivity {
            }
         });
 
-        buttonWeight.setOnClickListener(new View.OnClickListener() {
+        buttonSleep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 System.out.println("ButtonSleep: OnClickListener successful");
-                // -> Weight drawer?
+                sleepDrawingTool();
             }
         });
 
@@ -224,8 +252,16 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 System.out.println("ButtonActivity: OnClickListener successful");
                 pa.ActivityToGoal(); // for testing purposes
-                //activityDrawingTool(); //draw test
-                sleepDrawingTool();      //draw test
+                activityDrawingTool(); //draw test
+                //sleepDrawingTool();      //draw test
+            }
+        });
+
+        buttonWeight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("ButtonWeight: OnClickListener successful");
+                weightDrawingTool();
             }
         });
 
