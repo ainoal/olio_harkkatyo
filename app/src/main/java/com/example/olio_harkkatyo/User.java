@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class User implements Serializable {
+    private String username;
     private String name;
     private float weight;
     private float idealWeight;
@@ -27,11 +28,7 @@ public class User implements Serializable {
         this.birthMonth = birthMonth;
         this.birthDay = birthDay;
         this.birthYear = birthYear;
-
-
-
-
-
+        this.username = CreateAccountActivity.account.getUsername();
 
     }
 
