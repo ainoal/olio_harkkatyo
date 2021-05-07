@@ -36,6 +36,7 @@ public class co2_calculator extends AppCompatActivity {
     SeekBar restaurant;
     Spinner diet;
     String saveFile = "co2_history.txt";
+    User user;
 
 
     @Override
@@ -163,7 +164,8 @@ public class co2_calculator extends AppCompatActivity {
         //System.out.println(jsonobject);
         DataManager dm = DataManager.getInstance();
         if( json != null) {
-            dm.writeFile(saveFile, json);
+            //dm.writeFile(saveFile, json);
+            user.setCO2List(json);
         }
 
 

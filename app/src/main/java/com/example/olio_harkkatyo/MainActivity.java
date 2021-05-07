@@ -12,6 +12,8 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
     Context context = MainActivity.this;
     private EditText username;
@@ -102,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void co2Activity (View v){
         Intent intent = new Intent(MainActivity.this, co2_calculator.class);
+
         startActivity(intent);
     }
 
@@ -159,14 +162,10 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
+            public void onStartTrackingTouch(SeekBar seekBar) { }
 
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
+            public void onStopTrackingTouch(SeekBar seekBar) { }
         });
 
         seekbarActivity.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -183,12 +182,10 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
+            public void onStartTrackingTouch(SeekBar seekBar) { }
 
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-            }
+            public void onStopTrackingTouch(SeekBar seekBar) { }
         });
 
         seekbarWeight.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -210,7 +207,15 @@ public class MainActivity extends AppCompatActivity {
 
                 String wi = weightInfo.concat("\nYour weight: " + weight[0]);
                 wi = wi.concat("\nYour ideal weight: " + user.getIdealWeight());
-                wi = wi.concat("\n" + wm.comparison(user));
+
+                /* Set info box message about how far user is from their ideal weight */
+                if (wm.comparison(user) < 0) {
+                    wi = wi.concat("\nYou are " + Math.abs(wm.comparison(user)) + "kg under your ideal weight.");
+                } else if (wm.comparison(user) == 0) {
+                    wi = wi.concat("\nYou are in your ideal weight! :)");
+                } else {
+                    wi = wi.concat("\nYou are " + wm.comparison(user) + "kg over your ideal weight.");
+                }
                 weightInfoView.setText(wi);
 
                 //System.out.println(change.getChange());
@@ -218,12 +223,10 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
+            public void onStartTrackingTouch(SeekBar seekBar) { }
 
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-            }
+            public void onStopTrackingTouch(SeekBar seekBar) { }
         });
 
         buttonSave.setOnClickListener(new View.OnClickListener() {
@@ -276,7 +279,7 @@ public class MainActivity extends AppCompatActivity {
         String saveFile = slt.getSaveFile();
         int ID = slt.getAppID();
         Intent intent = new Intent(MainActivity.this, draw_tool.class);
-        intent.putExtra("filename", saveFile);
+        //intent.putExtra("username", User.);
         intent.putExtra("application", ID);
         startActivity(intent);
     }

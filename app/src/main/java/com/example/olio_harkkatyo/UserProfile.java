@@ -75,7 +75,7 @@ public class UserProfile extends AppCompatActivity {
                             dm.saveUser(userName, user);
 
                             Intent intent = new Intent(UserProfile.this, MainActivity.class);
-                            intent.putExtra("user", user);
+                            intent.putExtra(userName, user);
                             startActivity(intent);
                             Toast.makeText(UserProfile.this, "User information applied successfully!", Toast.LENGTH_SHORT).show();
                         }

@@ -15,6 +15,7 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class draw_tool extends AppCompatActivity {
@@ -22,6 +23,7 @@ public class draw_tool extends AppCompatActivity {
     private LineGraphSeries<DataPoint> data_series1;
     private LineGraphSeries<DataPoint> data_series2;
     private LineGraphSeries<DataPoint> data_series3;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +77,12 @@ public class draw_tool extends AppCompatActivity {
                 gv.setTitle("Total (BLK), meat(RED), plant(PNK) emission");
                 glr.setVerticalAxisTitle("Emission estimate in kg CO2 eq. / year");
                 glr.setHorizontalAxisTitle("Calculated data points");
+                ArrayList<String> co2List = new ArrayList<>();
+
+                co2List = user.getCO2List();
+                System.out.println("Arvo1: "+co2List.get(0));
+                System.out.println("Arvo2: "+co2List.get(1));
+
 
                 while (sc.hasNextLine()) {
 

@@ -18,20 +18,20 @@ public class WeightManagement {
         weight = user.getWeight();
         idealWeight = user.getIdealWeight();
         float difference = idealWeight - weight;
-        return difference;
-    }
 
-    public void setWeight(float inputWeight) {
-        this.weight = inputWeight;
+        System.out.println("Weight:" + weight);
+        System.out.println("Ideal:" + idealWeight);
+        System.out.println("DIFF:" + difference);
+        return difference;
     }
 
     public float getChange() { // Change during last 14 days
         float change = 0;
 
-        float first = weightHistory.get(0);
+        /*float first = weightHistory.get(0);
         float last = weightHistory.get(weightHistory.size() - 1);
 
-        change = last - first;
+        change = last - first;*/
         return change;
     }
 
