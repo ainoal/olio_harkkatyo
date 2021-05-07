@@ -1,15 +1,22 @@
 package com.example.olio_harkkatyo;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.net.Credentials;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 
 public class CreateAccountActivity extends AppCompatActivity {
     private Context context = CreateAccountActivity.this;
@@ -18,6 +25,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     private Button create;
 
     public static Account account;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +40,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         dm.init(context);
 
         create.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
 
@@ -39,7 +48,11 @@ public class CreateAccountActivity extends AppCompatActivity {
                 String createPassword = createPasswrd.getText().toString();
 
                 if(confirm(createUsername, createPassword)){
-                    account = new Account(createUsername, createPassword);
+                    byte[] hashedPassword = hashPSW(createPassword);
+
+                    String hashpass = dm.hashToString(hashedPassword);
+                    account = new Account(createUsername, hashpass);
+                    System.out.println("Tämä lähetetään: "+account.getPassword());
                     dm.saveAccount(account);
                     Intent intent = new Intent(CreateAccountActivity.this, UserProfile.class);
                     intent.putExtra("username", createUsername);                                        //send username to UserProfile for savefile name
@@ -103,4 +116,25 @@ public class CreateAccountActivity extends AppCompatActivity {
             return false;
         }
     }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public byte[] hashPSW(String password){
+        byte[] hashedPSW = null;
+        SecureRandom random = new SecureRandom();
+        byte[] salt = new byte[16];
+        random.nextBytes(salt);
+        System.out.println("Tänne mentiin\n");
+        try {
+            System.out.println("Täällä käytiin\n");
+            MessageDigest md = MessageDigest.getInstance("SHA-512");
+            md.update(salt);
+            hashedPSW = md.digest(password.getBytes(StandardCharsets.UTF_8));
+            System.out.println("Tämä saatiin: "+hashedPSW);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+
+        return hashedPSW;
+    }
+
 }

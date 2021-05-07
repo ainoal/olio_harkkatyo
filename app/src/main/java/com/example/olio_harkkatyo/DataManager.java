@@ -104,6 +104,7 @@ public class DataManager {
     public void saveAccount(Account account){
         String psw = account.getPassword();
         String usr = account.getUsername();
+
         appContext = getInstance().getContext();
 
         try {
@@ -113,6 +114,22 @@ public class DataManager {
         } catch (IOException e) {
             Log.e("IOException", "IOException while writing to a file.");
         }
+    }
+
+    public String hashToString(byte[] bytepsw){
+
+        StringBuilder pswrd = new StringBuilder();
+        System.out.println("Tää on passu: "+bytepsw);
+
+        for(int i = 0; i<bytepsw.length; i++){
+            String pswString = Integer.toHexString(0xff & bytepsw[i]);
+            if (pswString.length() == 1) {
+                pswrd.append('0');
+            }
+            pswrd.append(pswString);
+        }
+
+        return pswrd.toString();
     }
 
 }
