@@ -95,6 +95,7 @@ public class UserProfile extends AppCompatActivity {
                 birthday.add(bmonth);
                 birthday.add(bday);
                 birthday.add(byear);
+
             }
         };
 
