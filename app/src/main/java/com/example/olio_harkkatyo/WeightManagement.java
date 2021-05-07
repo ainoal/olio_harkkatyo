@@ -8,16 +8,13 @@ public class WeightManagement {
     public static class IdealWeight extends WeightManagement {
         float idealWeight;
 
-        IdealWeight(float weight, float idealWeight) {
-            this.weight = weight;
-            this.idealWeight = idealWeight;
-        }
-
         public void setIdealWeight(float inputIdeal) {
             this.idealWeight = inputIdeal;
         }
 
-        public float comparison() {
+        public float comparison(User user) {
+            weight = user.getWeight();
+            idealWeight = user.getIdealWeight();
             float difference = idealWeight - weight;
             return difference;
         }

@@ -191,6 +191,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 float currentWeight;
+                WeightManagement.IdealWeight ideal = new WeightManagement.IdealWeight();
 
                 /* User can choose their weight in range currentWeight +- 20kg.
                 This way the seek bar is customized for each individual user, and thus it
@@ -204,6 +205,8 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 String wi = weightInfo.concat("\nYour weight: " + weight[0]);
+                wi = wi.concat("\nYour ideal weight: " + user.getIdealWeight());
+                ideal.comparison(user);
                 weightInfoView.setText(wi);
                 System.out.println("SeekbarWeight: " + weight[0]);
             }
