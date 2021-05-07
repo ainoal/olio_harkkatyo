@@ -12,10 +12,7 @@ public class User implements Serializable {
     private int birthMonth;
     private int birthDay;
     private int birthYear;
-    private ArrayList<Float> sleepList = new ArrayList<>();
-    private ArrayList<Float> activityList = new ArrayList<>();
-    private ArrayList<Float> weightList = new ArrayList<>();
-    private ArrayList<String> co2List = new ArrayList<>();
+
 
 
 
@@ -27,8 +24,10 @@ public class User implements Serializable {
         this.birthDay = birthDay;
         this.birthYear = birthYear;
 
-
-
+        ArrayList<Float> sleepList = new ArrayList<>();
+        ArrayList<Float> activityList = new ArrayList<>();
+        ArrayList<Float> weightList = new ArrayList<>();
+        ArrayList<String> co2List = new ArrayList<>();
 
 
     }
@@ -49,6 +48,7 @@ public class User implements Serializable {
 
     public void setWeight(float weight) {
         this.weight = weight;
+        /*weightList.add(weight);*/
     }
 
     public float getIdealWeight() {
