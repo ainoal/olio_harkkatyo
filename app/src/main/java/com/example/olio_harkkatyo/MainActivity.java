@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
         final float[] weight = new float[1];
         String sleepInfo = "Your average sleep time: ";  // TODO add user sleep time to this string
         String activityInfo = "Your average daily activity: ";
-        String weightInfo = "Weight info: ";
+        String weightInfo = "";
 
         setContentView(R.layout.activity_mainview);
 
@@ -205,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
                     weight[0] = (float) (Math.round(weight[0] * 10) / 10.0);
                 }
 
-                String wi = weightInfo.concat("\nYour weight: " + weight[0]);
+                String wi = weightInfo.concat("Your weight: " + weight[0]);
                 wi = wi.concat("\nYour ideal weight: " + user.getIdealWeight());
 
                 /* Set info box message about how far user is from their ideal weight */
