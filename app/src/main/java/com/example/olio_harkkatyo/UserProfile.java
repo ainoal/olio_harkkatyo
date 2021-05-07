@@ -62,22 +62,28 @@ public class UserProfile extends AppCompatActivity {
                         birthDay = birthday.get(1);
                         birthYear = birthday.get(2);
                     } catch (IndexOutOfBoundsException e) {}
-                if(TextUtils.isEmpty(name) || TextUtils.isEmpty(weight) || TextUtils.isEmpty(idealWeight)){
-                    Toast.makeText(UserProfile.this, "Please fill in all the fields!", Toast.LENGTH_SHORT).show();
-                } else {
-                    float fWeight = Float.parseFloat(weight);
-                    float fIdealWeight = Float.parseFloat(idealWeight);
 
-                    String userName = getIntent().getStringExtra("username");
-                    user = new User(name, fWeight, fIdealWeight, birthMonth, birthDay, birthYear);
-                    dm.saveUser(userName,user);
+                    try {
+                        if (TextUtils.isEmpty(name) || TextUtils.isEmpty(weight) || TextUtils.isEmpty(idealWeight)) {
+                            Toast.makeText(UserProfile.this, "Please fill in all the fields!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            float fWeight = Float.parseFloat(weight);
+                            float fIdealWeight = Float.parseFloat(idealWeight);
 
-                    Intent intent = new Intent(UserProfile.this, MainActivity.class);
-                    //intent.putExtra("user", user);
-                    startActivity(intent);
-                    Toast.makeText(UserProfile.this, "User information applied successfully!", Toast.LENGTH_SHORT).show();
-                }
+                            String userName = getIntent().getStringExtra("username");
+                            user = new User(name, fWeight, fIdealWeight, birthMonth, birthDay, birthYear);
+                            dm.saveUser(userName, user);
+
+                            Intent intent = new Intent(UserProfile.this, MainActivity.class);
+                            //intent.putExtra("user", user);
+                            startActivity(intent);
+                            Toast.makeText(UserProfile.this, "User information applied successfully!", Toast.LENGTH_SHORT).show();
+                        }
+                    } catch(NumberFormatException e){
+                        Toast.makeText(UserProfile.this, "Please make sure weight is in correct format!", Toast.LENGTH_SHORT).show();
+                    }
             }
+
         });
 
     }
