@@ -92,6 +92,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                Account accountManager = new Account("username", "password");
+                accountManager.setUserList(dm.getAccountData());
+
+
+
                 String inputUsername = username.getText().toString();
                 String inputPassword = password.getText().toString();
 
@@ -101,10 +106,20 @@ public class MainActivity extends AppCompatActivity {
                     mainView(u);                                             //TODO testaamisen avuksi tyhjä login, poista!!!
                     //Toast.makeText(MainActivity.this, "Please fill in all the required fields.", Toast.LENGTH_SHORT).show();
                 } else {
+                    for (int i=0; accountManager.getUserList().size()>i;i++){
+                        String credentials = (String) accountManager.getUserList().get(i);
+                        String[] userInfo = credentials.split(":user&pass:");
+                        if (userInfo[0].equals(inputUsername)){
+                            if (userInfo[1].equals(inputPassword)){
+                            CreateAccountActivity caa = new CreateAccountActivity();
+                            caa.loginExisting(userInfo[0],userInfo[1]);
+
+                            }
+                        }
+                    }
                     confirmed = confirm(inputUsername,inputPassword);
                     if(!confirmed){
-                        System.out.println("nimi: "+CreateAccountActivity.account.getUsername()+"passu: "+CreateAccountActivity.account.getPassword());
-                        System.out.println("testattu nimi: "+inputUsername+" testattu passu: "+inputPassword);
+
                         Toast.makeText(MainActivity.this, "Invalid credentials!", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(MainActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();

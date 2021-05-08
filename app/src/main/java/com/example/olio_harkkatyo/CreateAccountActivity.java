@@ -38,6 +38,8 @@ public class CreateAccountActivity extends AppCompatActivity {
         createPasswrd = findViewById(R.id.etCreatePasswrd);
         create = findViewById(R.id.btnCreate);
 
+
+
         DataManager dm = DataManager.getInstance();
         dm.init(context);
 
@@ -52,7 +54,9 @@ public class CreateAccountActivity extends AppCompatActivity {
                 if(confirm(createUsername, createPassword)){
 
                     account = new Account(createUsername, createPassword);
+
                     dm.saveAccount(account);
+
                     Intent intent = new Intent(CreateAccountActivity.this, UserProfile.class);
                     intent.putExtra("username", createUsername);                                        //send username to UserProfile for savefile name
                     startActivity(intent);
@@ -136,4 +140,9 @@ public class CreateAccountActivity extends AppCompatActivity {
         return hashedPSW;
     }
 */
+    public void loginExisting(String username, String password){
+        account = new Account(username, password);
+
+    }
+
 }

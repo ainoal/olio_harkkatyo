@@ -1,6 +1,7 @@
 package com.example.olio_harkkatyo;
 
 import android.content.Context;
+import android.media.MediaDrm;
 import android.os.Build;
 import android.provider.ContactsContract;
 import android.util.Log;
@@ -8,6 +9,7 @@ import android.view.View;
 
 import androidx.annotation.RequiresApi;
 
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -24,6 +26,8 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import javax.crypto.Cipher;
 
 public class DataManager {
     private Context appContext;
@@ -107,17 +111,16 @@ public class DataManager {
         return user;
     }
 
-    //TODO pitää varmaan tehdä erillinen luku ja kirjoitus käyttäjä+salasana tiedostolle.
 
     public void saveAccount(Account account){
         String psw = account.getPassword();
         String usr = account.getUsername();
 
         appContext = getInstance().getContext();
-
         try {
-            OutputStreamWriter osw = new OutputStreamWriter(appContext.openFileOutput(userData, Context.MODE_APPEND));
-            osw.write(usr+":"+psw + "\n");
+
+           OutputStreamWriter osw = new OutputStreamWriter(appContext.openFileOutput(userData, Context.MODE_APPEND));
+            osw.write(usr+":user&pass:"+psw+"\n");
             osw.close();
         } catch (IOException e) {
             Log.e("IOException", "IOException while writing to a file.");
@@ -137,12 +140,10 @@ public class DataManager {
 
         return accounts;
     }
-
+/*
     public String hashToString(byte[] bytepsw, byte[] salt){
 
         StringBuilder pswrd = new StringBuilder();
-        StringBuilder slt = new StringBuilder();
-        System.out.println("Tää on passu: "+bytepsw);
 
 
 
@@ -155,52 +156,43 @@ public class DataManager {
         }
 
         System.out.println("Suolaa: "+salt);
-/*
-        for(int i = 0; i<salt.length; i++){
-            String sltString = Integer.toHexString(0xff & salt[i]);
-            System.out.println("+"+sltString);
-            if (sltString.length() == 1) {
-                pswrd.append('0');
-            }
-            slt.append(sltString);
+
+        StringBuilder sb = new StringBuilder();
+        for (byte b : salt) {
+            sb.append(String.format("%02X ", b));
         }
-*/
+        System.out.println(sb.toString());
+        // prints "FF 00 01 02 03 "
 
         String pswS = pswrd.toString();
-        String sltS = salt.toString();
+        //String sltS = slt.toString();
 
-        String compiled = pswS+":"+sltS;
-        System.out.println("Täällä käytiin: "+compiled);
+        //String compiled = pswS+":"+sltS;
+        //System.out.println("Täällä käytiin: "+compiled);
 
-        return compiled;
+        return pswS;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public String hashPSW(String password){
+    public String hashPSW(String username, String password){
         byte[] hashedPSW = null;
         String returnPSW;
         SecureRandom random = new SecureRandom();
         byte[] salt = new byte[16];
-        random.nextBytes(salt);
+
 
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-512");
             md.update(salt);
-            hashedPSW = md.digest(password.getBytes(StandardCharsets.UTF_8));
+            hashedPSW = md.digest(password.getBytes(StandardCharsets.ISO_8859_1));
             System.out.println("Tämä saatiin: "+hashedPSW);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-
         returnPSW = hashToString(hashedPSW, salt);
+        //saveAccount(username,returnPSW, salt);
 
         return returnPSW;
     }
-
-    /*public String testHashPSW(String password, String salt){
-        byte[] slt = salt.getBytes();
-
-        return psw;
-    }*/
-
+*/
 }
