@@ -236,7 +236,7 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println(user.getWeight()+" old weight \n");
                 user.setWeight(weight[0]);
                 System.out.println(user.getWeight()+ " updated weight \n");
-                pa.saveDaily(activity[0]); // test
+                //pa.saveDaily(activity[0]); // test
                 slt.setHistory(sleep[0]);
            }
         });
@@ -253,7 +253,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 System.out.println("ButtonActivity: OnClickListener successful");
-                pa.ActivityToGoal(); // for testing purposes
+                pa.ActivityToGoal(user); // for testing purposes
                 activityDrawingTool(); //draw test
                 //sleepDrawingTool();      //draw test
             }
