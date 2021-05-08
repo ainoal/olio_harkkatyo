@@ -34,7 +34,7 @@ public class PhysicalActivity {
         dailyAverage = averageActivity(user);
 
         if (dailyAverage >= 0) {
-            goal = (float) 5.0; // TODO Get goal from user info
+            goal = user.getActivityGoal();
             difference = goal - dailyAverage;
         }  else {
             //  ArrayList user.ActivityList<> is empty
