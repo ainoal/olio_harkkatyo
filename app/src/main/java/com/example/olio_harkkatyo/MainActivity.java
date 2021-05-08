@@ -95,16 +95,12 @@ public class MainActivity extends AppCompatActivity {
                 Account accountManager = new Account("username", "password");
                 accountManager.setUserList(dm.getAccountData());
 
-
-
                 String inputUsername = username.getText().toString();
                 String inputPassword = password.getText().toString();
-
 
                 if(inputUsername.isEmpty() || inputPassword.isEmpty()) {
                     //u = (User) dm.loadUsers("uasd");
                     mainView(u);                                             //TODO testaamisen avuksi tyhjä login, poista!!!
-                    u.twoWeekHistory(u.getActivityList());
                     //Toast.makeText(MainActivity.this, "Please fill in all the required fields.", Toast.LENGTH_SHORT).show();
                 } else {
                     for (int i=0; accountManager.getUserList().size()>i;i++){
@@ -118,17 +114,19 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                     }
+
+                    //Send username and password to get checked
                     confirmed = confirm(inputUsername,inputPassword);
                     if(!confirmed){
-
                         Toast.makeText(MainActivity.this, "Invalid credentials!", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(MainActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
-                        u = (User) dm.loadUsers(inputUsername);
-                        u.twoWeekHistory(u.getActivityList());
-                        Toast.makeText(MainActivity.this, "Welcome " + u.getName() + "!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this, "Welcome " + UserProfile.user.getName() + "!", Toast.LENGTH_LONG).show();
 
+                        u = (User) dm.loadUsers(inputUsername);
                         //User u = (User) getIntent().getSerializableExtra("user");
+
+                        //Find out if today is user's birthday
                         Calendar calendar = Calendar.getInstance();
                         int month = calendar.get(Calendar.MONTH);
                         month = month + 1;
@@ -136,7 +134,9 @@ public class MainActivity extends AppCompatActivity {
                         if(month == UserProfile.user.getBirthMonth() && day == UserProfile.user.getBirthDay()){
                             Toast.makeText(MainActivity.this, "Happy birthday!", Toast.LENGTH_LONG).show();
                         }
-                        mainView(u); // go to the main app view
+
+                        // Go to the main app view
+                        mainView(u);
                     }
                 }
             }
@@ -278,7 +278,13 @@ public class MainActivity extends AppCompatActivity {
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                float activityToGoal = pa.activityToGoal(user);
+                float avgActivity = pa.averageActivity(user);
                 DataManager dm = DataManager.getInstance();
+
+                activityToGoal = (float) (Math.round(activityToGoal * 10) / 10.0);
+                avgActivity = (float) (Math.round(avgActivity * 10) / 10.0);
+
                 System.out.println("ButtonSave: OnClickListener successful\nUsername is: "+u.getUsername());   //TODO poistoon kommentoidut
                 /*System.out.println(user.getWeight()+" old weight \n");
                 user.setWeight(weight[0]);
@@ -299,12 +305,17 @@ public class MainActivity extends AppCompatActivity {
 
                 /* Set activity info message */
                 String ai = activityInfo.concat(Float.toString(activity[0]));
-                ai = ai.concat( "\nYour average daily activity: " + pa.averageActivity(user) + "h");
+                ai = ai.concat( "\nYour average daily activity: " + avgActivity + "h");
+                if (activityToGoal > 0) {
+                    ai = ai.concat("\nYou are" + activityToGoal + "h behind your activity goal.");
+                } else {
+                    ai = ai.concat("\nYou have reached your activity goal! :)");
+                }
                 activityInfoView.setText(ai);
 
                 /* set weight info message */
                 String wi = weightInfo.concat(weight[0] + "kg");
-                wi = wi.concat("\nYour ideal weight: " + user.getIdealWeight());
+                wi = wi.concat("\nYour ideal weight: " + user.getIdealWeight() + "kg");
                 /* Set info box message about how far user is from their ideal weight */
                 if (wm.comparison(user) < 0) {
                     wi = wi.concat("\nYou are " + Math.abs(wm.comparison(user)) + "kg under your ideal weight.");

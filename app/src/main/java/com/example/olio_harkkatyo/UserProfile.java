@@ -41,9 +41,10 @@ public class UserProfile extends AppCompatActivity {
         userIdealWeight = findViewById(R.id.etUserIdealWeight);
         applyInfo = findViewById(R.id.btnApplyInfo);
         userActivityGoal = findViewById(R.id.etUserActivityGoal);
+        bday = findViewById(R.id.btnBday);
 
         ArrayList<Integer> birthday = datePicker();
-        bday = findViewById(R.id.btnBday);
+
         bday.setText(getTodaysDate());
 
         DataManager dm = DataManager.getInstance();
@@ -82,6 +83,7 @@ public class UserProfile extends AppCompatActivity {
                             Intent intent = new Intent(UserProfile.this, MainActivity.class);
                             intent.putExtra(userName, user);
                             startActivity(intent);
+
                             Toast.makeText(UserProfile.this, "User information applied successfully!", Toast.LENGTH_SHORT).show();
                         }
                     } catch(NumberFormatException e){
@@ -97,7 +99,7 @@ public class UserProfile extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
-        month = month + 1;
+        month = month + 1; //JAN = 0
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         return makeDateString(year, month, day);
     }
@@ -106,6 +108,8 @@ public class UserProfile extends AppCompatActivity {
         ArrayList<Integer> birthday = new ArrayList<>();
         DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
+
+            //Birthday specification
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month = month + 1; //Jan = 0
                 String date = makeDateString(year, month, day);
