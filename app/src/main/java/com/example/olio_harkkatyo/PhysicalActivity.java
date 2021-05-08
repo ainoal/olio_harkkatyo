@@ -20,28 +20,21 @@ public class PhysicalActivity {
     public void saveDaily(float dailyActivity, User user) {
         String inputText = Float.toString(dailyActivity);
 
-        DataManager dm = DataManager.getInstance();
-        dm.writeFile(fileName, inputText);
+
     }
 
-    public float ActivityToGoal(User user) {
+    public float activityToGoal(User user) {
         float dailyAverage;
         float goal;
         float difference;
-        float historicalActivity = 0;
-        int i;
 
         //DataManager dm = DataManager.getInstance();
         //String file = dm.readFile(fileName);
 
-        activityHistory = user.activityList;
+        dailyAverage = averageActivity(user);
 
-        if (activityHistory.size() >= 1) {
+        if (dailyAverage >= 0) {
             goal = (float) 5.0; // TODO Get goal from user info
-            for(i=0; i<activityHistory.size(); i++ ) {
-                historicalActivity += activityHistory.get(i);
-            }
-            dailyAverage = historicalActivity / activityHistory.size();
             difference = goal - dailyAverage;
         }  else {
             //  ArrayList user.ActivityList<> is empty
@@ -53,6 +46,26 @@ public class PhysicalActivity {
         System.out.println(inputText);
 
         return difference;
+    }
+
+    public float averageActivity(User user) {
+        float historicalActivity = 0;
+        float dailyAverage;
+        int i;
+
+        activityHistory = user.activityList;
+
+        if (activityHistory.size() >= 1) {
+            for(i=0; i<activityHistory.size(); i++ ) {
+                historicalActivity += activityHistory.get(i);
+            }
+            dailyAverage = historicalActivity / activityHistory.size();
+        }  else {
+            //  ArrayList user.ActivityList<> is empty
+            dailyAverage = (float) -1; // return an impossible number as a sign that the user hasn't input any data
+        }
+
+        return dailyAverage;
     }
 
     public String getSaveFile(){
