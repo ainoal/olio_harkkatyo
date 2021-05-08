@@ -331,6 +331,16 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     wi = wi.concat("\nYou are " + wm.comparison(user) + "kg over your ideal weight.");
                 }
+
+                if (wm.getChange(user) < 0) {
+                    wi = wi.concat("\nYou have lost " + Math.round(Math.abs(wm.getChange(user)) * 10) / 10.0
+                            + " kg during the last " + user.twoWeekHistory(user.getWeightList()).size()
+                            + " days");
+                } else if (wm.getChange(user) < 999) {
+                    wi = wi.concat("\nYou have gained " + Math.round(wm.getChange(user) * 10) / 10.0
+                            + " kg during the last "+ user.twoWeekHistory(user.getWeightList()).size()
+                            + " days");
+                }
                 weightInfoView.setText(wi);
            }
         });

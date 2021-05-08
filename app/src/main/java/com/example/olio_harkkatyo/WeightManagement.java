@@ -28,21 +28,14 @@ public class WeightManagement {
     public float getChange(User user) { // Change during last 14 days
         float change = 1000;
         weightHistory = user.twoWeekHistory(user.getWeightList());
-        System.out.println("weight history size: " + weightHistory.size());
 
         if (weightHistory.size() > 1) {
             float first = weightHistory.get(0);
             float last = weightHistory.get(weightHistory.size() - 1);
-
-            System.out.println("first: " + first);
-            System.out.println("last: " + last);
-
             change = last - first;
         } else if (weightHistory.size() == 1) {
-            System.out.println("else if");
             // Nothing to compare here since the user has input only 1 weight
         } else {
-            System.out.println("else");
             // Empty ArrayList user.WeightList<>
         }
 
