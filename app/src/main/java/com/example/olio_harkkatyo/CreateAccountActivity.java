@@ -32,6 +32,8 @@ public class CreateAccountActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
 
+        this.setTitle("Create a new account");
+
         createName = findViewById(R.id.etCreateName);
         createPasswrd = findViewById(R.id.etCreatePasswrd);
         create = findViewById(R.id.btnCreate);
@@ -48,11 +50,8 @@ public class CreateAccountActivity extends AppCompatActivity {
                 String createPassword = createPasswrd.getText().toString();
 
                 if(confirm(createUsername, createPassword)){
-                    byte[] hashedPassword = hashPSW(createPassword);
 
-                    String hashpass = dm.hashToString(hashedPassword);
-                    account = new Account(createUsername, hashpass);
-                    System.out.println("Tämä lähetetään: "+account.getPassword());
+                    account = new Account(createUsername, createPassword);
                     dm.saveAccount(account);
                     Intent intent = new Intent(CreateAccountActivity.this, UserProfile.class);
                     intent.putExtra("username", createUsername);                                        //send username to UserProfile for savefile name
@@ -116,7 +115,7 @@ public class CreateAccountActivity extends AppCompatActivity {
             return false;
         }
     }
-
+/*
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public byte[] hashPSW(String password){
         byte[] hashedPSW = null;
@@ -136,5 +135,5 @@ public class CreateAccountActivity extends AppCompatActivity {
 
         return hashedPSW;
     }
-
+*/
 }
