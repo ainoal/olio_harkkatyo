@@ -28,9 +28,6 @@ public class PhysicalActivity {
         float goal;
         float difference;
 
-        //DataManager dm = DataManager.getInstance();
-        //String file = dm.readFile(fileName);
-
         dailyAverage = averageActivity(user);
 
         if (dailyAverage >= 0) {
@@ -53,7 +50,7 @@ public class PhysicalActivity {
         float dailyAverage;
         int i;
 
-        activityHistory = user.activityList;
+        activityHistory = user.twoWeekHistory(user.getActivityList());
 
         if (activityHistory.size() >= 1) {
             for(i=0; i<activityHistory.size(); i++ ) {
