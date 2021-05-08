@@ -71,8 +71,6 @@ public class UserProfile extends AppCompatActivity {
                             float fIdealWeight = Float.parseFloat(idealWeight);
 
                             String userName = getIntent().getStringExtra("username");
-                            String username = CreateAccountActivity.account.getUsername();
-                            user = new User(username, name, fWeight, fIdealWeight, birthMonth, birthDay, birthYear);
                             dm.saveUser(userName, user);
 
                             Intent intent = new Intent(UserProfile.this, MainActivity.class);

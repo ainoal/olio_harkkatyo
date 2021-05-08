@@ -176,6 +176,7 @@ public class co2_calculator extends AppCompatActivity {
             //dm.writeFile(saveFile, json);
             user.setCO2List(json);
             dm.saveUser(userName, user);
+            //Toast.makeText(UserProfile.this, "Please fill in all the fields!", Toast.LENGTH_SHORT).show();
         }
 
 
