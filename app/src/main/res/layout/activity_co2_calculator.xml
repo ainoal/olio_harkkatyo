@@ -19,19 +19,21 @@
 
     <SeekBar
         android:id="@+id/beefBar"
-        android:layout_width="269dp"
-        android:layout_height="23dp"
+        android:layout_width="270dp"
+        android:layout_height="25dp"
         android:thumbTint="#34A0A4"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="71dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <SeekBar
         android:id="@+id/pigBar"
-        android:layout_width="274dp"
-        android:layout_height="26dp"
+        android:layout_width="270dp"
+        android:layout_height="25dp"
         android:thumbTint="#34A0A4"
-        app:layout_constraintTop_toBottomOf="@+id/beefView"
-        tools:layout_editor_absoluteX="66dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/beefView" />
 
     <TextView
         android:id="@+id/pigView"
@@ -53,11 +55,12 @@
 
     <SeekBar
         android:id="@+id/fishBar"
-        android:layout_width="282dp"
-        android:layout_height="26dp"
+        android:layout_width="270dp"
+        android:layout_height="25dp"
         android:thumbTint="#34A0A4"
-        app:layout_constraintTop_toBottomOf="@+id/pigView"
-        tools:layout_editor_absoluteX="65dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pigView" />
 
     <Button
         android:id="@+id/button5"
@@ -117,53 +120,59 @@
 
     <SeekBar
         android:id="@+id/cheeseBar"
-        android:layout_width="266dp"
-        android:layout_height="23dp"
+        android:layout_width="270dp"
+        android:layout_height="25dp"
         android:thumbTint="#34A0A4"
-        app:layout_constraintTop_toBottomOf="@+id/fishView"
-        tools:layout_editor_absoluteX="73dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fishView" />
 
     <SeekBar
         android:id="@+id/milkBar"
-        android:layout_width="255dp"
-        android:layout_height="21dp"
+        android:layout_width="270dp"
+        android:layout_height="25dp"
         android:thumbTint="#34A0A4"
-        app:layout_constraintTop_toBottomOf="@+id/cheeseView"
-        tools:layout_editor_absoluteX="78dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cheeseView" />
 
     <SeekBar
         android:id="@+id/riceBar"
-        android:layout_width="254dp"
-        android:layout_height="21dp"
+        android:layout_width="270dp"
+        android:layout_height="25dp"
         android:thumbTint="#34A0A4"
-        app:layout_constraintTop_toBottomOf="@+id/milkView"
-        tools:layout_editor_absoluteX="79dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/milkView" />
 
     <SeekBar
         android:id="@+id/saladBar"
-        android:layout_width="255dp"
-        android:layout_height="24dp"
+        android:layout_width="270dp"
+        android:layout_height="25dp"
         android:thumbTint="#34A0A4"
-        app:layout_constraintTop_toBottomOf="@+id/riceView"
-        tools:layout_editor_absoluteX="78dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/riceView" />
 
     <SeekBar
         android:id="@+id/eggBar"
-        android:layout_width="250dp"
-        android:layout_height="26dp"
+        android:layout_width="270dp"
+        android:layout_height="25dp"
         android:thumbTint="#34A0A4"
-        app:layout_constraintTop_toBottomOf="@+id/saladView"
-        tools:layout_editor_absoluteX="81dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/saladView" />
 
     <SeekBar
         android:id="@+id/restaurantBar"
-        android:layout_width="255dp"
-        android:layout_height="24dp"
+        android:layout_width="270dp"
+        android:layout_height="25dp"
         android:layout_marginTop="8dp"
-        android:thumbTint="#34A0A4"
         android:max="800"
-        app:layout_constraintTop_toBottomOf="@+id/eggView"
-        tools:layout_editor_absoluteX="81dp" />
+        android:thumbTint="#34A0A4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eggView" />
 
     <TextView
         android:id="@+id/restaurantView"
@@ -178,7 +187,9 @@
         android:id="@+id/spinnerDiet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/restaurantView" />
 
