@@ -101,19 +101,10 @@ public class User implements Serializable {
     }
 
     public void manipulateFloatList(ArrayList list, float value){
-        if (list.size()>365){
+        if (list.size()>365){                                                   //keeping list size at 1 year
             list.remove(0);
         }
-       /* while(list.size()<365) {
-            list.add(value+1);
-            list.add(value-4);
-        }*/
         list.add(value);
-        for(int i=0; i<list.size(); i++){
-            System.out.println("Listan arvot: "+list.get(i)+"\n");
-        }
-
-
     }
 
     public void manipulateStringList(ArrayList list, String line){
@@ -121,12 +112,6 @@ public class User implements Serializable {
             list.remove(0);
         }
         list.add(line);
-
-        for(int i=0; i<list.size(); i++){
-            System.out.println("Listan rivit: "+list.get(i)+"\n");
-        }
-
-
     }
 
     public ArrayList getCO2List() {
@@ -143,6 +128,24 @@ public class User implements Serializable {
 
     public ArrayList getSleepList() {
         return sleepList;
+    }
+
+    public ArrayList<Float> twoWeekHistory(ArrayList<Float> list){
+        ArrayList<Float> history = new ArrayList<>();
+        int bookmark = list.size();
+
+        if(list.size() > 14) {
+            for (int i = 0; i < 14; i++) {
+                bookmark = bookmark-1;
+                history.add(list.get(bookmark));
+
+            }
+        } else {
+            for (int i = 0; i<list.size(); i++){
+                history.add(list.get(i));
+            }
+        }
+        return history;
     }
 
 }

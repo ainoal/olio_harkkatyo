@@ -103,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
                 if(inputUsername.isEmpty() || inputPassword.isEmpty()) {
                     //u = (User) dm.loadUsers("uasd");
                     mainView(u);                                             //TODO testaamisen avuksi tyhjä login, poista!!!
+                    u.twoWeekHistory(u.getActivityList());
                     //Toast.makeText(MainActivity.this, "Please fill in all the required fields.", Toast.LENGTH_SHORT).show();
                 } else {
                     for (int i=0; accountManager.getUserList().size()>i;i++){
@@ -122,8 +123,10 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Invalid credentials!", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(MainActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
-                        Toast.makeText(MainActivity.this, "Welcome " + UserProfile.user.getName() + "!", Toast.LENGTH_LONG).show();
                         u = (User) dm.loadUsers(inputUsername);
+                        u.twoWeekHistory(u.getActivityList());
+                        Toast.makeText(MainActivity.this, "Welcome " + u.getName() + "!", Toast.LENGTH_LONG).show();
+
                         //User u = (User) getIntent().getSerializableExtra("user");
                         mainView(u); // go to the main app view
                     }
