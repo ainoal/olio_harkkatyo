@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
     Context context = MainActivity.this;
@@ -110,6 +111,13 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Welcome " + UserProfile.user.getName() + "!", Toast.LENGTH_LONG).show();
                         u = (User) dm.loadUsers(inputUsername);
                         //User u = (User) getIntent().getSerializableExtra("user");
+                        Calendar calendar = Calendar.getInstance();
+                        int month = calendar.get(Calendar.MONTH);
+                        month = month + 1;
+                        int day = calendar.get(Calendar.DAY_OF_MONTH);
+                        if(month == UserProfile.user.getBirthMonth() && day == UserProfile.user.getBirthDay()){
+                            Toast.makeText(MainActivity.this, "Happy birthday!", Toast.LENGTH_LONG).show();
+                        }
                         mainView(u); // go to the main app view
                     }
                 }
@@ -134,6 +142,15 @@ public class MainActivity extends AppCompatActivity {
 
         return false;
     }
+
+    /*private String getTodaysDate(){
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        month = month + 1;
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        //return makeDateString(year, month, day);
+    }*/
 
     public void mainView(User user) {
         final float[] sleep = new float[1];
