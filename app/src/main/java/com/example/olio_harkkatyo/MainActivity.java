@@ -14,7 +14,6 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
@@ -99,10 +98,10 @@ public class MainActivity extends AppCompatActivity {
                 String inputPassword = password.getText().toString();
 
                 if(inputUsername.isEmpty() || inputPassword.isEmpty()) {
-                    //u = (User) dm.loadUsers("uasd");
                     mainView(u);                                             //TODO testaamisen avuksi tyhjä login, poista!!!
-                    //Toast.makeText(MainActivity.this, "Please fill in all the required fields.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Please fill in all the required fields.", Toast.LENGTH_SHORT).show();
                 } else {
+                    //Checking if saved username is linked to saved password
                     for (int i=0; accountManager.getUserList().size()>i;i++){
                         String credentials = (String) accountManager.getUserList().get(i);
                         String[] userInfo = credentials.split(":user&pass:");
@@ -120,18 +119,17 @@ public class MainActivity extends AppCompatActivity {
                     if(!confirmed){
                         Toast.makeText(MainActivity.this, "Invalid credentials!", Toast.LENGTH_SHORT).show();
                     } else {
+                        u = (User) dm.loadUsers(inputUsername);     //load user data from savefile
                         Toast.makeText(MainActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
-                        Toast.makeText(MainActivity.this, "Welcome " + UserProfile.user.getName() + "!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this, "Welcome " + u.getName() + "!", Toast.LENGTH_LONG).show();
 
-                        u = (User) dm.loadUsers(inputUsername);
-                        //User u = (User) getIntent().getSerializableExtra("user");
 
                         //Find out if today is user's birthday
                         Calendar calendar = Calendar.getInstance();
                         int month = calendar.get(Calendar.MONTH);
                         month = month + 1;
                         int day = calendar.get(Calendar.DAY_OF_MONTH);
-                        if(month == UserProfile.user.getBirthMonth() && day == UserProfile.user.getBirthDay()){
+                        if(month == u.getBirthMonth() && day == u.getBirthDay()){
                             Toast.makeText(MainActivity.this, "Happy birthday!", Toast.LENGTH_LONG).show();
                         }
 
@@ -301,8 +299,9 @@ public class MainActivity extends AppCompatActivity {
 
                 /* set sleep info message */
                 String si = sleepInfo.concat(sleep[0]+ "h");
-                si = si.concat("\nYour average sleep time: " + st.avgSleepTime());
-                si = si.concat("\n" + slt.compareSleepTimes());
+                //si = si.concat("\nYour average sleep time" + st.avgSleepTime());
+                String compare = slt.compareSleepTimes(u.getUsername());
+                si = si.concat("\n" + compare);
                 sleepInfoView.setText(si);
 
                 /* Set activity info message. Provide information about activity goal
@@ -332,16 +331,6 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     wi = wi.concat("\nYou are " + wm.comparison(user) + "kg over your ideal weight.");
                 }
-
-                if (wm.getChange(user) < 0) {
-                    wi = wi.concat("\nYou have lost " + Math.round(Math.abs(wm.getChange(user)) * 10) / 10.0
-                            + " kg during the last " + user.twoWeekHistory(user.getWeightList()).size()
-                            + " days");
-                } else if (wm.getChange(user) < 999) {
-                    wi = wi.concat("\nYou have gained " + Math.round(wm.getChange(user) * 10) / 10.0
-                            + " kg during the last "+ user.twoWeekHistory(user.getWeightList()).size()
-                            + " days");
-                }
                 weightInfoView.setText(wi);
            }
         });
@@ -358,7 +347,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 System.out.println("ButtonActivity: OnClickListener successful");
-                activityDrawingTool();
+                pa.activityToGoal(user); // for testing purposes
+                activityDrawingTool(); //draw test
+                //sleepDrawingTool();      //draw test
             }
         });
 

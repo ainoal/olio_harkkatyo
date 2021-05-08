@@ -50,11 +50,6 @@ public class User implements Serializable {
 
     public void setCO2List(String line) {
         manipulateStringList(co2List, line);
-
-        for(int i=0;co2List.size()>i;i++){
-            System.out.println("CO2 listan arvot, "+i+":"+ co2List.get(i));
-        }
-
     }
 
     public void setSleepList(float line) {
@@ -110,33 +105,33 @@ public class User implements Serializable {
         this.birthYear = birthYear;
     }
 
-    public void manipulateFloatList(ArrayList list, float value){
+    public void manipulateFloatList(ArrayList<Float> list, float value){
         if (list.size()>365){                                                   //keeping list size at 1 year
             list.remove(0);
         }
         list.add(value);
     }
 
-    public void manipulateStringList(ArrayList list, String line){
+    public void manipulateStringList(ArrayList<String> list, String line){
         if (list.size()>365){
             list.remove(0);
         }
         list.add(line);
     }
 
-    public ArrayList getCO2List() {
+    public ArrayList<String> getCO2List() {
         return co2List;
     }
 
-    public ArrayList getWeightList() {
+    public ArrayList<Float> getWeightList() {
         return weightList;
     }
 
-    public ArrayList getActivityList() {
+    public ArrayList<Float> getActivityList() {
         return activityList;
     }
 
-    public ArrayList getSleepList() {
+    public ArrayList<Float> getSleepList() {
         return sleepList;
     }
 

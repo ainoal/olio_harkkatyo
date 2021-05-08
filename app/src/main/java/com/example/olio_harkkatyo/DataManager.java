@@ -1,39 +1,25 @@
 package com.example.olio_harkkatyo;
 
 import android.content.Context;
-import android.media.MediaDrm;
-import android.os.Build;
-import android.provider.ContactsContract;
+
 import android.util.Log;
-import android.view.View;
 
-import androidx.annotation.RequiresApi;
-
-import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import javax.crypto.Cipher;
 
 public class DataManager {
     private Context appContext;
-    private ArrayList<User> users = new ArrayList<>();
     private static DataManager dm= new DataManager();
-    private String userData = "accounts.txt";
+    private final String userData = "accounts.txt";
 
     public void init(Context context) {
         if(appContext == null) {
@@ -62,7 +48,7 @@ public class DataManager {
     public String readFile(String fileName) {
         appContext = getInstance().getContext();
 
-        String s = "";
+        String s;
         String fileContent = "";
 
         try {
@@ -139,59 +125,4 @@ public class DataManager {
 
         return accounts;
     }
-/*
-    public String hashToString(byte[] bytepsw, byte[] salt){
-
-        StringBuilder pswrd = new StringBuilder();
-
-
-
-        for(int i = 0; i<bytepsw.length; i++){
-            String pswString = Integer.toHexString(0xff & bytepsw[i]);
-            if (pswString.length() == 1) {
-                pswrd.append('0');
-            }
-            pswrd.append(pswString);
-        }
-
-        System.out.println("Suolaa: "+salt);
-
-        StringBuilder sb = new StringBuilder();
-        for (byte b : salt) {
-            sb.append(String.format("%02X ", b));
-        }
-        System.out.println(sb.toString());
-        // prints "FF 00 01 02 03 "
-
-        String pswS = pswrd.toString();
-        //String sltS = slt.toString();
-
-        //String compiled = pswS+":"+sltS;
-        //System.out.println("Täällä käytiin: "+compiled);
-
-        return pswS;
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public String hashPSW(String username, String password){
-        byte[] hashedPSW = null;
-        String returnPSW;
-        SecureRandom random = new SecureRandom();
-        byte[] salt = new byte[16];
-
-
-        try {
-            MessageDigest md = MessageDigest.getInstance("SHA-512");
-            md.update(salt);
-            hashedPSW = md.digest(password.getBytes(StandardCharsets.ISO_8859_1));
-            System.out.println("Tämä saatiin: "+hashedPSW);
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        returnPSW = hashToString(hashedPSW, salt);
-        //saveAccount(username,returnPSW, salt);
-
-        return returnPSW;
-    }
-*/
 }

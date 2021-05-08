@@ -11,7 +11,7 @@
         android:id="@+id/beefView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Beef and lamb"
+        android:text="@string/beef_and_lamb"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,7 +39,7 @@
         android:id="@+id/pigView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pig and poultry"
+        android:text="@string/pig_and_poultry"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pigBar" />
@@ -48,7 +48,7 @@
         android:id="@+id/fishView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Fish and shellfish"
+        android:text="@string/fish_and_shellfish"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fishBar" />
@@ -69,7 +69,7 @@
         android:layout_marginStart="60dp"
         android:layout_marginLeft="60dp"
         android:onClick="readJSON"
-        android:text="Calculate"
+        android:text="@string/calculate"
         app:backgroundTint="#34A0A4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -79,7 +79,7 @@
         android:id="@+id/cheeseView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cheese"
+        android:text="@string/cheese"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cheeseBar" />
@@ -88,7 +88,7 @@
         android:id="@+id/milkView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Milk"
+        android:text="@string/milk"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/milkBar" />
@@ -97,7 +97,7 @@
         android:id="@+id/riceView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Rice"
+        android:text="@string/rice"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/riceBar" />
@@ -106,7 +106,7 @@
         android:id="@+id/saladView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Winter salad"
+        android:text="@string/winter_salad"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/saladBar" />
@@ -115,7 +115,7 @@
         android:id="@+id/eggView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Eggs"
+        android:text="@string/eggs"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/eggBar" />
@@ -180,7 +180,7 @@
         android:id="@+id/restaurantView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Restaurant spending"
+        android:text="@string/restaurant_spending"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/restaurantBar" />
@@ -202,7 +202,7 @@
         android:layout_marginEnd="60dp"
         android:layout_marginRight="60dp"
         android:onClick="loadDrawingTool"
-        android:text="Draw?"
+        android:text="@string/draw_history"
         app:backgroundTint="#34A0A4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

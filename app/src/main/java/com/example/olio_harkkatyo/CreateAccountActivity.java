@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Credentials;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -13,10 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
 import java.util.ArrayList;
 
 public class CreateAccountActivity extends AppCompatActivity {
@@ -142,27 +137,7 @@ public class CreateAccountActivity extends AppCompatActivity {
             return false;
         }
     }
-/*
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public byte[] hashPSW(String password){
-        byte[] hashedPSW = null;
-        SecureRandom random = new SecureRandom();
-        byte[] salt = new byte[16];
-        random.nextBytes(salt);
-        System.out.println("Tänne mentiin\n");
-        try {
-            System.out.println("Täällä käytiin\n");
-            MessageDigest md = MessageDigest.getInstance("SHA-512");
-            md.update(salt);
-            hashedPSW = md.digest(password.getBytes(StandardCharsets.UTF_8));
-            System.out.println("Tämä saatiin: "+hashedPSW);
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
 
-        return hashedPSW;
-    }
-*/
     public void loginExisting(String username, String password){
         account = new Account(username, password);
 
