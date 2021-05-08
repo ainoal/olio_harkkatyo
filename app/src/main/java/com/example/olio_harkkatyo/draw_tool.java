@@ -82,6 +82,8 @@ public class draw_tool extends AppCompatActivity {
 
         switch(app) {
             case 1:
+
+                this.setTitle("CO2 calculator");
                 gv.setTitle("Total (BLK), meat(RED), plant(PNK) emission");
                 glr.setVerticalAxisTitle("Emission estimate in kg CO2 eq. / year");
                 glr.setHorizontalAxisTitle("Calculated data points");
@@ -111,6 +113,7 @@ public class draw_tool extends AppCompatActivity {
                 break;
             case 2:
 
+                this.setTitle("Weight");
                 gv.setTitle("Weight change over time");
                 glr.setVerticalAxisTitle("Weight in kg");
                 glr.setHorizontalAxisTitle("Days");
@@ -125,6 +128,8 @@ public class draw_tool extends AppCompatActivity {
                 gv.addSeries(data_series1);
                 break;
             case 3:
+
+                this.setTitle("Activity");
                 gv.setTitle("Your daily activity");
                 glr.setVerticalAxisTitle("Activity in hours");
                 glr.setHorizontalAxisTitle("Days");
@@ -143,6 +148,8 @@ public class draw_tool extends AppCompatActivity {
                 break;
 
             case 4:
+
+                this.setTitle("Sleep");
                 gv.setTitle("Your nightly sleep");
                 glr.setVerticalAxisTitle("Sleep in hours");
                 glr.setHorizontalAxisTitle("Nights");
