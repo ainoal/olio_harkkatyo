@@ -22,6 +22,7 @@ public class UserProfile extends AppCompatActivity {
     private EditText userName;
     private EditText userWeight;
     private EditText userIdealWeight;
+    private EditText userActivityGoal;
     private Button applyInfo;
     private DatePickerDialog datePickerDialog;
     private Button bday;
@@ -39,6 +40,7 @@ public class UserProfile extends AppCompatActivity {
         userWeight = findViewById(R.id.etUserWeight);
         userIdealWeight = findViewById(R.id.etUserIdealWeight);
         applyInfo = findViewById(R.id.btnApplyInfo);
+        userActivityGoal = findViewById(R.id.etUserActivityGoal);
 
         ArrayList<Integer> birthday = datePicker();
         bday = findViewById(R.id.btnBday);
@@ -54,6 +56,7 @@ public class UserProfile extends AppCompatActivity {
                 String name = userName.getText().toString().trim();
                 String weight = userWeight.getText().toString().trim();
                 String idealWeight = userIdealWeight.getText().toString().trim();
+                String activityGoal = userActivityGoal.getText().toString().trim();
                 int birthMonth = 1;
                 int birthDay = 1;
                 int birthYear = 1990;
@@ -64,15 +67,16 @@ public class UserProfile extends AppCompatActivity {
                     } catch (IndexOutOfBoundsException e) {}
 
                     try {
-                        if (TextUtils.isEmpty(name) || TextUtils.isEmpty(weight) || TextUtils.isEmpty(idealWeight)) {
+                        if (TextUtils.isEmpty(name) || TextUtils.isEmpty(weight) || TextUtils.isEmpty(idealWeight) || TextUtils.isEmpty(activityGoal)) {
                             Toast.makeText(UserProfile.this, "Please fill in all the fields!", Toast.LENGTH_SHORT).show();
                         } else {
                             float fWeight = Float.parseFloat(weight);
                             float fIdealWeight = Float.parseFloat(idealWeight);
+                            float fActivityGoal = Float.parseFloat(activityGoal);
 
                             String userName = getIntent().getStringExtra("username");
                             String username = CreateAccountActivity.account.getUsername();
-                            user = new User(username, name, fWeight, fIdealWeight, birthMonth, birthDay, birthYear);
+                            user = new User(username, name, fWeight, fIdealWeight, fActivityGoal, birthMonth, birthDay, birthYear);
                             dm.saveUser(userName, user);
 
                             Intent intent = new Intent(UserProfile.this, MainActivity.class);
