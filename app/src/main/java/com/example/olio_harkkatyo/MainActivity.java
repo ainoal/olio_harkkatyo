@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
     Context context = MainActivity.this;
@@ -70,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //testi käyttäjän tallennus ja luku
-        User juser = new User("uasd","asd",1,1,2,3,123);
+        User juser = new User("uasd","asd",1,1,1,2,3, 123);
         System.out.println("Ideal weight pitäs olla 1: "+juser.getIdealWeight()+" oikee paino 1: "+juser.getWeight());
 
         dm.saveUser(juser.getUsername(), juser);
@@ -128,6 +129,13 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Welcome " + u.getName() + "!", Toast.LENGTH_LONG).show();
 
                         //User u = (User) getIntent().getSerializableExtra("user");
+                        Calendar calendar = Calendar.getInstance();
+                        int month = calendar.get(Calendar.MONTH);
+                        month = month + 1;
+                        int day = calendar.get(Calendar.DAY_OF_MONTH);
+                        if(month == UserProfile.user.getBirthMonth() && day == UserProfile.user.getBirthDay()){
+                            Toast.makeText(MainActivity.this, "Happy birthday!", Toast.LENGTH_LONG).show();
+                        }
                         mainView(u); // go to the main app view
                     }
                 }
@@ -153,13 +161,22 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
+    /*private String getTodaysDate(){
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        month = month + 1;
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        //return makeDateString(year, month, day);
+    }*/
+
     public void mainView(User user) {
         final float[] sleep = new float[1];
         final float[] activity = new float[1];
         final float[] weight = new float[1];
-        String sleepInfo = "Your average sleep time: ";  // TODO add user sleep time to this string
-        String activityInfo = "Your average daily activity: ";
-        String weightInfo = "";
+        String sleepInfo = "Your sleep time today: ";
+        String activityInfo = "Your physical activity today: ";
+        String weightInfo = "Your weight: ";
 
         setContentView(R.layout.activity_mainview);
 
@@ -181,19 +198,20 @@ public class MainActivity extends AppCompatActivity {
 
         PhysicalActivity pa = new PhysicalActivity();
         WeightManagement wm = new WeightManagement();
+        SleepTracker st = new SleepTracker();
 
         seekbarSleep.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                String msg = slt.compareSleepTimes();
+                //String msg = slt.compareSleepTimes();
 
                 /* Sleep time choices between 0h and 16h */
                 sleep[0] = (float) (progress / 6.25);
                 /* Round to the nearest half an hour */
                 sleep[0] = (float) (Math.round(sleep[0] * 2) / 2.0);
 
-                String si = sleepInfo.concat("\nYour sleep time today: " + sleep[0]);
-                si = si.concat("\n" + msg);
+                String si = sleepInfo.concat(sleep[0]+ "h");
+                //si = si.concat("\n" + msg);
                 sleepInfoView.setText(si);
                 System.out.println("SeekbarSleep: " + sleep[0]);
             }
@@ -213,8 +231,8 @@ public class MainActivity extends AppCompatActivity {
                 /* Round to the nearest half an hour */
                 activity[0] = (float) (Math.round(activity[0] * 2) / 2.0);
 
-                String ai = activityInfo.concat(Float.toString(pa.averageActivity(user)));
-                ai = ai.concat("\nYour activity today: " + activity[0]);
+                String ai = activityInfo.concat(activity[0] + "h");
+                //ai = ai.concat( "\nYour average daily activity: " + pa.averageActivity(user));
                 activityInfoView.setText(ai);
                 System.out.println("SeekbarActivity: " + activity[0]);
             }
@@ -243,21 +261,11 @@ public class MainActivity extends AppCompatActivity {
                     weight[0] = (float) (Math.round(weight[0] * 10) / 10.0);
                 }
 
-                String wi = weightInfo.concat("Your weight: " + weight[0]);
-                wi = wi.concat("\nYour ideal weight: " + user.getIdealWeight());
-
-                /* Set info box message about how far user is from their ideal weight */
-                if (wm.comparison(user) < 0) {
-                    wi = wi.concat("\nYou are " + Math.abs(wm.comparison(user)) + "kg under your ideal weight.");
-                } else if (wm.comparison(user) == 0) {
-                    wi = wi.concat("\nYou are in your ideal weight! :)");
-                } else {
-                    wi = wi.concat("\nYou are " + wm.comparison(user) + "kg over your ideal weight.");
-                }
+                String wi = weightInfo.concat(weight[0] + "kg");
                 weightInfoView.setText(wi);
 
                 System.out.println(wm.getChange(user));
-                System.out.println("SeekbarWeight: " + weight[0]);
+                System.out.println("SeekbarWeight: " + weight[0] + "kg");
             }
 
             @Override
@@ -283,7 +291,29 @@ public class MainActivity extends AppCompatActivity {
                 u.setActivityList(activity[0]);
                 dm.saveUser(u.getUsername(),u);
 
+                /* set sleep info message */
+                String si = sleepInfo.concat(sleep[0]+ "h");
+                //si = si.concat("\nYour average sleep time" + st.avgSleepTime());
+                si = si.concat("\n" + slt.compareSleepTimes());
+                sleepInfoView.setText(si);
 
+                /* Set activity info message */
+                String ai = activityInfo.concat(Float.toString(activity[0]));
+                ai = ai.concat( "\nYour average daily activity: " + pa.averageActivity(user) + "h");
+                activityInfoView.setText(ai);
+
+                /* set weight info message */
+                String wi = weightInfo.concat(weight[0] + "kg");
+                wi = wi.concat("\nYour ideal weight: " + user.getIdealWeight());
+                /* Set info box message about how far user is from their ideal weight */
+                if (wm.comparison(user) < 0) {
+                    wi = wi.concat("\nYou are " + Math.abs(wm.comparison(user)) + "kg under your ideal weight.");
+                } else if (wm.comparison(user) == 0) {
+                    wi = wi.concat("\nYou are in your ideal weight! :)");
+                } else {
+                    wi = wi.concat("\nYou are " + wm.comparison(user) + "kg over your ideal weight.");
+                }
+                weightInfoView.setText(wi);
            }
         });
 

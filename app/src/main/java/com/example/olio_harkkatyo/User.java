@@ -10,6 +10,7 @@ public class User implements Serializable {
     private String name;
     private float weight;
     private float idealWeight;
+    private float activityGoal;
     private int birthMonth;
     private int birthDay;
     private int birthYear;
@@ -21,11 +22,12 @@ public class User implements Serializable {
 
 
 
-    User(String username, String name, float fWeight, float fIdealWeight, int birthMonth, int birthDay, int birthYear) {
+    User(String username, String name, float fWeight, float fIdealWeight, float fActivityGoal, int birthMonth, int birthDay, int birthYear) {
         this.username = username;
         this.name = name;
         this.weight = fWeight;
         this.idealWeight = fIdealWeight;
+        this.activityGoal = fActivityGoal;
         this.birthMonth = birthMonth;
         this.birthDay = birthDay;
         this.birthYear = birthYear;
@@ -74,6 +76,14 @@ public class User implements Serializable {
 
     public void setIdealWeight(float idealWeight) {
         this.idealWeight = idealWeight;
+    }
+
+    public float getActivityGoal() {
+        return activityGoal;
+    }
+
+    public void setActivityGoal(float activityGoal) {
+        this.activityGoal = activityGoal;
     }
 
     public int getBirthMonth() {
