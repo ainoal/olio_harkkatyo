@@ -300,13 +300,19 @@ public class MainActivity extends AppCompatActivity {
                 si = si.concat("\n" + slt.compareSleepTimes());
                 sleepInfoView.setText(si);
 
-                /* Set activity info message */
+                /* Set activity info message. Provide information about activity goal
+                compared to daily activity only if user already has previous activity
+                 history */
                 String ai = activityInfo.concat(Float.toString(activity[0]));
-                ai = ai.concat( "\nYour average daily activity: " + avgActivity + "h");
-                if (activityToGoal > 0) {
-                    ai = ai.concat("\nYou are" + activityToGoal + "h behind your activity goal.");
+                if (avgActivity >= 0) {
+                    ai = ai.concat("\nYour average daily activity: " + avgActivity + "h");
+                    if (activityToGoal > 0) {
+                        ai = ai.concat("\nYou are" + activityToGoal + "h behind your activity goal.");
+                    } else {
+                        ai = ai.concat("\nYou have reached your activity goal! :)");
+                    }
                 } else {
-                    ai = ai.concat("\nYou have reached your activity goal! :)");
+                    ai = ai.concat("\nYour personal activity goal is " + user.getActivityGoal());
                 }
                 activityInfoView.setText(ai);
 
