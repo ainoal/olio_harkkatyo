@@ -27,7 +27,7 @@ public class WeightManagement {
 
     public float getChange(User user) { // Change during last 14 days
         float change = 0;
-        weightHistory = user.weightList;
+        weightHistory = user.twoWeekHistory(user.getActivityList());
 
         if (weightHistory.size() > 1) {
             float first = weightHistory.get(0);
