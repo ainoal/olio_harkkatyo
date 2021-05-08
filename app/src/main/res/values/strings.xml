@@ -12,4 +12,22 @@
     <string name="activity_info_here">*Activity info*</string>
     <string name="sleep_info">*Sleep info*</string>
     <string name="weight_info_here">*Weight info*</string>
+    <string name="beef_and_lamb">Beef and lamb</string>
+    <string name="pig_and_poultry">Pig and poultry</string>
+    <string name="milk">Milk</string>
+    <string name="rice">Rice</string>
+    <string name="winter_salad">Winter salad</string>
+    <string name="eggs">Eggs</string>
+    <string name="restaurant_spending">Restaurant spending</string>
+    <string name="draw_history">Draw history</string>
+    <string name="cheese">Cheese</string>
+    <string name="calculate">Calculate</string>
+    <string name="fish_and_shellfish">Fish and shellfish</string>
+    <string name="enter_username">Enter username:</string>
+    <string name="enter_password">Enter password:</string>
+    <string name="create_account">Create Account</string>
+    <string name="kg_week">kg/week</string>
+    <string name="money_week">€/week</string>
+    <string name="kpl_week">kpl/week</string>
+
 </resources>
