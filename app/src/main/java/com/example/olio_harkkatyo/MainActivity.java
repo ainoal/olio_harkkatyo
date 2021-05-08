@@ -95,11 +95,8 @@ public class MainActivity extends AppCompatActivity {
                 Account accountManager = new Account("username", "password");
                 accountManager.setUserList(dm.getAccountData());
 
-
-
                 String inputUsername = username.getText().toString();
                 String inputPassword = password.getText().toString();
-
 
                 if(inputUsername.isEmpty() || inputPassword.isEmpty()) {
                     //u = (User) dm.loadUsers("uasd");
@@ -117,15 +114,19 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                     }
+
+                    //Send username and password to get checked
                     confirmed = confirm(inputUsername,inputPassword);
                     if(!confirmed){
-
                         Toast.makeText(MainActivity.this, "Invalid credentials!", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(MainActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
                         Toast.makeText(MainActivity.this, "Welcome " + UserProfile.user.getName() + "!", Toast.LENGTH_LONG).show();
+
                         u = (User) dm.loadUsers(inputUsername);
                         //User u = (User) getIntent().getSerializableExtra("user");
+
+                        //Find out if today is user's birthday
                         Calendar calendar = Calendar.getInstance();
                         int month = calendar.get(Calendar.MONTH);
                         month = month + 1;
@@ -133,7 +134,9 @@ public class MainActivity extends AppCompatActivity {
                         if(month == UserProfile.user.getBirthMonth() && day == UserProfile.user.getBirthDay()){
                             Toast.makeText(MainActivity.this, "Happy birthday!", Toast.LENGTH_LONG).show();
                         }
-                        mainView(u); // go to the main app view
+
+                        // Go to the main app view
+                        mainView(u);
                     }
                 }
             }
