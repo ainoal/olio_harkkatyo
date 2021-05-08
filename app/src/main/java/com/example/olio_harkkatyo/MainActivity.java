@@ -297,6 +297,8 @@ public class MainActivity extends AppCompatActivity {
                 u.setActivityList(activity[0]);
                 dm.saveUser(u.getUsername(),u);
 
+                Toast.makeText(MainActivity.this, "Information saved!", Toast.LENGTH_SHORT).show();
+
                 /* set sleep info message */
                 String si = sleepInfo.concat(sleep[0]+ "h");
                 //si = si.concat("\nYour average sleep time" + st.avgSleepTime());
