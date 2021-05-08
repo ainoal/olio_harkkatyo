@@ -202,7 +202,7 @@
         android:layout_marginEnd="60dp"
         android:layout_marginRight="60dp"
         android:onClick="loadDrawingTool"
-        android:text="Draw?"
+        android:text="Draw"
         app:backgroundTint="#34A0A4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
