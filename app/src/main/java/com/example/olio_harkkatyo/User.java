@@ -59,17 +59,13 @@ public class User implements Serializable {
         manipulateFloatList(sleepList, line);
     }
 
-    public void setWeightList(float line) {
-        manipulateFloatList(weightList, line);
+    public void setWeightList(float weight) {
+        manipulateFloatList(weightList, weight);
+        this.weight = weight;
     }
 
     public void setActivityList(float line) {
         manipulateFloatList(activityList, line);
-    }
-
-    public void setWeight(float weight) {
-        manipulateFloatList(weightList, weight);
-        this.weight = weight;
     }
 
     public float getIdealWeight() {
