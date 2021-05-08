@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Invalid credentials!", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(MainActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
-
+                        Toast.makeText(MainActivity.this, "Welcome " + UserProfile.user.getName() + "!", Toast.LENGTH_LONG).show();
                         u = (User) dm.loadUsers(inputUsername);
                         //User u = (User) getIntent().getSerializableExtra("user");
                         mainView(u); // go to the main app view
