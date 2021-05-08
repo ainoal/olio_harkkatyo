@@ -153,6 +153,7 @@ public class MainActivity extends AppCompatActivity {
         weightInfoView.setText(weightInfo);
 
         PhysicalActivity pa = new PhysicalActivity();
+        WeightManagement wm = new WeightManagement();
 
         seekbarSleep.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -185,7 +186,8 @@ public class MainActivity extends AppCompatActivity {
                 /* Round to the nearest half an hour */
                 activity[0] = (float) (Math.round(activity[0] * 2) / 2.0);
 
-                String ai = activityInfo.concat("\nYour activity today: " + activity[0]);
+                String ai = activityInfo.concat(Float.toString(pa.averageActivity(user)));
+                ai = ai.concat("\nYour activity today: " + activity[0]);
                 activityInfoView.setText(ai);
                 System.out.println("SeekbarActivity: " + activity[0]);
             }
@@ -270,7 +272,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 System.out.println("ButtonActivity: OnClickListener successful");
-                pa.ActivityToGoal(user); // for testing purposes
+                pa.activityToGoal(user); // for testing purposes
                 activityDrawingTool(); //draw test
                 //sleepDrawingTool();      //draw test
             }
