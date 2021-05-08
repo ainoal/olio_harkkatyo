@@ -38,8 +38,6 @@ public class CreateAccountActivity extends AppCompatActivity {
         createPasswrd = findViewById(R.id.etCreatePasswrd);
         create = findViewById(R.id.btnCreate);
 
-
-
         DataManager dm = DataManager.getInstance();
         dm.init(context);
 
@@ -51,6 +49,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                 String createUsername = createName.getText().toString();
                 String createPassword = createPasswrd.getText().toString();
 
+                //Send username and password to get checked
                 if(confirm(createUsername, createPassword)){
 
                     account = new Account(createUsername, createPassword);
@@ -58,7 +57,9 @@ public class CreateAccountActivity extends AppCompatActivity {
                     dm.saveAccount(account);
 
                     Intent intent = new Intent(CreateAccountActivity.this, UserProfile.class);
-                    intent.putExtra("username", createUsername);                                        //send username to UserProfile for savefile name
+
+                    //Send username to UserProfile for savefile name
+                    intent.putExtra("username", createUsername);
                     startActivity(intent);
                     Toast.makeText(CreateAccountActivity.this,"New account created successfully!", Toast.LENGTH_SHORT).show();
 
@@ -94,6 +95,8 @@ public class CreateAccountActivity extends AppCompatActivity {
                 Toast.makeText(this, "Password must contain at least 1 special character!", Toast.LENGTH_SHORT).show();
                 return false;
             } else {
+
+                //Loop goes through the password looking for wanted characters
                 for (int i = 0; i < password.length(); i++) {
                     char c = password.charAt(i);
                     if (Character.isDigit(c)) {
