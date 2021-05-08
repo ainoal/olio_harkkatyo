@@ -3,25 +3,14 @@ package com.example.olio_harkkatyo;
 import java.util.ArrayList;
 
 public class PhysicalActivity {
-    String fileName = "testfile0.txt";
     int appID = 3;
 
     public ArrayList<Float> activityHistory = new ArrayList<>();
 
     public PhysicalActivity(){}
 
-    public void changeGoal(float newGoal, User user) {
-        String inputText = Float.toString(newGoal);
-
-        // TODO User goal --> inputText
-    }
-
-    public void saveDaily(float dailyActivity, User user) {
-        String inputText = Float.toString(dailyActivity);
-
-
-    }
-
+    /* Calculate how much user's average daily activity during the past 14 days
+    * differs from the physical activity goal that they have set  */
     public float activityToGoal(User user) {
         float dailyAverage;
         float goal;
@@ -33,8 +22,9 @@ public class PhysicalActivity {
             goal = user.getActivityGoal();
             difference = goal - dailyAverage;
         }  else {
-            //  ArrayList user.ActivityList<> is empty
-            difference = 1000; // return an impossible number as a sign that the user hasn't input any data
+            /* If ArrayList user.ActivityList<> is empty, return an impossible difference
+            * as a sign that the user has not input any data yet */
+            difference = 1000;
         }
 
         String inputText = Float.toString(difference);
@@ -44,6 +34,7 @@ public class PhysicalActivity {
         return difference;
     }
 
+    /* Calculate 14-day average activity */
     public float averageActivity(User user) {
         float historicalActivity = 0;
         float dailyAverage;
@@ -57,15 +48,12 @@ public class PhysicalActivity {
             }
             dailyAverage = historicalActivity / activityHistory.size();
         }  else {
-            //  ArrayList user.ActivityList<> is empty
-            dailyAverage = (float) -1; // return an impossible number as a sign that the user hasn't input any data
+            /* If ArrayList user.ActivityList<> is empty, return an impossible difference
+             * as a sign that the user has not input any data yet */
+            dailyAverage = (float) -1;
         }
 
         return dailyAverage;
-    }
-
-    public String getSaveFile(){
-        return fileName;
     }
 
     public int getAppID(){

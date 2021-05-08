@@ -201,7 +201,7 @@ public class MainActivity extends AppCompatActivity {
         seekbarSleep.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                //String msg = slt.compareSleepTimes();
+                String msg = slt.compareSleepTimes(user.getUsername());
 
                 /* Sleep time choices between 0h and 16h */
                 sleep[0] = (float) (progress / 6.25);
@@ -209,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
                 sleep[0] = (float) (Math.round(sleep[0] * 2) / 2.0);
 
                 String si = sleepInfo.concat(sleep[0]+ "h");
-                //si = si.concat("\n" + msg);
+                si = si.concat("\n" + msg);
                 sleepInfoView.setText(si);
                 System.out.println("SeekbarSleep: " + sleep[0]);
             }
@@ -273,6 +273,7 @@ public class MainActivity extends AppCompatActivity {
             public void onStopTrackingTouch(SeekBar seekBar) { }
         });
 
+        /* When user presses the "Save" button, it saves  */
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -283,13 +284,8 @@ public class MainActivity extends AppCompatActivity {
                 activityToGoal = (float) (Math.round(activityToGoal * 10) / 10.0);
                 avgActivity = (float) (Math.round(avgActivity * 10) / 10.0);
 
-                System.out.println("ButtonSave: OnClickListener successful\nUsername is: "+u.getUsername());   //TODO poistoon kommentoidut
-                /*System.out.println(user.getWeight()+" old weight \n");
-                user.setWeight(weight[0]);
-                System.out.println(user.getWeight()+ " updated weight \n");
-                pa.saveDaily(activity[0]); // test
-                slt.setHistory(sleep[0]);*/
-                //user = (User) dm.loadUsers(u.getUsername());
+                System.out.println("ButtonSave: OnClickListener successful\nUsername is: "+u.getUsername());
+
                 u.setWeightList(weight[0]);
                 u.setSleepList(sleep[0]);
                 u.setActivityList(activity[0]);

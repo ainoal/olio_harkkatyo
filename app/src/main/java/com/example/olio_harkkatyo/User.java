@@ -150,10 +150,6 @@ public class User implements Serializable {
                 history.add(list.get(i));
             }
         }
-
-        for(int i = 0; i<history.size(); i++) {
-            System.out.println("history " + i + history.get(i));
-        }
         return history;
     }
 

@@ -6,7 +6,6 @@ public class WeightManagement {
     float weight;
     float idealWeight;
     int appID = 2;
-    String saveFile = "weight_history.txt";
 
     public ArrayList<Float> weightHistory = new ArrayList<>();
 
@@ -25,29 +24,22 @@ public class WeightManagement {
         return difference;
     }
 
-    public float getChange(User user) { // Change during last 14 days
-        float change = 1000;
+    /* Get user's weight change during the last 14 days */
+    public float getChange(User user) {
+        float change;
         weightHistory = user.twoWeekHistory(user.getWeightList());
 
         if (weightHistory.size() > 1) {
             float first = weightHistory.get(0);
             float last = weightHistory.get(weightHistory.size() - 1);
             change = last - first;
-        } else if (weightHistory.size() == 1) {
-            // Nothing to compare here since the user has input only 1 weight
-        } else {
-            // Empty ArrayList user.WeightList<>
+        } else  {
+            /* Nothing to compare here since the user has only input their weight
+            * 0 or 1 times. Return an impossible change as sign of this. */
+            change = 1000;
         }
 
         return change;
-    }
-
-    public void createHistory() {
-
-    }
-
-    public String getSaveFile(){
-        return saveFile;
     }
 
     public int getAppID(){
