@@ -32,6 +32,8 @@ public class CreateAccountActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
 
+        this.setTitle("Create a new account");
+
         createName = findViewById(R.id.etCreateName);
         createPasswrd = findViewById(R.id.etCreatePasswrd);
         create = findViewById(R.id.btnCreate);

@@ -17,7 +17,7 @@ public class WeightManagement {
     public float comparison(User user) {
         weight = user.getWeight();
         idealWeight = user.getIdealWeight();
-        float difference = idealWeight - weight;
+        float difference = weight - idealWeight;
 
         System.out.println("Weight:" + weight);
         System.out.println("Ideal:" + idealWeight);
