@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class UserProfile extends AppCompatActivity {
-    Context context = UserProfile.this;;
+    Context context = UserProfile.this;
     private EditText userName;
     private EditText userWeight;
     private EditText userIdealWeight;

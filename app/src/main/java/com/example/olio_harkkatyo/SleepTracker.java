@@ -1,8 +1,5 @@
 package com.example.olio_harkkatyo;
 
-import android.content.Intent;
-import android.view.View;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -29,7 +26,7 @@ public class SleepTracker {
         getHistory();
         avgSleepTime();
         System.out.println("Average sleep time of last 14 days: "+twoWeekAverage);
-        compareSleepTimes();
+        //compareSleepTimes();
 
 
     }
@@ -51,18 +48,19 @@ public class SleepTracker {
 
     public void avgSleepTime(){
         float total = 0;
+
         for (int i = 0; i < sleepHistory.size(); i++){
             total = total+sleepHistory.get(i);
         }
         twoWeekAverage = total / sleepHistory.size();
-        //TODO ??14?? latest values from sleepHistory and calculate average
-
     }
 
-    public String compareSleepTimes(){
-        //TODO what is reasonable deviation?
+    public String compareSleepTimes(String userName){
         int under_avg = 0;
         int over_avg = 0;
+        DataManager dm = DataManager.getInstance();
+        User user = (User) dm.loadUsers(userName);
+        sleepHistory = user.twoWeekHistory(user.getSleepList());
         for (int i = 0; i < sleepHistory.size(); i++){
             if (sleepHistory.get(i) > twoWeekAverage+1){
                 over_avg++;
@@ -70,9 +68,8 @@ public class SleepTracker {
                 under_avg++;
             }
         }
-        //TODO set UI and textbox for messages
         if ((over_avg > 3) || (under_avg > 3) || ((over_avg+under_avg) > 3)){
-            evaluation = "Sleep irregular";
+            evaluation = "Sleep irregular!";
             System.out.println(evaluation);
 
         } else {

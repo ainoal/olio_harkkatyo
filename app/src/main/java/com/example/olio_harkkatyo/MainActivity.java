@@ -300,7 +300,8 @@ public class MainActivity extends AppCompatActivity {
                 /* set sleep info message */
                 String si = sleepInfo.concat(sleep[0]+ "h");
                 //si = si.concat("\nYour average sleep time" + st.avgSleepTime());
-                si = si.concat("\n" + slt.compareSleepTimes());
+                String compare = slt.compareSleepTimes(u.getUsername());
+                si = si.concat("\n" + compare);
                 sleepInfoView.setText(si);
 
                 /* Set activity info message. Provide information about activity goal

@@ -1,7 +1,6 @@
 package com.example.olio_harkkatyo;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class PhysicalActivity {
     String fileName = "testfile0.txt";

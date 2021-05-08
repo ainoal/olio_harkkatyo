@@ -43,6 +43,7 @@ public class co2_calculator extends AppCompatActivity {
     int ID = 1;
     String userName;
     TextView co2_display;
+    String ph;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,31 +102,41 @@ public class co2_calculator extends AppCompatActivity {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {    //
                 switch (seekBar.getId()) {
                     case R.id.beefBar:
-                        beef_text.setText(getString(R.string.beef_and_lamb)+": "+ (df.format((float)progress/125))+getString(R.string.kg_week)); //average 0.4kg/week
+                        ph = getString(R.string.beef_and_lamb)+ (df.format((float)progress/125))+getString(R.string.kg_week);
+                        //beef_text.setText(getString(R.string.beef_and_lamb)+ (df.format((float)progress/125))+getString(R.string.kg_week)); //average 0.4kg/week
+                        beef_text.setText(ph);
                         break;
                     case R.id.pigBar:
-                        pig_text.setText(getString(R.string.pig_and_poultry)+": "+(df.format((float)progress/50))+getString(R.string.kg_week)); //average 1.0kg/week
+                        ph = getString(R.string.pig_and_poultry)+(df.format((float)progress/50))+getString(R.string.kg_week); //average 1.0kg/week
+                        pig_text.setText(ph);
                         break;
                     case R.id.fishBar:
-                        fish_text.setText(getString(R.string.fish_and_shellfish)+": "+(df.format((float)progress/83))+getString(R.string.kg_week)); //average 0.6kg/week
+                        ph = getString(R.string.fish_and_shellfish)+(df.format((float)progress/83))+getString(R.string.kg_week); //average 0.6kg/week
+                        fish_text.setText(ph);
                         break;
                     case R.id.cheeseBar:
-                        cheese_text.setText(getString(R.string.cheese)+": "+(df.format((float)progress/166))+getString(R.string.kg_week)); //average 0.3kg/week
+                        ph = getString(R.string.cheese)+(df.format((float)progress/166))+getString(R.string.kg_week); //average 0.3kg/week
+                        cheese_text.setText(ph);
                         break;
                     case R.id.milkBar:
-                        milk_text.setText(getString(R.string.milk)+": "+(df.format((float)progress/13))+getString(R.string.kg_week)); //average 3.8kg/week
+                        ph = getString(R.string.milk)+(df.format((float)progress/13))+getString(R.string.kg_week); //average 3.8kg/week
+                        milk_text.setText(ph);
                         break;
                     case R.id.riceBar:
-                        rice_text.setText(getString(R.string.rice)+": "+(df.format((float)progress/555))+getString(R.string.kg_week)); //average 0.09kg/week
+                        ph = getString(R.string.rice)+(df.format((float)progress/555))+getString(R.string.kg_week); //average 0.09kg/week
+                        rice_text.setText(ph);
                         break;
                     case R.id.saladBar:
-                        salad_text.setText(getString(R.string.winter_salad)+": "+(df.format((float)progress/36))+getString(R.string.kg_week)); //average 1.4kg/week
+                        ph = getString(R.string.winter_salad)+(df.format((float)progress/36))+getString(R.string.kg_week); //average 1.4kg/week
+                        salad_text.setText(ph);
                         break;
                     case R.id.eggBar:
-                        egg_text.setText(getString(R.string.eggs)+": "+(progress/16)+getString(R.string.kpl_week)); //average 3kpl/week
+                        ph = getString(R.string.eggs)+(progress/16)+getString(R.string.kpl_week); //average 3kpl/week
+                        egg_text.setText(ph);
                         break;
                     case R.id.restaurantBar:
-                        restaurant_text.setText(getString(R.string.restaurant_spending)+": "+(progress)+getString(R.string.money_week));
+                        ph = getString(R.string.restaurant_spending)+(progress)+getString(R.string.money_week);
+                        restaurant_text.setText(ph);
                         break;
 
                     default:
