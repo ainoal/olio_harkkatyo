@@ -72,9 +72,7 @@ public class draw_tool extends AppCompatActivity {
         double y_1;
         double y_2;
         double y_3;
-        //String data_1 = readHistory(fileName); //TODO poista scanneri
         ArrayList<String> data = user.getCO2List(); //load list from user data to process
-        //Scanner sc = new Scanner(data_1);
         GridLabelRenderer glr = gv.getGridLabelRenderer();
         gv.getViewport().setXAxisBoundsManual(true);
         gv.getViewport().setMinX(1);
@@ -125,6 +123,8 @@ public class draw_tool extends AppCompatActivity {
                     x = x + 1;
                 }
                 gv.getViewport().setMaxX(x+1);
+                data_series1.setColor(Color.BLACK);
+                gv.setBackgroundColor(Color.argb(150, 255, 150, 80));
                 gv.addSeries(data_series1);
                 break;
             case 3:
