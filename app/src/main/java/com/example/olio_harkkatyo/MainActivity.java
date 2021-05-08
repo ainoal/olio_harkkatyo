@@ -301,7 +301,7 @@ public class MainActivity extends AppCompatActivity {
 
                 /* set sleep info message */
                 String si = sleepInfo.concat(sleep[0]+ "h");
-                //si = si.concat("\nYour average sleep time" + st.avgSleepTime());
+                si = si.concat("\nYour average sleep time: " + st.avgSleepTime());
                 si = si.concat("\n" + slt.compareSleepTimes());
                 sleepInfoView.setText(si);
 
@@ -332,6 +332,16 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     wi = wi.concat("\nYou are " + wm.comparison(user) + "kg over your ideal weight.");
                 }
+
+                if (wm.getChange(user) < 0) {
+                    wi = wi.concat("\nYou have lost " + Math.round(Math.abs(wm.getChange(user)) * 10) / 10.0
+                            + " kg during the last " + user.twoWeekHistory(user.getWeightList()).size()
+                            + " days");
+                } else if (wm.getChange(user) < 999) {
+                    wi = wi.concat("\nYou have gained " + Math.round(wm.getChange(user) * 10) / 10.0
+                            + " kg during the last "+ user.twoWeekHistory(user.getWeightList()).size()
+                            + " days");
+                }
                 weightInfoView.setText(wi);
            }
         });
@@ -348,9 +358,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 System.out.println("ButtonActivity: OnClickListener successful");
-                pa.activityToGoal(user); // for testing purposes
-                activityDrawingTool(); //draw test
-                //sleepDrawingTool();      //draw test
+                activityDrawingTool();
             }
         });
 

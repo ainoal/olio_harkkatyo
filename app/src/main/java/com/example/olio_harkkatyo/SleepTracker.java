@@ -49,7 +49,7 @@ public class SleepTracker {
         }
     }
 
-    public void avgSleepTime(){
+    public float avgSleepTime(){
         float total = 0;
         for (int i = 0; i < sleepHistory.size(); i++){
             total = total+sleepHistory.get(i);
@@ -57,6 +57,7 @@ public class SleepTracker {
         twoWeekAverage = total / sleepHistory.size();
         //TODO ??14?? latest values from sleepHistory and calculate average
 
+        return twoWeekAverage;
     }
 
     public String compareSleepTimes(){
