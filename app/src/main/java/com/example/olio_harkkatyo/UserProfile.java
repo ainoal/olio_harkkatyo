@@ -70,21 +70,27 @@ public class UserProfile extends AppCompatActivity {
                     try {
                         if (TextUtils.isEmpty(name) || TextUtils.isEmpty(weight) || TextUtils.isEmpty(idealWeight) || TextUtils.isEmpty(activityGoal)) {
                             Toast.makeText(UserProfile.this, "Please fill in all the fields!", Toast.LENGTH_SHORT).show();
+
                         } else {
                             float fWeight = Float.parseFloat(weight);
                             float fIdealWeight = Float.parseFloat(idealWeight);
                             float fActivityGoal = Float.parseFloat(activityGoal);
 
-                            String userName = getIntent().getStringExtra("username");
-                            String username = CreateAccountActivity.account.getUsername();
-                            user = new User(username, name, fWeight, fIdealWeight, fActivityGoal, birthMonth, birthDay, birthYear);
-                            dm.saveUser(userName, user);
+                            if (fActivityGoal > 24.0){
+                                Toast.makeText(UserProfile.this, "Activity goal can't be more than 24 hours!", Toast.LENGTH_SHORT).show();
 
-                            Intent intent = new Intent(UserProfile.this, MainActivity.class);
-                            intent.putExtra(userName, user);
-                            startActivity(intent);
+                            } else {
+                                String userName = getIntent().getStringExtra("username");
+                                String username = CreateAccountActivity.account.getUsername();
+                                user = new User(username, name, fWeight, fIdealWeight, fActivityGoal, birthMonth, birthDay, birthYear);
+                                dm.saveUser(userName, user);
 
-                            Toast.makeText(UserProfile.this, "User information applied successfully!", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(UserProfile.this, MainActivity.class);
+                                intent.putExtra(userName, user);
+                                startActivity(intent);
+
+                                Toast.makeText(UserProfile.this, "User information applied successfully!", Toast.LENGTH_SHORT).show();
+                            }
                         }
                     } catch(NumberFormatException e){
                         Toast.makeText(UserProfile.this, "Please make sure weight is in correct format!", Toast.LENGTH_SHORT).show();
