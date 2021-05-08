@@ -275,7 +275,13 @@ public class MainActivity extends AppCompatActivity {
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                float activityToGoal = pa.activityToGoal(user);
+                float avgActivity = pa.averageActivity(user);
                 DataManager dm = DataManager.getInstance();
+
+                activityToGoal = (float) (Math.round(activityToGoal * 10) / 10.0);
+                avgActivity = (float) (Math.round(avgActivity * 10) / 10.0);
+
                 System.out.println("ButtonSave: OnClickListener successful\nUsername is: "+u.getUsername());   //TODO poistoon kommentoidut
                 /*System.out.println(user.getWeight()+" old weight \n");
                 user.setWeight(weight[0]);
@@ -296,12 +302,17 @@ public class MainActivity extends AppCompatActivity {
 
                 /* Set activity info message */
                 String ai = activityInfo.concat(Float.toString(activity[0]));
-                ai = ai.concat( "\nYour average daily activity: " + pa.averageActivity(user) + "h");
+                ai = ai.concat( "\nYour average daily activity: " + avgActivity + "h");
+                if (activityToGoal > 0) {
+                    ai = ai.concat("\nYou are" + activityToGoal + "h behind your activity goal.");
+                } else {
+                    ai = ai.concat("\nYou have reached your activity goal! :)");
+                }
                 activityInfoView.setText(ai);
 
                 /* set weight info message */
                 String wi = weightInfo.concat(weight[0] + "kg");
-                wi = wi.concat("\nYour ideal weight: " + user.getIdealWeight());
+                wi = wi.concat("\nYour ideal weight: " + user.getIdealWeight() + "kg");
                 /* Set info box message about how far user is from their ideal weight */
                 if (wm.comparison(user) < 0) {
                     wi = wi.concat("\nYou are " + Math.abs(wm.comparison(user)) + "kg under your ideal weight.");
