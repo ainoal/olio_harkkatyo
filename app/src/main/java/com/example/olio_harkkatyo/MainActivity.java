@@ -1,9 +1,11 @@
 package com.example.olio_harkkatyo;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -46,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
         DataManager dm = DataManager.getInstance();
         dm.init(context);
 
+        Account loginManager = new Account(null, null);
+
         profileTester.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,11 +87,14 @@ public class MainActivity extends AppCompatActivity {
         //WeightManagement.IdealWeight idealWeight = new WeightManagement.IdealWeight(juser.getWeight(),juser.getIdealWeight());
 
         login.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
 
                 String inputUsername = username.getText().toString();
                 String inputPassword = password.getText().toString();
+
+
                 if(inputUsername.isEmpty() || inputPassword.isEmpty()) {
                     //u = (User) dm.loadUsers("uasd");
                     mainView(u);                                             //TODO testaamisen avuksi tyhjä login, poista!!!
@@ -95,6 +102,8 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     confirmed = confirm(inputUsername,inputPassword);
                     if(!confirmed){
+                        System.out.println("nimi: "+CreateAccountActivity.account.getUsername()+"passu: "+CreateAccountActivity.account.getPassword());
+                        System.out.println("testattu nimi: "+inputUsername+" testattu passu: "+inputPassword);
                         Toast.makeText(MainActivity.this, "Invalid credentials!", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(MainActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
