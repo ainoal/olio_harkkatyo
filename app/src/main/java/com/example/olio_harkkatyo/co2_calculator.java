@@ -41,12 +41,10 @@ public class co2_calculator extends AppCompatActivity {
     SeekBar egg;
     SeekBar restaurant;
     Spinner diet;
-    String saveFile = "co2_history.txt";
     User user;
     int ID = 1;
     String userName;
     TextView co2_display;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,10 +55,8 @@ public class co2_calculator extends AppCompatActivity {
         co2_display = findViewById(R.id.co2_info);
 
         userName = getIntent().getStringExtra("username");
-        System.out.println("Käyttäjänimi on: "+ userName);
 
-
-        diet = findViewById(R.id.spinnerDiet);
+        diet = findViewById(R.id.spinnerDiet);              //creating drop down menu for diet selection
         ArrayList<String> dietList = new ArrayList<>();
         String diet_0 = "omnivore";
         String diet_1 = "vegan";
@@ -68,21 +64,11 @@ public class co2_calculator extends AppCompatActivity {
         dietList.add(diet_0);
         dietList.add(diet_1);
         dietList.add(diet_2);
+
         ArrayAdapter<String> dietAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, dietList);
         diet.setAdapter(dietAdapter);
-        /*diet.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {                 //listener for dropdown if we want to do something on selected
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-*/
         TextView beef_text = findViewById(R.id.beefView);
         beef = findViewById(R.id.beefBar);
         TextView pig_text = findViewById(R.id.pigView);
@@ -106,13 +92,13 @@ public class co2_calculator extends AppCompatActivity {
 
 
 
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build(); //jotain nettiyhteyden hyväksymistä
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build(); //networking access fix
         StrictMode.setThreadPolicy(policy);
 
         DecimalFormat df = new DecimalFormat();
         df.setMaximumFractionDigits(3);
 
-        SeekBar.OnSeekBarChangeListener co2_listener = new SeekBar.OnSeekBarChangeListener() {  //kuuntelija liukuvalikolle
+        SeekBar.OnSeekBarChangeListener co2_listener = new SeekBar.OnSeekBarChangeListener() {  //Setting listener for sliders
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {    //
                 switch (seekBar.getId()) {
@@ -159,7 +145,7 @@ public class co2_calculator extends AppCompatActivity {
 
             }
     };
-        beef.setOnSeekBarChangeListener(co2_listener);          //Listeners for sliders
+        beef.setOnSeekBarChangeListener(co2_listener);          //applying listeners for sliders
         pig.setOnSeekBarChangeListener(co2_listener);
         fish.setOnSeekBarChangeListener(co2_listener);
         cheese.setOnSeekBarChangeListener(co2_listener);
@@ -174,15 +160,11 @@ public class co2_calculator extends AppCompatActivity {
 
 
 
-    public void readJSON(View v) throws JSONException {
+    public void readJSON(View v) throws JSONException { //saving data in json format and displaying
         String json = getJSON();
-
-        //JSONObject jsonobject = new JSONObject(json);
-        //System.out.println(jsonobject);
         DataManager dm = DataManager.getInstance();
         user = (User) dm.loadUsers(userName);
         if( json != null) {
-            //dm.writeFile(saveFile, json);
             user.setCO2List(json);
             dm.saveUser(userName, user);
             JSONObject jsonobject = new JSONObject(json);
@@ -209,12 +191,10 @@ public class co2_calculator extends AppCompatActivity {
         int egg_value = pig.getProgress();
         int restaurant_value = restaurant.getProgress();
 
-        System.out.println("Values: " +beef_value +" and " + fish_value +" also "+ pig_value+"valittu spinner tavara: "+diet.getSelectedItem());
         try {
-            url = new URL("https://ilmastodieetti.ymparisto.fi/ilmastodieetti/calculatorapi/v1/FoodCalculator" +        //bar value from 0 to 100 -> 50*2 = 100%, max 200%
+            url = new URL("https://ilmastodieetti.ymparisto.fi/ilmastodieetti/calculatorapi/v1/FoodCalculator" +
                     "?query.diet="+diet.getSelectedItem()+              //takes selected item from dropdown menú
-                    //"&query.lowCarbonPreference=true" +               //low carbon preference diet, do we even care?
-                    "&query.beefLevel="+ beef_value*2 +
+                    "&query.beefLevel="+ beef_value*2 +                 //bar values from 0 to 100 -> 50*2 = 100%, max 200%
                     "&query.fishLevel="+ fish_value*2 +
                     "&query.porkPoultryLevel="+ pig_value*2 +
                     "&query.dairyLevel="+ cheese_value*2 +
@@ -224,7 +204,7 @@ public class co2_calculator extends AppCompatActivity {
                     "&query.winterSaladLevel="+ egg_value*2 +
                     "&query.restaurantSpending="+restaurant_value +
                     "&api_key=diary");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();  //fetching data from source
             conn.setRequestMethod("GET");
             InputStream in = new BufferedInputStream(conn.getInputStream());
             BufferedReader br = new BufferedReader((new InputStreamReader(in)));
@@ -251,7 +231,7 @@ public class co2_calculator extends AppCompatActivity {
             if (user.getCO2List().size() > 1) {
                 Intent intent = new Intent(co2_calculator.this, draw_tool.class);
                 intent.putExtra("username", userName);
-                intent.putExtra("application", ID);
+                intent.putExtra("application", ID);      //application ID defined for every drawable for switch-case
                 startActivity(intent);
             } else {
                 Toast.makeText(co2_calculator.this, "Need at least two entries to draw!", Toast.LENGTH_SHORT).show();
