@@ -17,6 +17,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.ArrayList;
 
 public class CreateAccountActivity extends AppCompatActivity {
     private Context context = CreateAccountActivity.this;
@@ -75,6 +76,9 @@ public class CreateAccountActivity extends AppCompatActivity {
         0-9 = any digit between 0 and 9
         *  = 0 or more instances */
 
+        DataManager dm = DataManager.getInstance();
+        ArrayList<String> users = dm.getAccountData();
+
         boolean foundDigit = false;
         boolean foundLCLetter = false;
         boolean foundUCLetter = false;
@@ -85,6 +89,18 @@ public class CreateAccountActivity extends AppCompatActivity {
             Toast.makeText(this,"Please fill in all the fields!", Toast.LENGTH_SHORT).show();
             return false;
         }
+
+
+
+        for(int i = 0; i<users.size(); i++){
+            String[] oldUser = users.get(i).split(":user&pass:");
+            if (oldUser[0].equals(username)){
+                Toast.makeText(this,"Username already in use!", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+
+        }
+
         if(password.length() < 12 ) {
             Toast.makeText(this, "Password must be at least 12 characters long!", Toast.LENGTH_SHORT).show();
             return false;
@@ -107,6 +123,9 @@ public class CreateAccountActivity extends AppCompatActivity {
                         } else if (Character.isUpperCase(c)) {
                             foundUCLetter = true;
                         }
+
+
+
                     }
                     if (foundDigit && foundLCLetter && foundUCLetter) {
                         break;
@@ -115,6 +134,7 @@ public class CreateAccountActivity extends AppCompatActivity {
             }
         }
         if (foundDigit && foundLCLetter && foundUCLetter){
+
             return true;
         }
         else {

@@ -82,7 +82,7 @@ public class DataManager {
         return fileContent;
     }
 
-    public void saveUser(String fileName, Object user) { //tänne siis lista usereista, jotka kirjoitetaan tiedostoon?
+    public void saveUser(String fileName, Object user) { //Saves serialized user
         appContext = getInstance().getContext();
         try {
             ObjectOutputStream oos = new ObjectOutputStream(appContext.openFileOutput(fileName+".ser", Context.MODE_PRIVATE));
@@ -95,7 +95,7 @@ public class DataManager {
         }
     }
 
-    public Object loadUsers(String fileName) { //tänne palautukseen ArrayList, jossa kaikki userit?
+    public Object loadUsers(String fileName) { //Loads serialized user
         Object user = null;
         appContext = getInstance().getContext();
         try {
@@ -118,7 +118,6 @@ public class DataManager {
 
         appContext = getInstance().getContext();
         try {
-
            OutputStreamWriter osw = new OutputStreamWriter(appContext.openFileOutput(userData, Context.MODE_APPEND));
             osw.write(usr+":user&pass:"+psw+"\n");
             osw.close();
@@ -127,7 +126,7 @@ public class DataManager {
         }
     }
 
-    public ArrayList getAccountData() {
+    public ArrayList getAccountData() {                 //loads all registered accounts and puts on list
         ArrayList<String> accounts = new ArrayList<>();
 
         String userFile = readFile(userData);
