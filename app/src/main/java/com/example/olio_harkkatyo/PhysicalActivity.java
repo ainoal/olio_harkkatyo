@@ -11,49 +11,44 @@ public class PhysicalActivity {
 
     public PhysicalActivity(){}
 
-    public void changeGoal(float newGoal) {
+    public void changeGoal(float newGoal, User user) {
         String inputText = Float.toString(newGoal);
 
         // TODO User goal --> inputText
     }
 
-    public void saveDaily(float dailyActivity) {
+    public void saveDaily(float dailyActivity, User user) {
         String inputText = Float.toString(dailyActivity);
 
         DataManager dm = DataManager.getInstance();
         dm.writeFile(fileName, inputText);
     }
 
-    public float ActivityToGoal() {
+    public float ActivityToGoal(User user) {
         float dailyAverage;
         float goal;
-        float difference = 0;
+        float difference;
         float historicalActivity = 0;
-        String line;
-        Integer lineCount = 0;
-        String inputText;
+        int i;
 
-        DataManager dm = DataManager.getInstance();
+        //DataManager dm = DataManager.getInstance();
+        //String file = dm.readFile(fileName);
 
-        String file = dm.readFile(fileName);
+        activityHistory = user.activityList;
 
-        Scanner avgScanner = new Scanner(file);
-
-        while (avgScanner.hasNextLine()){
-            line = avgScanner.nextLine();
-            historicalActivity += Float.parseFloat(line.trim());
-            lineCount++;
-            }
-
-        if (lineCount != 0) {   // If there's sleep activity data in the file
-            dailyAverage = historicalActivity / lineCount;
+        if (activityHistory.size() >= 1) {
             goal = (float) 5.0; // TODO Get goal from user info
+            for(i=0; i<activityHistory.size(); i++ ) {
+                historicalActivity += activityHistory.get(i);
+            }
+            dailyAverage = historicalActivity / activityHistory.size();
             difference = goal - dailyAverage;
-        } else {
-            return 1000;  // return an impossible number as a sign that the user hasn't input any data
+        }  else {
+            //  ArrayList user.ActivityList<> is empty
+            difference = 1000; // return an impossible number as a sign that the user hasn't input any data
         }
 
-        inputText = Float.toString(difference);
+        String inputText = Float.toString(difference);
         System.out.print("DIFFERENCE: ");
         System.out.println(inputText);
 
