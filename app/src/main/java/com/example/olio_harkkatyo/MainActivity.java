@@ -195,6 +195,7 @@ public class MainActivity extends AppCompatActivity {
 
         PhysicalActivity pa = new PhysicalActivity();
         WeightManagement wm = new WeightManagement();
+        SleepTracker st = new SleepTracker();
 
         seekbarSleep.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -206,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
                 /* Round to the nearest half an hour */
                 sleep[0] = (float) (Math.round(sleep[0] * 2) / 2.0);
 
-                String si = sleepInfo.concat(Float.toString(sleep[0]));
+                String si = sleepInfo.concat(sleep[0]+ "h");
                 //si = si.concat("\n" + msg);
                 sleepInfoView.setText(si);
                 System.out.println("SeekbarSleep: " + sleep[0]);
@@ -227,7 +228,7 @@ public class MainActivity extends AppCompatActivity {
                 /* Round to the nearest half an hour */
                 activity[0] = (float) (Math.round(activity[0] * 2) / 2.0);
 
-                String ai = activityInfo.concat(Float.toString(activity[0]));
+                String ai = activityInfo.concat(activity[0] + "h");
                 //ai = ai.concat( "\nYour average daily activity: " + pa.averageActivity(user));
                 activityInfoView.setText(ai);
                 System.out.println("SeekbarActivity: " + activity[0]);
@@ -257,11 +258,11 @@ public class MainActivity extends AppCompatActivity {
                     weight[0] = (float) (Math.round(weight[0] * 10) / 10.0);
                 }
 
-                String wi = weightInfo.concat(Float.toString(weight[0]));
+                String wi = weightInfo.concat(weight[0] + "kg");
                 weightInfoView.setText(wi);
 
                 System.out.println(wm.getChange(user));
-                System.out.println("SeekbarWeight: " + weight[0]);
+                System.out.println("SeekbarWeight: " + weight[0] + "kg");
             }
 
             @Override
@@ -287,19 +288,19 @@ public class MainActivity extends AppCompatActivity {
                 u.setActivityList(activity[0]);
                 dm.saveUser(u.getUsername(),u);
 
-                /* Set activity info message */
-                String ai = activityInfo.concat(Float.toString(activity[0]));
-                ai = ai.concat( "\nYour average daily activity: " + pa.averageActivity(user));
-                activityInfoView.setText(ai);
-
                 /* set sleep info message */
-                String msg = slt.compareSleepTimes();
-                String si = sleepInfo.concat(Float.toString(sleep[0]));
-                si = si.concat("\n" + msg);
+                String si = sleepInfo.concat(sleep[0]+ "h");
+                //si = si.concat("\nYour average sleep time" + st.avgSleepTime());
+                si = si.concat("\n" + slt.compareSleepTimes());
                 sleepInfoView.setText(si);
 
+                /* Set activity info message */
+                String ai = activityInfo.concat(Float.toString(activity[0]));
+                ai = ai.concat( "\nYour average daily activity: " + pa.averageActivity(user) + "h");
+                activityInfoView.setText(ai);
+
                 /* set weight info message */
-                String wi = weightInfo.concat(Float.toString(weight[0]));
+                String wi = weightInfo.concat(weight[0] + "kg");
                 wi = wi.concat("\nYour ideal weight: " + user.getIdealWeight());
                 /* Set info box message about how far user is from their ideal weight */
                 if (wm.comparison(user) < 0) {
