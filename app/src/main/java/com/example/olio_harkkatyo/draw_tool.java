@@ -2,6 +2,7 @@ package com.example.olio_harkkatyo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -20,28 +21,34 @@ import java.util.Scanner;
 
 public class draw_tool extends AppCompatActivity {
 
+    Context context = draw_tool.this;
     private LineGraphSeries<DataPoint> data_series1;
     private LineGraphSeries<DataPoint> data_series2;
     private LineGraphSeries<DataPoint> data_series3;
     private User user;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_draw_tool);
         GraphView gv = (GraphView) findViewById(R.id.graph);
-        String fileName = getIntent().getStringExtra("filename");
+        String userName = getIntent().getStringExtra("username");
         int app = getIntent().getIntExtra("application",0); //values: 1=co2, 2=weight, 3=...
 
-        System.out.println("numero: "+app +" ja tiedostonimi: "+fileName);
+        System.out.println("numero: "+app +" ja tiedostonimi: "+userName);
+        DataManager dm = new DataManager();
+        dm.init(context);
+
+        user = (User) dm.loadUsers(userName);
 
         data_series1 = new LineGraphSeries<>();
         data_series2 = new LineGraphSeries<>();
         data_series3 = new LineGraphSeries<>();
 
             try {
-                drawCO2Graph(gv, fileName, app);
-                System.out.println("Piirtäjään: numero: "+app +" ja tiedostonimi: "+fileName+"\n");
+                drawCO2Graph(gv, userName, app);
+                System.out.println("Piirtäjään: numero: "+app +" ja tiedostonimi: "+userName+"\n");
             } catch (JSONException e) {
                 e.printStackTrace();
         }
@@ -61,12 +68,13 @@ public class draw_tool extends AppCompatActivity {
     }
 
     public void drawCO2Graph(GraphView gv, String fileName, int app) throws JSONException {
-        double x=0;
+        double x=1;
         double y_1;
         double y_2;
         double y_3;
-        String data = readHistory(fileName);
-        Scanner sc = new Scanner(data);
+        //String data_1 = readHistory(fileName); //TODO poista scanneri
+        ArrayList<String> data = user.getCO2List(); //load list from user data to process
+        //Scanner sc = new Scanner(data_1);
         GridLabelRenderer glr = gv.getGridLabelRenderer();
         gv.getViewport().setXAxisBoundsManual(true);
         gv.getViewport().setMinX(1);
@@ -77,16 +85,12 @@ public class draw_tool extends AppCompatActivity {
                 gv.setTitle("Total (BLK), meat(RED), plant(PNK) emission");
                 glr.setVerticalAxisTitle("Emission estimate in kg CO2 eq. / year");
                 glr.setHorizontalAxisTitle("Calculated data points");
-                ArrayList<String> co2List = new ArrayList<>();
-
-                co2List = user.getCO2List();
+                ArrayList<String> co2List = user.getCO2List();
                 System.out.println("Arvo1: "+co2List.get(0));
-                System.out.println("Arvo2: "+co2List.get(1));
 
 
-                while (sc.hasNextLine()) {
-
-                    String line = sc.nextLine();
+                for (int i = 0; i<co2List.size(); i++){
+                    String line = co2List.get(i);
                     JSONObject jsonobject = new JSONObject(line);
                     y_1 = jsonobject.getDouble("Total");
                     data_series1.appendData(new DataPoint(x, y_1), true, 365);
@@ -106,11 +110,13 @@ public class draw_tool extends AppCompatActivity {
                 gv.addSeries(data_series3);
                 break;
             case 2:
+
                 gv.setTitle("Weight change over time");
                 glr.setVerticalAxisTitle("Weight in kg");
                 glr.setHorizontalAxisTitle("Days");
-                while (sc.hasNextLine()) {
-                    String line = sc.nextLine();
+                ArrayList<Float> weightList = user.getWeightList();
+                for (int i = 0; i<weightList.size(); i++){
+                    String line = String.valueOf(weightList.get(i));
                     y_1 = Double.parseDouble(line);
                     data_series1.appendData(new DataPoint(x, y_1), true, 365);
                     x = x + 1;
@@ -123,8 +129,10 @@ public class draw_tool extends AppCompatActivity {
                 glr.setVerticalAxisTitle("Activity in hours");
                 glr.setHorizontalAxisTitle("Days");
                 System.out.println("Mentiin piirtää\n");
-                while (sc.hasNextLine()) {
-                    String line = sc.nextLine();
+                ArrayList<Float> activitytList = user.getActivityList();
+                for (int i = 0; i<activitytList.size(); i++){
+                    String line = String.valueOf(activitytList.get(i));
+                    System.out.println("Arvo, "+i+" :"+line);
                     y_1 = Double.parseDouble(line);
                     data_series1.appendData(new DataPoint(x, y_1), true, 365);
                     x = x + 1;
@@ -138,9 +146,9 @@ public class draw_tool extends AppCompatActivity {
                 gv.setTitle("Your nightly sleep");
                 glr.setVerticalAxisTitle("Sleep in hours");
                 glr.setHorizontalAxisTitle("Nights");
-                while (sc.hasNextLine()) {
-
-                    String line = sc.nextLine();
+                ArrayList<Float> sleepList = user.getSleepList();
+                for (int i = 0; i<sleepList.size(); i++){
+                    String line = String.valueOf(sleepList.get(i));
                     y_1 = Double.parseDouble(line);
                     data_series1.appendData(new DataPoint(x, y_1), true, 365);
                     x = x + 1;
