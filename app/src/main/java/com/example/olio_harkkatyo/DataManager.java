@@ -1,9 +1,12 @@
 package com.example.olio_harkkatyo;
 
 import android.content.Context;
+import android.os.Build;
 import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
+
+import androidx.annotation.RequiresApi;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -15,7 +18,12 @@ import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class DataManager {
     private Context appContext;
@@ -116,10 +124,27 @@ public class DataManager {
         }
     }
 
-    public String hashToString(byte[] bytepsw){
+    public ArrayList getAccountData() {
+        ArrayList<String> accounts = new ArrayList<>();
+
+        String userFile = readFile(userData);
+        Scanner sc = new Scanner(userFile);
+
+        while(sc.hasNextLine()){
+            String line = sc.nextLine();
+            accounts.add(line);
+        }
+
+        return accounts;
+    }
+
+    public String hashToString(byte[] bytepsw, byte[] salt){
 
         StringBuilder pswrd = new StringBuilder();
+        StringBuilder slt = new StringBuilder();
         System.out.println("Tää on passu: "+bytepsw);
+
+
 
         for(int i = 0; i<bytepsw.length; i++){
             String pswString = Integer.toHexString(0xff & bytepsw[i]);
@@ -129,7 +154,53 @@ public class DataManager {
             pswrd.append(pswString);
         }
 
-        return pswrd.toString();
+        System.out.println("Suolaa: "+salt);
+/*
+        for(int i = 0; i<salt.length; i++){
+            String sltString = Integer.toHexString(0xff & salt[i]);
+            System.out.println("+"+sltString);
+            if (sltString.length() == 1) {
+                pswrd.append('0');
+            }
+            slt.append(sltString);
+        }
+*/
+
+        String pswS = pswrd.toString();
+        String sltS = salt.toString();
+
+        String compiled = pswS+":"+sltS;
+        System.out.println("Täällä käytiin: "+compiled);
+
+        return compiled;
     }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public String hashPSW(String password){
+        byte[] hashedPSW = null;
+        String returnPSW;
+        SecureRandom random = new SecureRandom();
+        byte[] salt = new byte[16];
+        random.nextBytes(salt);
+
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-512");
+            md.update(salt);
+            hashedPSW = md.digest(password.getBytes(StandardCharsets.UTF_8));
+            System.out.println("Tämä saatiin: "+hashedPSW);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+
+        returnPSW = hashToString(hashedPSW, salt);
+
+        return returnPSW;
+    }
+
+    /*public String testHashPSW(String password, String salt){
+        byte[] slt = salt.getBytes();
+
+        return psw;
+    }*/
 
 }
