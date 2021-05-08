@@ -270,7 +270,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 System.out.println("ButtonActivity: OnClickListener successful");
-                pa.ActivityToGoal(); // for testing purposes
+                pa.ActivityToGoal(user); // for testing purposes
                 activityDrawingTool(); //draw test
                 //sleepDrawingTool();      //draw test
             }
