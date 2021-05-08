@@ -46,6 +46,9 @@ public class co2_calculator extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_co2_calculator);
+
+        this.setTitle("CO2 calculator");
+
         userName = getIntent().getStringExtra("username");
         System.out.println("Käyttäjänimi on: "+ userName);
 
