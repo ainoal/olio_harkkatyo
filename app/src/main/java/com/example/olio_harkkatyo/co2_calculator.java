@@ -13,6 +13,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.jjoe64.graphview.series.DataPoint;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -40,6 +45,7 @@ public class co2_calculator extends AppCompatActivity {
     User user;
     int ID = 1;
     String userName;
+    TextView co2_display;
 
 
     @Override
@@ -48,6 +54,7 @@ public class co2_calculator extends AppCompatActivity {
         setContentView(R.layout.activity_co2_calculator);
 
         this.setTitle("CO2 calculator");
+        co2_display = findViewById(R.id.co2_info);
 
         userName = getIntent().getStringExtra("username");
         System.out.println("Käyttäjänimi on: "+ userName);
@@ -94,6 +101,8 @@ public class co2_calculator extends AppCompatActivity {
         egg = findViewById(R.id.eggBar);
         TextView restaurant_text = findViewById(R.id.restaurantView);
         restaurant = findViewById(R.id.restaurantBar);
+
+
 
 
 
@@ -150,7 +159,7 @@ public class co2_calculator extends AppCompatActivity {
 
             }
     };
-        beef.setOnSeekBarChangeListener(co2_listener);          //kuuntelija liitetään liukuvalikoihin
+        beef.setOnSeekBarChangeListener(co2_listener);          //Listeners for sliders
         pig.setOnSeekBarChangeListener(co2_listener);
         fish.setOnSeekBarChangeListener(co2_listener);
         cheese.setOnSeekBarChangeListener(co2_listener);
@@ -165,7 +174,7 @@ public class co2_calculator extends AppCompatActivity {
 
 
 
-    public void readJSON(View v) {
+    public void readJSON(View v) throws JSONException {
         String json = getJSON();
 
         //JSONObject jsonobject = new JSONObject(json);
@@ -176,6 +185,12 @@ public class co2_calculator extends AppCompatActivity {
             //dm.writeFile(saveFile, json);
             user.setCO2List(json);
             dm.saveUser(userName, user);
+            JSONObject jsonobject = new JSONObject(json);
+            Double y_1 = jsonobject.getDouble("Total");
+            Double y_2 = jsonobject.getDouble("Meat");
+            Double y_3 = jsonobject.getDouble("Plant");
+            co2_display.setText("Yearly CO2 emissions estimate in kg:\n " +
+                    "Total: "+String.format("%,.1f", y_1)+" Meat: "+String.format("%,.1f", y_2)+" Plant: "+String.format("%,.1f", y_3));
         }
 
 
