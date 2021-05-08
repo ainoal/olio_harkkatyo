@@ -1,70 +1,36 @@
 package com.example.olio_harkkatyo;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class SleepTracker {
     String evaluation = "";
-    String saveFile = "sleep_history.txt";
-    int appID = 4;
+    int appID = 4;              //direction to inform drawing app
 
     public ArrayList<Float> sleepHistory = new ArrayList<>();
     public float twoWeekAverage;
 
-    public SleepTracker(){
+    public SleepTracker(){ }
 
 
-
-    }
-
-    public void setHistory(Float sleepTime){ //adds latest value to a file
-        System.out.println("Slept: "+sleepTime);
-        DataManager dm = DataManager.getInstance();
-        dm.writeFile(saveFile, sleepTime.toString());
-
-
-        getHistory();
-        avgSleepTime();
-        System.out.println("Average sleep time of last 14 days: "+twoWeekAverage);
-        //compareSleepTimes();
-
-
-    }
-
-    public void getHistory(){              //gets n previous values
-        DataManager dm = DataManager.getInstance();
-        String history_string = dm.readFile("sleep_history.txt");
-
-        Scanner scanner = new Scanner(history_string);
-
-        while (scanner.hasNextLine()){
-            String line = scanner.nextLine();
-            sleepHistory.add(Float.parseFloat(line));
-            if (sleepHistory.size() > 14){
-                sleepHistory.remove(0);
-            }
-        }
-    }
-
-    public void avgSleepTime(){
-        float total = 0;
-
-        for (int i = 0; i < sleepHistory.size(); i++){
-            total = total+sleepHistory.get(i);
-        }
-        twoWeekAverage = total / sleepHistory.size();
-    }
-
-    public String compareSleepTimes(String userName){
+       public String compareSleepTimes(String userName){
         int under_avg = 0;
         int over_avg = 0;
+        float total = 0;
+        float days = 0;
         DataManager dm = DataManager.getInstance();
         User user = (User) dm.loadUsers(userName);
         sleepHistory = user.twoWeekHistory(user.getSleepList());
-        for (int i = 0; i < sleepHistory.size(); i++){
-            if (sleepHistory.get(i) > twoWeekAverage+1){
+
+        for (int j = 0; j <sleepHistory.size(); j++){           //gets total time slept ni last 14 days
+            total = total+sleepHistory.get(j);
+            days++;
+        }
+        twoWeekAverage = total/days;
+
+        for (int i = 0; i < sleepHistory.size(); i++){          //see if times vary greatly
+            if (sleepHistory.get(i) > twoWeekAverage+2){
                 over_avg++;
-            } if (sleepHistory.get(i) < twoWeekAverage-1){
+            } if (sleepHistory.get(i) < twoWeekAverage-2){
                 under_avg++;
             }
         }
@@ -77,10 +43,6 @@ public class SleepTracker {
             System.out.println(evaluation);}
 
         return evaluation;
-    }
-
-    public String getSaveFile(){
-        return saveFile;
     }
 
     public int getAppID(){
