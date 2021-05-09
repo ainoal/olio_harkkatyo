@@ -171,25 +171,23 @@ public class co2_calculator extends AppCompatActivity {
 
     public void readJSON(View v) throws JSONException { //saving data in json format and displaying
         String json = getJSON();
-        DataManager dm = DataManager.getInstance();
-        user = (User) dm.loadUsers(userName);
-        if( json != null) {
-            user.setCO2List(json);
-            dm.saveUser(userName, user);
-            JSONObject jsonobject = new JSONObject(json);
-            Double y_1 = jsonobject.getDouble("Total");
-            Double y_2 = jsonobject.getDouble("Meat");
-            Double y_3 = jsonobject.getDouble("Plant");
-            Double y_4 = jsonobject.getDouble("Dairy");
-            co2_display.setText(String.format("Yearly CO2 emissions estimate in kg:\n Total: %s Meat: %s Plant: %s Dairy: %s",
-                    String.format(Locale.ENGLISH,"%,.1f", y_1), String.format(Locale.ENGLISH,"%,.1f", y_2),
-                    String.format(Locale.ENGLISH,"%,.1f", y_3), String.format(Locale.ENGLISH,"%,.1f", y_4)));
-        }
-
-
+            if (json != null) {
+                DataManager dm = DataManager.getInstance();
+                user = (User) dm.loadUsers(userName);
+                user.setCO2List(json);
+                dm.saveUser(userName, user);
+                JSONObject jsonobject = new JSONObject(json);
+                Double y_1 = jsonobject.getDouble("Total");
+                Double y_2 = jsonobject.getDouble("Meat");
+                Double y_3 = jsonobject.getDouble("Plant");
+                Double y_4 = jsonobject.getDouble("Dairy");
+                co2_display.setText(String.format("Yearly CO2 emissions estimate in kg:\n Total: %s Meat: %s Plant: %s Dairy: %s",
+                        String.format(Locale.ENGLISH, "%,.1f", y_1), String.format(Locale.ENGLISH, "%,.1f", y_2),
+                        String.format(Locale.ENGLISH, "%,.1f", y_3), String.format(Locale.ENGLISH, "%,.1f", y_4)));
+            }
     }
     /*Fetching value from sliders and passing on to query*/
-    public String  getJSON(){
+    public String  getJSON() {
         URL url;
         String response = null;
         int beef_value = beef.getProgress();
@@ -202,39 +200,44 @@ public class co2_calculator extends AppCompatActivity {
         int egg_value = pig.getProgress();
         int restaurant_value = restaurant.getProgress();
 
-        try {
-            url = new URL("https://ilmastodieetti.ymparisto.fi/ilmastodieetti/calculatorapi/v1/FoodCalculator" +
-                    "?query.diet="+diet.getSelectedItem()+              //takes selected item from dropdown menú
-                    "&query.beefLevel="+ beef_value*2 +                 //bar values from 0 to 100 -> 50*2 = 100%, max 200%
-                    "&query.fishLevel="+ fish_value*2 +
-                    "&query.porkPoultryLevel="+ pig_value*2 +
-                    "&query.dairyLevel="+ cheese_value*2 +
-                    "&query.cheeseLevel="+ milk_value*2 +
-                    "&query.riceLevel="+ rice_value*2 +
-                    "&query.eggLevel="+ salad_value*2 +
-                    "&query.winterSaladLevel="+ egg_value*2 +
-                    "&query.restaurantSpending="+restaurant_value +
-                    "&api_key=diary");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
-            InputStream in = new BufferedInputStream(conn.getInputStream());
-            BufferedReader br = new BufferedReader((new InputStreamReader(in)));
-            StringBuilder sb = new StringBuilder();
-            String line;
-            while((line = br.readLine()) != null){
-                sb.append(line);
+        //if sliders untouched
+        if (beef_value+pig_value+fish_value+cheese_value+milk_value+rice_value+salad_value+egg_value+restaurant_value>0) {
+            try {
+                url = new URL("https://ilmastodieetti.ymparisto.fi/ilmastodieetti/calculatorapi/v1/FoodCalculator" +
+                        "?query.diet=" + diet.getSelectedItem() +              //takes selected item from dropdown menú
+                        "&query.beefLevel=" + beef_value * 2 +                 //bar values from 0 to 100 -> 50*2 = 100%, max 200%
+                        "&query.fishLevel=" + fish_value * 2 +
+                        "&query.porkPoultryLevel=" + pig_value * 2 +
+                        "&query.dairyLevel=" + cheese_value * 2 +
+                        "&query.cheeseLevel=" + milk_value * 2 +
+                        "&query.riceLevel=" + rice_value * 2 +
+                        "&query.eggLevel=" + salad_value * 2 +
+                        "&query.winterSaladLevel=" + egg_value * 2 +
+                        "&query.restaurantSpending=" + restaurant_value +
+                        "&api_key=diary");
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("GET");
+                InputStream in = new BufferedInputStream(conn.getInputStream());
+                BufferedReader br = new BufferedReader((new InputStreamReader(in)));
+                StringBuilder sb = new StringBuilder();
+                String line;
+                while ((line = br.readLine()) != null) {
+                    sb.append(line);
+                }
+
+                response = sb.toString();
+                in.close();
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-
-            response = sb.toString();
-            in.close();
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return response;
-        }
+            return response;
+        } else {
+            Toast.makeText(co2_calculator.this, "Please use the sliders to set your diet!", Toast.LENGTH_SHORT).show();
+            return null;
+        }    }
 
         public void loadDrawingTool(View v) {
         DataManager dm = DataManager.getInstance();

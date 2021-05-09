@@ -93,7 +93,7 @@ public class UserProfile extends AppCompatActivity {
                             }
                         }
                     } catch(NumberFormatException e){
-                        Toast.makeText(UserProfile.this, "Please make sure weight is in correct format!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(UserProfile.this, "Please make sure weight and activity are in correct format!", Toast.LENGTH_SHORT).show();
                     }
             }
 
