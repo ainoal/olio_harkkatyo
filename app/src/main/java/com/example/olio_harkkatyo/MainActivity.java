@@ -227,75 +227,79 @@ public class MainActivity extends AppCompatActivity {
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                float activityToGoal = pa.activityToGoal(user);
-                float avgActivity = pa.averageActivity(user);
-                float avgSleep = slt.averageSleep(user);
-                DataManager dm = DataManager.getInstance();
+                if (weight[0]+sleep[0]+activity[0] > 0) {
+                    float activityToGoal = pa.activityToGoal(user);
+                    float avgActivity = pa.averageActivity(user);
+                    float avgSleep = slt.averageSleep(user);
+                    DataManager dm = DataManager.getInstance();
 
-                activityToGoal = (float) (Math.round(activityToGoal * 10) / 10.0);
-                avgActivity = (float) (Math.round(avgActivity * 10) / 10.0);
+                    activityToGoal = (float) (Math.round(activityToGoal * 10) / 10.0);
+                    avgActivity = (float) (Math.round(avgActivity * 10) / 10.0);
 
-                avgSleep = (float) (Math.round(avgSleep * 10) / 10.0);
+                    avgSleep = (float) (Math.round(avgSleep * 10) / 10.0);
 
-                System.out.println("ButtonSave: OnClickListener successful\nUsername is: "+u.getUsername());
+                    System.out.println("ButtonSave: OnClickListener successful\nUsername is: " + u.getUsername());
 
-                u.setWeightList(weight[0]);
-                u.setSleepList(sleep[0]);
-                u.setActivityList(activity[0]);
-                dm.saveUser(u.getUsername(),u);
+                    u.setWeightList(weight[0]);
+                    u.setSleepList(sleep[0]);
+                    u.setActivityList(activity[0]);
+                    dm.saveUser(u.getUsername(), u);
 
-                Toast.makeText(MainActivity.this, "Information saved!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Information saved!", Toast.LENGTH_SHORT).show();
 
-                /* set sleep info message */
-                String si = sleepInfo.concat(sleep[0]+ "h");
-                if (avgSleep >= 0) {
-                    si = si.concat("\nYour average sleep time: " + avgSleep + "h");
-                }
-                String compare = slt.compareSleepTimes(u.getUsername());
-                si = si.concat("\n" + compare);
-                sleepInfoView.setText(si);
+                    /* set sleep info message */
+                    String si = sleepInfo.concat(sleep[0] + "h");
+                    if (avgSleep >= 0) {
+                        si = si.concat("\nYour average sleep time: " + avgSleep + "h");
+                    }
+                    String compare = slt.compareSleepTimes(u.getUsername());
+                    si = si.concat("\n" + compare);
+                    sleepInfoView.setText(si);
 
                 /* Set activity info message. Provide information about activity goal
                 compared to daily activity only if user already has previous activity
                  history */
-                String ai = activityInfo.concat(Float.toString(activity[0]) + "h");
-                if (avgActivity >= 0) {
-                    ai = ai.concat("\nYour average daily activity: " + avgActivity + "h");
-                    if (activityToGoal > 0) {
-                        ai = ai.concat("\nYou are " + activityToGoal + " h behind your activity goal.");
+                    String ai = activityInfo.concat(Float.toString(activity[0]) + "h");
+                    if (avgActivity >= 0) {
+                        ai = ai.concat("\nYour average daily activity: " + avgActivity + "h");
+                        if (activityToGoal > 0) {
+                            ai = ai.concat("\nYou are " + activityToGoal + " h behind your activity goal.");
+                        } else {
+                            ai = ai.concat("\nYou have reached your activity goal! :)");
+                        }
                     } else {
-                        ai = ai.concat("\nYou have reached your activity goal! :)");
+                        ai = ai.concat("\nYour personal activity goal is " + user.getActivityGoal() + "h");
                     }
-                } else {
-                    ai = ai.concat("\nYour personal activity goal is " + user.getActivityGoal() + "h");
-                }
-                activityInfoView.setText(ai);
+                    activityInfoView.setText(ai);
 
-                /* set weight info message */
-                String wi = weightInfo.concat(weight[0] + "kg");
-                wi = wi.concat("\nYour ideal weight: " + user.getIdealWeight() + "kg");
-                /* Set info box message about how far user is from their ideal weight */
-                if (wm.comparison(user) < 0) {
-                    wi = wi.concat("\nYou are " + Math.round(Math.abs(wm.comparison(user)) * 10) / 10.0
-                            + "kg under your ideal weight.");
-                } else if (wm.comparison(user) == 0) {
-                    wi = wi.concat("\nYou are in your ideal weight! :)");
-                } else {
-                    wi = wi.concat("\nYou are " + Math.round(wm.comparison(user) * 10) /10.0
-                            + "kg over your ideal weight.");
-                }
+                    /* set weight info message */
+                    String wi = weightInfo.concat(weight[0] + "kg");
+                    wi = wi.concat("\nYour ideal weight: " + user.getIdealWeight() + "kg");
+                    /* Set info box message about how far user is from their ideal weight */
+                    if (wm.comparison(user) < 0) {
+                        wi = wi.concat("\nYou are " + Math.round(Math.abs(wm.comparison(user)) * 10) / 10.0
+                                + "kg under your ideal weight.");
+                    } else if (wm.comparison(user) == 0) {
+                        wi = wi.concat("\nYou are in your ideal weight! :)");
+                    } else {
+                        wi = wi.concat("\nYou are " + Math.round(wm.comparison(user) * 10) / 10.0
+                                + "kg over your ideal weight.");
+                    }
 
-                if (wm.getChange(user) < 0) {
-                    wi = wi.concat("\nYou have lost " + Math.round(Math.abs(wm.getChange(user)) * 10) / 10.0
-                            + " kg during the last " + user.twoWeekHistory(user.getWeightList()).size()
-                            + " days");
-                } else if (wm.getChange(user) < 999) {
-                    wi = wi.concat("\nYou have gained " + Math.round(Math.abs(wm.getChange(user)) * 10) / 10.0
-                            + " kg during the last "+ user.twoWeekHistory(user.getWeightList()).size()
-                            + " days");
+                    if (wm.getChange(user) < 0) {
+                        wi = wi.concat("\nYou have lost " + Math.round(Math.abs(wm.getChange(user)) * 10) / 10.0
+                                + " kg during the last " + user.twoWeekHistory(user.getWeightList()).size()
+                                + " days");
+                    } else if (wm.getChange(user) < 999) {
+                        wi = wi.concat("\nYou have gained " + Math.round(Math.abs(wm.getChange(user)) * 10) / 10.0
+                                + " kg during the last " + user.twoWeekHistory(user.getWeightList()).size()
+                                + " days");
+                    }
+                    weightInfoView.setText(wi);
+                } else{
+                    Toast.makeText(MainActivity.this, "Please use the sliders to set values!", Toast.LENGTH_SHORT).show();
                 }
-                weightInfoView.setText(wi);
-           }
+            }
         });
 
         buttonSleep.setOnClickListener(new View.OnClickListener() {
