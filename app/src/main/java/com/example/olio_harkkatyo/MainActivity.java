@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private Button signUp;
     boolean confirmed = false;
     PhysicalActivity phs = new PhysicalActivity();
-    SleepTracker slt = new SleepTracker(); //luonti testausta varten, siirretään varmaan toiseen aktiviteettiin
+    SleepTracker slt = new SleepTracker();
     WeightManagement wgt = new WeightManagement();
     User u;
 
@@ -169,7 +169,6 @@ public class MainActivity extends AppCompatActivity {
 
         PhysicalActivity pa = new PhysicalActivity();
         WeightManagement wm = new WeightManagement();
-        SleepTracker st = new SleepTracker();
 
         seekbarSleep.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -252,7 +251,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 float activityToGoal = pa.activityToGoal(user);
                 float avgActivity = pa.averageActivity(user);
-                float avgSleep = st.averageSleep(user);
+                float avgSleep = slt.averageSleep(user);
                 DataManager dm = DataManager.getInstance();
 
                 activityToGoal = (float) (Math.round(activityToGoal * 10) / 10.0);
