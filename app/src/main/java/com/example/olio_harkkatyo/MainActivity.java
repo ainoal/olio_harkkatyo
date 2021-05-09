@@ -202,7 +202,6 @@ public class MainActivity extends AppCompatActivity {
                 activity[0] = (float) (Math.round(activity[0] * 2) / 2.0);
 
                 String ai = activityInfo.concat(activity[0] + "h");
-                //ai = ai.concat( "\nYour average daily activity: " + pa.averageActivity(user));
                 activityInfoView.setText(ai);
                 System.out.println("SeekbarActivity: " + activity[0]);
             }
@@ -280,7 +279,7 @@ public class MainActivity extends AppCompatActivity {
                 /* Set activity info message. Provide information about activity goal
                 compared to daily activity only if user already has previous activity
                  history */
-                String ai = activityInfo.concat(Float.toString(activity[0]));
+                String ai = activityInfo.concat(Float.toString(activity[0]) + "h");
                 if (avgActivity >= 0) {
                     ai = ai.concat("\nYour average daily activity: " + avgActivity + "h");
                     if (activityToGoal > 0) {
@@ -289,7 +288,7 @@ public class MainActivity extends AppCompatActivity {
                         ai = ai.concat("\nYou have reached your activity goal! :)");
                     }
                 } else {
-                    ai = ai.concat("\nYour personal activity goal is " + user.getActivityGoal());
+                    ai = ai.concat("\nYour personal activity goal is " + user.getActivityGoal() + "h");
                 }
                 activityInfoView.setText(ai);
 
