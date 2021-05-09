@@ -45,6 +45,28 @@ public class SleepTracker {
         return evaluation;
     }
 
+    /* Calculate 14-day average sleep */
+    public float averageSleep(User user) {
+        float sleepCount= 0;
+        float dailyAverage;
+        int i;
+
+        sleepHistory = user.twoWeekHistory(user.getActivityList());
+
+        if (sleepHistory.size() >= 1) {
+            for(i=0; i<sleepHistory.size(); i++ ) {
+                sleepCount += sleepHistory.get(i);
+            }
+            dailyAverage = sleepCount / sleepHistory.size();
+        }  else {
+            /* If ArrayList user.SleepList<> is empty, return an impossible difference
+             * as a sign that the user has not input any data yet */
+            dailyAverage = (float) -1;
+        }
+
+        return dailyAverage;
+    }
+
     public int getAppID(){
         return appID;
     }

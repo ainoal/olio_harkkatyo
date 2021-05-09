@@ -279,10 +279,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 float activityToGoal = pa.activityToGoal(user);
                 float avgActivity = pa.averageActivity(user);
+                float avgSleep = st.averageSleep(user);
                 DataManager dm = DataManager.getInstance();
 
                 activityToGoal = (float) (Math.round(activityToGoal * 10) / 10.0);
                 avgActivity = (float) (Math.round(avgActivity * 10) / 10.0);
+
+                avgSleep = (float) (Math.round(avgSleep * 10) / 10.0);
 
                 System.out.println("ButtonSave: OnClickListener successful\nUsername is: "+u.getUsername());
 
@@ -295,7 +298,9 @@ public class MainActivity extends AppCompatActivity {
 
                 /* set sleep info message */
                 String si = sleepInfo.concat(sleep[0]+ "h");
-                //si = si.concat("\nYour average sleep time" + st.avgSleepTime());
+                if (avgSleep >= 0) {
+                    si = si.concat("\nYour average sleep time: " + avgSleep + "h");
+                }
                 String compare = slt.compareSleepTimes(u.getUsername());
                 si = si.concat("\n" + compare);
                 sleepInfoView.setText(si);
