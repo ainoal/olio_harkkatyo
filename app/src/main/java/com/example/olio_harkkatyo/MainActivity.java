@@ -162,7 +162,6 @@ public class MainActivity extends AppCompatActivity {
                 String si = sleepInfo.concat(sleep[0]+ "h");
                 si = si.concat("\n" + msg);
                 sleepInfoView.setText(si);
-                System.out.println("SeekbarSleep: " + sleep[0]);
             }
 
             @Override
@@ -182,7 +181,6 @@ public class MainActivity extends AppCompatActivity {
 
                 String ai = activityInfo.concat(activity[0] + "h");
                 activityInfoView.setText(ai);
-                System.out.println("SeekbarActivity: " + activity[0]);
             }
 
             @Override
@@ -211,9 +209,6 @@ public class MainActivity extends AppCompatActivity {
 
                 String wi = weightInfo.concat(weight[0] + "kg");
                 weightInfoView.setText(wi);
-
-                System.out.println(wm.getChange(user));
-                System.out.println("SeekbarWeight: " + weight[0] + "kg");
             }
 
             @Override
@@ -305,7 +300,6 @@ public class MainActivity extends AppCompatActivity {
         buttonSleep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("ButtonSleep: OnClickListener successful");
                 sleepDrawingTool();
             }
         });
@@ -313,8 +307,6 @@ public class MainActivity extends AppCompatActivity {
         buttonActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("ButtonActivity: OnClickListener successful");
-                pa.activityToGoal(user);
                 activityDrawingTool();
             }
         });
@@ -322,7 +314,6 @@ public class MainActivity extends AppCompatActivity {
         buttonWeight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("ButtonWeight: OnClickListener successful");
                 weightDrawingTool();
             }
         });

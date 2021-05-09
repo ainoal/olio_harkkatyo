@@ -27,10 +27,6 @@ public class PhysicalActivity {
             difference = 1000;
         }
 
-        String inputText = Float.toString(difference);
-        System.out.print("DIFFERENCE: ");
-        System.out.println(inputText);
-
         return difference;
     }
 
