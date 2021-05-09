@@ -28,8 +28,8 @@ public class Account {
         password = password;
     }
 
-    public void setUserList(ArrayList users){ UserList = users; }
+    public void setUserList(ArrayList<String> users){ UserList = users; }
 
-    public ArrayList getUserList(){ return UserList; }
+    public ArrayList<String> getUserList(){ return UserList; }
 }
 

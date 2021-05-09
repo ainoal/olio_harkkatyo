@@ -21,7 +21,7 @@ public class SleepTracker {
         User user = (User) dm.loadUsers(userName);
         sleepHistory = user.twoWeekHistory(user.getSleepList());
 
-        for (int j = 0; j <sleepHistory.size(); j++){           //gets total time slept ni last 14 days
+        for (int j = 0; j <sleepHistory.size(); j++){           //gets total time slept in last 14 days
             total = total+sleepHistory.get(j);
             days++;
         }
@@ -35,13 +35,10 @@ public class SleepTracker {
             }
         }
         if ((over_avg > 3) || (under_avg > 3) || ((over_avg+under_avg) > 3)){
-            evaluation = "Sleep irregular!";
-            System.out.println(evaluation);
-
+            evaluation = "Sleep times irregular!";
         } else {
             evaluation = "Sleep under control!";
-            System.out.println(evaluation);}
-
+        }
         return evaluation;
     }
 

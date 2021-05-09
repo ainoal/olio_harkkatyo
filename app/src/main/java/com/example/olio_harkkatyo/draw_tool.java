@@ -32,7 +32,7 @@ public class draw_tool extends AppCompatActivity {
         setContentView(R.layout.activity_draw_tool);
         GraphView gv = (GraphView) findViewById(R.id.graph);
         String userName = getIntent().getStringExtra("username");
-        int app = getIntent().getIntExtra("application",0); //values: 1=co2, 2=weight, 3=...
+        int app = getIntent().getIntExtra("application",0); //values: 1=co2, 2=weight, 3=activity, 4=sleep
 
 
         DataManager dm = new DataManager();
@@ -158,6 +158,5 @@ public class draw_tool extends AppCompatActivity {
             default:
                 break;
         }
-
     }
 }

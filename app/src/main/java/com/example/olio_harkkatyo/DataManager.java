@@ -33,18 +33,6 @@ public class DataManager {
 
     public static synchronized DataManager getInstance() { return dm; }
 
-    public void writeFile(String fileName, String text) {
-        appContext = getInstance().getContext();
-
-        try {
-            OutputStreamWriter osw = new OutputStreamWriter(appContext.openFileOutput(fileName, Context.MODE_APPEND));
-            osw.write(text + "\n");
-            osw.close();
-        } catch (IOException e) {
-            Log.e("IOException", "IOException while writing to a file.");
-        }
-    }
-
     public String readFile(String fileName) {
         appContext = getInstance().getContext();
 
@@ -112,7 +100,7 @@ public class DataManager {
         }
     }
 
-    public ArrayList getAccountData() {                 //loads all registered accounts and puts on list
+    public ArrayList<String> getAccountData() {                 //loads all registered accounts and puts on list
         ArrayList<String> accounts = new ArrayList<>();
 
         String userFile = readFile(userData);
