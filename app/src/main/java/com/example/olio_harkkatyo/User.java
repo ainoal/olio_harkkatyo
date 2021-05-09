@@ -142,7 +142,7 @@ public class User implements Serializable {
         if(list.size() > 14) {
             for (int i = 0; i < 14; i++) {
                 bookmark = bookmark-1;
-                history.add(list.get(bookmark));
+                history.add(0, list.get(bookmark));
             }
         } else {
             for (int i = 0; i<list.size(); i++){
