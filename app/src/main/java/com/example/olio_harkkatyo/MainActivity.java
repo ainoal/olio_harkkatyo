@@ -24,11 +24,9 @@ public class MainActivity extends AppCompatActivity {
     private Button signUp;
     boolean confirmed = false;
     PhysicalActivity phs = new PhysicalActivity();
-    SleepTracker slt = new SleepTracker(); //luonti testausta varten, siirretään varmaan toiseen aktiviteettiin
+    SleepTracker slt = new SleepTracker();
     WeightManagement wgt = new WeightManagement();
     User u;
-
-    private Button profileTester; //Testiä varten
 
     public MainActivity() {
     }
@@ -43,19 +41,9 @@ public class MainActivity extends AppCompatActivity {
         password = findViewById(R.id.etPassword);
         login = findViewById(R.id.btnLogin);
         signUp = findViewById(R.id.btnSignUp);
-        profileTester = findViewById(R.id.btnProfileTester);
 
         DataManager dm = DataManager.getInstance();
         dm.init(context);
-
-        Account loginManager = new Account(null, null);
-
-        profileTester.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, UserProfile.class));
-            }
-        });
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,26 +51,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, CreateAccountActivity.class));
             }
         });
-
-
-
-
-
-
-        //testi käyttäjän tallennus ja luku
-        User juser = new User("uasd","asd",1,1,1,2,3, 123);
-        System.out.println("Ideal weight pitäs olla 1: "+juser.getIdealWeight()+" oikee paino 1: "+juser.getWeight());
-
-        dm.saveUser(juser.getUsername(), juser);
-        User useri = (User) dm.loadUsers(juser.getUsername());
-        System.out.println("TESTI RIVI\n" +
-                "################################\n" +
-                "painou: "+useri.getIdealWeight()+
-                "\n######################################");
-        u = useri;
-
-
-       //WeightManagement.IdealWeight idealWeight = new WeightManagement.IdealWeight(juser.getWeight(),juser.getIdealWeight());
 
         login.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -96,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
                 String inputPassword = password.getText().toString();
 
                 if(inputUsername.isEmpty() || inputPassword.isEmpty()) {
-                    mainView(u);                                             //TODO testaamisen avuksi tyhjä login, poista!!!
                     Toast.makeText(MainActivity.this, "Please fill in all the required fields.", Toast.LENGTH_SHORT).show();
                 } else {
                     //Checking if saved username is linked to saved password
@@ -141,9 +108,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void co2Activity (View v){
             Intent intent = new Intent(MainActivity.this, co2_calculator.class);
-            //System.out.println("Käyttäjänimi on: "+ u.getUsername());
-
-            //intent.putExtra("username", "uasd"); //TODO TESTIÄ VARTEN, POISTA
             intent.putExtra("username", u.getUsername());
             startActivity(intent);
      }
@@ -156,15 +120,6 @@ public class MainActivity extends AppCompatActivity {
 
         return false;
     }
-
-    /*private String getTodaysDate(){
-        Calendar calendar = Calendar.getInstance();
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH);
-        month = month + 1;
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-        //return makeDateString(year, month, day);
-    }*/
 
     public void mainView(User user) {
         final float[] sleep = new float[1];
@@ -380,7 +335,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void sleepDrawingTool(){ //TODO set to a button to draw, currently starting at line 200 activity click
+    public void sleepDrawingTool(){
         if(u.getSleepList().size() > 1) {
             int ID = slt.getAppID();
             Intent intent = new Intent(MainActivity.this, draw_tool.class);
@@ -392,7 +347,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void activityDrawingTool() { //TODO set to a button to draw activity
+    public void activityDrawingTool() {
         if(u.getSleepList().size() > 1) {
             int ID = phs.getAppID();
             System.out.println("ID: " + ID + "Save file: " + u.getUsername());
@@ -405,7 +360,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void weightDrawingTool() { //TODO set to a button to draw weight
+    public void weightDrawingTool() {
         if(u.getSleepList().size() > 1) {
             int ID = wgt.getAppID();
             System.out.println("ID: " + ID + "Save file: " + u.getUsername());

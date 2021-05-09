@@ -143,7 +143,6 @@ public class User implements Serializable {
             for (int i = 0; i < 14; i++) {
                 bookmark = bookmark-1;
                 history.add(list.get(bookmark));
-
             }
         } else {
             for (int i = 0; i<list.size(); i++){
@@ -152,5 +151,4 @@ public class User implements Serializable {
         }
         return history;
     }
-
 }

@@ -182,7 +182,7 @@ public class UserProfile extends AppCompatActivity {
         if(month == 12) {
             return "DEC";
         }
-        //default (should never happen), makes the red go away
+        //default (should never happen)
         return "JAN";
     }
     public void openDatePicker(View view){
