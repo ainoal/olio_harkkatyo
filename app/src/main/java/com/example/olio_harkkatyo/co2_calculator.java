@@ -188,7 +188,7 @@ public class co2_calculator extends AppCompatActivity {
 
 
     }
-
+    /*Fetching value from sliders and passing on to query*/
     public String  getJSON(){
         URL url;
         String response = null;
@@ -215,7 +215,7 @@ public class co2_calculator extends AppCompatActivity {
                     "&query.winterSaladLevel="+ egg_value*2 +
                     "&query.restaurantSpending="+restaurant_value +
                     "&api_key=diary");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();  //fetching data from source
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             InputStream in = new BufferedInputStream(conn.getInputStream());
             BufferedReader br = new BufferedReader((new InputStreamReader(in)));

@@ -82,9 +82,7 @@ public class MainActivity extends AppCompatActivity {
         u = useri;
 
 
-        ////TODO tallennetaanko userit tiedostoon, josta haetaan aina kaikki tallennetut userit, jos tietoja muutetaan niin kirjoitetaan koko tiedosto uusiks?
-
-        //WeightManagement.IdealWeight idealWeight = new WeightManagement.IdealWeight(juser.getWeight(),juser.getIdealWeight());
+       //WeightManagement.IdealWeight idealWeight = new WeightManagement.IdealWeight(juser.getWeight(),juser.getIdealWeight());
 
         login.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -312,7 +310,7 @@ public class MainActivity extends AppCompatActivity {
                 if (avgActivity >= 0) {
                     ai = ai.concat("\nYour average daily activity: " + avgActivity + "h");
                     if (activityToGoal > 0) {
-                        ai = ai.concat("\nYou are" + activityToGoal + "h behind your activity goal.");
+                        ai = ai.concat("\nYou are " + activityToGoal + " h behind your activity goal.");
                     } else {
                         ai = ai.concat("\nYou have reached your activity goal! :)");
                     }
@@ -335,12 +333,12 @@ public class MainActivity extends AppCompatActivity {
                             + "kg over your ideal weight.");
                 }
 
-                if (wm.getChange(user) < 0) {
+                if (wm.getChange(user) > 0) {
                     wi = wi.concat("\nYou have lost " + Math.round(Math.abs(wm.getChange(user)) * 10) / 10.0
                             + " kg during the last " + user.twoWeekHistory(user.getWeightList()).size()
                             + " days");
                 } else if (wm.getChange(user) < 999) {
-                    wi = wi.concat("\nYou have gained " + Math.round(wm.getChange(user) * 10) / 10.0
+                    wi = wi.concat("\nYou have gained " + Math.round(Math.abs(wm.getChange(user)) * 10) / 10.0
                             + " kg during the last "+ user.twoWeekHistory(user.getWeightList()).size()
                             + " days");
                 }
