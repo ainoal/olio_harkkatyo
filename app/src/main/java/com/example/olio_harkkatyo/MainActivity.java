@@ -321,11 +321,13 @@ public class MainActivity extends AppCompatActivity {
                 wi = wi.concat("\nYour ideal weight: " + user.getIdealWeight() + "kg");
                 /* Set info box message about how far user is from their ideal weight */
                 if (wm.comparison(user) < 0) {
-                    wi = wi.concat("\nYou are " + Math.abs(wm.comparison(user)) + "kg under your ideal weight.");
+                    wi = wi.concat("\nYou are " + Math.round(Math.abs(wm.comparison(user)) * 10) / 10.0
+                            + "kg under your ideal weight.");
                 } else if (wm.comparison(user) == 0) {
                     wi = wi.concat("\nYou are in your ideal weight! :)");
                 } else {
-                    wi = wi.concat("\nYou are " + wm.comparison(user) + "kg over your ideal weight.");
+                    wi = wi.concat("\nYou are " + Math.round(wm.comparison(user) * 10) /10.0
+                            + "kg over your ideal weight.");
                 }
 
                 if (wm.getChange(user) < 0) {
