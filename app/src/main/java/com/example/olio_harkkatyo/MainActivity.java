@@ -28,11 +28,8 @@ public class MainActivity extends AppCompatActivity {
     WeightManagement wgt = new WeightManagement();
     User u;
 
-    private Button profileTester; //Testiä varten
-
     public MainActivity() {
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,19 +40,11 @@ public class MainActivity extends AppCompatActivity {
         password = findViewById(R.id.etPassword);
         login = findViewById(R.id.btnLogin);
         signUp = findViewById(R.id.btnSignUp);
-        profileTester = findViewById(R.id.btnProfileTester);
 
         DataManager dm = DataManager.getInstance();
         dm.init(context);
 
         Account loginManager = new Account(null, null);
-
-        profileTester.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, UserProfile.class));
-            }
-        });
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,11 +52,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, CreateAccountActivity.class));
             }
         });
-
-
-
-
-
 
         //testi käyttäjän tallennus ja luku
         User juser = new User("uasd","asd",1,1,1,2,3, 123);
@@ -156,15 +140,6 @@ public class MainActivity extends AppCompatActivity {
 
         return false;
     }
-
-    /*private String getTodaysDate(){
-        Calendar calendar = Calendar.getInstance();
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH);
-        month = month + 1;
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-        //return makeDateString(year, month, day);
-    }*/
 
     public void mainView(User user) {
         final float[] sleep = new float[1];
